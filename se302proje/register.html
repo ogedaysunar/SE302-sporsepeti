@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Title Page-->
+    <title>SporSepetim Kayıt</title>
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Kayıt</h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">İsim</label>
+                                    <input id="isim" class="input--style-4" type="text" name="first_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Soyad</label>
+                                    <input id="soyad" class="input--style-4" type="text" name="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Statü</label>
+                                    <div id="status" class="p-t-10">
+                                        <label class="radio-container m-r-45">Kullanıcı
+                                            <input id="s1" type="radio" value="user" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Yönetici
+                                            <input id="s2" type="radio" value="manager" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Eğitmen
+                                            <input id="s3" type="radio" value="trainer" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input id="email" class="input--style-4" type="email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Telefon Numarası</label>
+                                    <input id="telefon" class="input--style-4" type="text" name="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Şifre</label>
+                                    <input id="sifre" class="input--style-4" type="password" name="email">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Şifre Tekrar</label>
+                                    <input id="sifretekrar" class="input--style-4" type="password" name="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <label class="radio-container"><p><a href="https://www.w3schools.com/html/">Kullanıcı ve Gizlilik Politikasını Okudum, Kabul Ediyorum.</a></p>
+                            <input id="sozlesmeID" type="radio" name="sozlesme">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="p-t-15">
+                            <button onclick="kayit()" class="btn btn--radius-2 btn--blue" type="button">Kayıt</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
+      authDomain: "sporsepeti-65ea9.firebaseapp.com",
+      databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
+      projectId: "sporsepeti-65ea9",
+      storageBucket: "sporsepeti-65ea9.appspot.com",
+      messagingSenderId: "932394206290"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='#' class='icon fa-user'><br>Ögeday</a></li>"
+      } else {
+        // No user is signed in.
+        document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li>"
+      }
+    });
+
+    function kayit(){
+
+      // BİLGİLERİN HEPSİNİ BİR DEĞERE KAYDEDİYORUM.
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("sifre").value;
+      var password2 = document.getElementById("sifretekrar").value;
+      var isim = document.getElementById("isim").value;
+      var soyad = document.getElementById("soyad").value;
+      var telefon = document.getElementById("telefon").value;
+
+
+      // RADIO BUTTON İLE STATÜ KONTROLÜ YAPIYORUM VE VALUE NEYSE KAYDEDİYORUM.
+      var status = document.getElementById('status').value;
+      if (document.getElementById('s1').checked) {
+        status_value = document.getElementById('s1').value;
+      }else if (document.getElementById('s2').checked) {
+        status_value = document.getElementById('s2').value;
+      }else if(document.getElementById('s3').checked){
+        status_value = document.getElementById('s3').value;
+      }else{
+        status_value = "alert";
+      }
+
+
+
+      if(validateEmail(email)){ // GEÇERLİ E-MAİL KONTROLÜ
+        if(isim == ""){
+          alert("Lütfen isminizi giriniz.");
+        }else{
+          if(soyad == ""){
+            alert("Lütfen soyadınızı giriniz.");
+          }else{
+            if(status_value == "alert"){
+              alert("Lütfen statünüzü seçiniz.");
+            }else{
+              if(email == ""){
+                alert("Lütfen email giriniz.");
+              }else{
+                if(telefon == ""){
+                  alert("Lütfen telefon numaranızı giriniz.");
+                }else{
+                  if(password == "" || password2 == ""){
+                    alert("Lütfen şifreleri giriniz.");
+                  }else if (password != password2) {
+                    alert("Şifreler aynı değil.");
+                  }else if (password.length < 6) {
+                    alert("Şifre en az 6 karakterli olmalıdır.");
+                  }else{
+                    if (! document.getElementById("sozlesmeID").checked){
+                      alert("Kullanıcı sözleşmesini ve gizlilik politikasını kabul etmelisiniz.");
+                    }else{
+                      // kayıt kodu!
+                      alert("kayıt işlemi başarılı");
+
+                      // DATABASE BİLGİLERİ KAYDEDERKEN NASIL KAYDEDECEĞİMİZE BAK!
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      else{
+        alert("Lütfen geçerli bir e-mail girin.");
+      }
+    }
+
+    function logout1(){
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  }
+
+  // valid email
+    function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  </script>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body>
+
+</html>

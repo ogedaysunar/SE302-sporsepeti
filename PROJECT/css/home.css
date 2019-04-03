@@ -41,7 +41,7 @@
 }
 
 .search{
-	width: 50%;
+	width: 40%;
 	margin-top: 2.0%;
 	margin-left: 15%;
 	height: 30px;
@@ -59,7 +59,7 @@
 	font-size: 12px;
 	float: right;
 	background-color: transparent;
-	margin-right: 1.0%;
+	margin-right: 2.0%;
 	position:relative;
 }
 
@@ -96,8 +96,8 @@
 
 }
 .mainName ul{
-  padding: 0px;
-  margin: 0px;
+  padding: auto;
+  margin: auto;
   text-align: center;
   display:inline-block;
   vertical-align:top;
@@ -113,7 +113,7 @@
 
 @media only screen and (max-width: 1500px) {
   .mainName ul {
-    margin-right: 8.0rem;
+    margin-right: 14.0rem;
   }
   .mainName i{
     float:right;
