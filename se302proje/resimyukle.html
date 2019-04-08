@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Profil Resmi Ekle</title>
+  </head>
+
+  <body id="uploadButton">
+
+		<h1 align="left">Profil Resmi Ekle</h1>
+    <div id="filesubmit">
+      <input type="file" class="file-select" accept="image/*"/>
+      <progress id="uploader" value="0" max="100">0%</progress>
+      <button class="file-submit">SUBMIT</button>
+    </div>
+    <label id="yuklemeBildirim"></label>
+    <br><br>
+    <a href="index.html" type="button">Geri</a><br><br>
+    Çekilen deneme resim <br>
+    <img id="denemeimg" src="images/emptyUser.jpg" style="width:100px;height:100px">
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
+      authDomain: "sporsepeti-65ea9.firebaseapp.com",
+      databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
+      projectId: "sporsepeti-65ea9",
+      storageBucket: "sporsepeti-65ea9.appspot.com",
+      messagingSenderId: "932394206290"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+  <script>
+
+firebase.auth().onAuthStateChanged(function(user) {
+if (user) {
+  // User is signed in.
+  getPopularTrainersImage(user.uid); // profil resmi için
+
+
+} else {
+  // No user is signed in.
+  console.log("user is not login.");
+}
+});
+
+const storageService = firebase.storage();
+const storageRef = storageService.ref();
+
+document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
+document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+
+var selectedFile;
+  function handleFileUploadChange(e) {
+    selectedFile = e.target.files[0];
+}
+
+function handleFileUploadSubmit(e) {
+  var user = firebase.auth().currentUser;
+  var downloadURL = "";
+  console.log(user.uid);
+  const uploadTask = storageRef.child('trainers/' + user.uid).put(selectedFile); //create a child directory called images, and place the file inside this directory
+  uploadTask.on('state_changed', (snapshot) => {
+    var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+    uploader.value = percentage;
+
+  }, (error) => {
+    // Handle unsuccessful uploads
+    console.log(error);
+  }, () => {
+    // Do something once upload is complete
+    document.getElementById("yuklemeBildirim").innerHTML = "Resminiz eklenmiştir.";
+    console.log('success');
+  });
+}
+
+
+function getPopularTrainersImage(uid){ // RESİM İNDİRME DENEME..
+  var storageRef = firebase.storage().ref();
+  var starsRef = storageRef.child('trainers/' + uid);
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+  // Insert url into an <img> tag to "download"
+  if(url.includes(uid)){
+    document.getElementById("denemeimg").src = url;
+  }
+
+  }).catch(function(error) {
+  switch (error.code) {
+    case 'storage/object_not_found':
+      // File doesn't exist
+      alert("Üzgünüz. Dosya bulunamıyor.");
+      break;
+    case 'storage/unauthorized':
+      // User doesn't have permission to access the object
+      alert("Bu resmi çekmenize izniniz yok.");
+      break;
+    case 'storage/canceled':
+      // User canceled the upload
+      alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+      break;
+    case 'storage/unknown':
+      // Unknown error occurred, inspect the server response
+      alert("Lütfen bizimle iletişime geçiniz");
+      break;
+  }
+});
+}
+  </script>
+
+  </body>
+</html>
