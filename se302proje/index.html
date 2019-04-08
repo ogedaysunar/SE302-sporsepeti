@@ -284,7 +284,7 @@
 						firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
 							firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
 								userNameAsString = snapshot.val().name
-								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='#' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 							});
 							notLoading();
 						});
