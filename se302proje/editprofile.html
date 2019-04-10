@@ -66,13 +66,12 @@
                         <h1>Kişisel Bilgiler</h1>
                         <div class="custom-input active">
                           <label>Ad</label>
-                            <input class="validate-item data-hj-whitelist" type="text" value="Hans" />
-
+                            <input id="name" class="validate-item data-hj-whitelist" type="text" />
                         </div>
 
                         <div class="custom-input active">
                           <label>Soyad</label>
-                            <input class="validate-item data-hj-whitelist" id="LastName" name="LastName" type="text" value="Down" />
+                            <input class="validate-item data-hj-whitelist" id="surname" name="LastName" type="text" />
 
                         </div>
 
@@ -80,7 +79,7 @@
                     <div class="form-item">
                         <div class="custom-input active">
                           <label>Email</label>
-                            <input class="validate-item email data-hj-whitelist" id="Email" name="Email" type="text" value="hans.down@gmail.com" />
+                            <input class="validate-item email data-hj-whitelist" id="email" name="Email" type="text" />
 
                         </div>
                     </div>
@@ -94,7 +93,7 @@
                     <div class="form-item">
                         <div class="custom-input">
                           <label>Telefon Numarası</label>
-                            <input class="phone data-hj-whitelist" id="Phone" name="Phone" type="text" value="" />
+                            <input class="phone data-hj-whitelist" id="phone" name="Phone" type="text" value="" />
 
                         </div>
                     </div>
@@ -153,11 +152,12 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">Homepage</a></li>
-										<li><a href="generic.html">Generic</a></li>
-										<li><a href="elements.html">Elements</a></li>
-										<li>
-										
+										<li><a href="index.html">Anasayfa</a></li>
+										<li><a href="#">Hakkımızda</a></li>
+										<li><a href="sportcenters.html">Spor Salonları</a></li>
+										<li><a href="trainers.html">Eğitmenler</a></li>
+										<li><a href="#">İletişim</a></li>
+
 								</nav>
 
 							<!-- Section -->
@@ -242,6 +242,7 @@
 		});
 
 		getPopularTrainersImage(user.uid);
+		getInfo(user.uid);
 		//notLoading();
 
 
@@ -331,6 +332,18 @@
 	  });
 	}
 	// RESİM YÜKLEME BİTTİ -------------->
+
+	function getInfo(uid){
+		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot){
+			firebase.database().ref("Kullanıcılar").child(snapshot.key).child(uid).on("value",function(snapshot2){
+				document.getElementById("name").value = snapshot2.val().name
+				document.getElementById("surname").value = snapshot2.val().surname
+				document.getElementById("email").value = snapshot2.val().email
+				document.getElementById("phone").value = snapshot2.val().phone
+			});
+		});
+	}
+
 	</script>
 
 	</body>

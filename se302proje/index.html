@@ -50,7 +50,7 @@
 											</h1>
 											<p>Neden SporSepetim ?</p>
 										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+										<p>açıklama gelecek. jfkjfkjsdkjfkjdksjkdk ffdksjfkjfksjdkfsskd gkfs jkgj kfjskjgfsjgkjf kskg fsg fsg jkfj ksjgkgjfkjsk gjfkksgjkfgjkfgjs kfgjkgjskfgkgfsj</p>
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 										</ul>
@@ -205,15 +205,7 @@
 										<li><a href="sportcenters.html">Spor Salonları</a></li>
 										<li><a href="trainers.html">Eğitmenler</a></li>
 										<li><a href="#">İletişim</a></li>
-										<li>
-											<span class="opener">Another Submenu</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
+
 									</ul>
 								</nav>
 
@@ -400,7 +392,7 @@
 		function getPopularTrainers(){
 			const egitmenListesi = document.querySelector("#trainerList");
 			firebase.database().ref("Kullanıcılar").child("Eğitmen").on("child_added",function(snapshot){
-				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='resimEkle()' class='button'>İncele</a></li></ul></article>"
+				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a href='profil.html' class='button'>İncele</a></li></ul></article>"
 			});
 		}
 		getPopularTrainers();
