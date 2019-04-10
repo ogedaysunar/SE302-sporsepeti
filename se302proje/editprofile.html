@@ -66,13 +66,12 @@
                         <h1>Kişisel Bilgiler</h1>
                         <div class="custom-input active">
                           <label>Ad</label>
-                            <input class="validate-item data-hj-whitelist" type="text" value="Hans" />
-
+                            <input id="name" class="validate-item data-hj-whitelist" type="text" />
                         </div>
 
                         <div class="custom-input active">
                           <label>Soyad</label>
-                            <input class="validate-item data-hj-whitelist" id="LastName" name="LastName" type="text" value="Down" />
+                            <input class="validate-item data-hj-whitelist" id="surname" name="LastName" type="text" />
 
                         </div>
 
@@ -80,7 +79,7 @@
                     <div class="form-item">
                         <div class="custom-input active">
                           <label>Email</label>
-                            <input class="validate-item email data-hj-whitelist" id="Email" name="Email" type="text" value="hans.down@gmail.com" />
+                            <input class="validate-item email data-hj-whitelist" id="email" name="Email" type="text" />
 
                         </div>
                     </div>
@@ -94,7 +93,7 @@
                     <div class="form-item">
                         <div class="custom-input">
                           <label>Telefon Numarası</label>
-                            <input class="phone data-hj-whitelist" id="Phone" name="Phone" type="text" value="" />
+                            <input class="phone data-hj-whitelist" id="phone" name="Phone" type="text" value="" />
 
                         </div>
                     </div>
@@ -153,10 +152,18 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
+<<<<<<< HEAD
 										<li><a href="index.html">Homepage</a></li>
 										<li><a href="generic.html">Generic</a></li>
 										<li><a href="elements.html">Elements</a></li>
 										<li>
+=======
+										<li><a href="index.html">Anasayfa</a></li>
+										<li><a href="#">Hakkımızda</a></li>
+										<li><a href="sportcenters.html">Spor Salonları</a></li>
+										<li><a href="trainers.html">Eğitmenler</a></li>
+										<li><a href="#">İletişim</a></li>
+>>>>>>> 3c2a5b0be4da155b1d4831a8f858fef9c56f89af
 
 								</nav>
 
@@ -234,21 +241,24 @@
 	if (user) {
 	  // User is signed in.
 		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
-			firebase.database().ref("Kullanıcılar").child(snapshot2.key).child(user.uid).on("value", function(snapshot){
-				userNameAsString = snapshot.val().name + snapshot.val().surname
-				document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+			firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
+				if(snapshot.key == user.uid){
+					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
+					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+				}
 			});
 
 		});
 
 		getPopularTrainersImage(user.uid);
-		//notLoading();
+		getInfo(user.uid);
+		notLoading();
 
 
 	} else {
 	  // No user is signed in.
-		document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
-	  console.log("user is not login.");
+
+		window.location.href = "file:///Users/ogedaysunar/Documents/GitHub/SE302-sporsepeti/se302proje/index.html";
 	}
 	});
 
@@ -331,6 +341,28 @@
 	  });
 	}
 	// RESİM YÜKLEME BİTTİ -------------->
+
+	function getInfo(uid){
+		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot){
+			firebase.database().ref("Kullanıcılar").child(snapshot.key).on("child_added",function(snapshot2){
+				if(snapshot2.key == uid){
+					document.getElementById("name").value = snapshot2.val().name
+					document.getElementById("surname").value = snapshot2.val().surname
+					document.getElementById("email").value = snapshot2.val().email
+					document.getElementById("phone").value = snapshot2.val().phone
+				}
+			});
+		});
+	}
+
+	function logout1(){
+	firebase.auth().signOut().then(function() {
+		console.log('Signed Out');
+	}, function(error) {
+		console.error('Sign Out Error', error);
+	});
+}
+
 	</script>
 
 	</body>

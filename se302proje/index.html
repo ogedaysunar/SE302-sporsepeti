@@ -22,6 +22,7 @@
 	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
+				
 
 				<!-- Main -->
 					<div id="main">
@@ -282,7 +283,7 @@
 						document.getElementById("kayitButton").href = "resimyukle.html"
 						// User is signed in.
 						firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
-							firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
+							firebase.database().ref("Kullanıcılar").child(snapshot2.key).child(user.uid).on("value", function(snapshot){
 								userNameAsString = snapshot.val().name
 								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 							});

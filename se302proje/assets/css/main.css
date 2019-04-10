@@ -3867,6 +3867,7 @@ border-bottom:1px solid #313030;
 .user-rating li:hover ~ li i { transform: scale(1.1); }
 .user-rating li:active i,
 .user-rating li:active ~ li i { transform: scale(0.9) }
+<<<<<<< HEAD
 
 
 
@@ -3979,3 +3980,5 @@ border-bottom:1px solid #313030;
 	padding-top: 30px;
 
 }
+=======
+>>>>>>> 3c2a5b0be4da155b1d4831a8f858fef9c56f89af
