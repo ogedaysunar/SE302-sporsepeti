@@ -67,6 +67,7 @@
                         <div class="custom-input active">
                           <label>Ad</label>
                             <input id="name" class="validate-item data-hj-whitelist" type="text" />
+
                         </div>
 
                         <div class="custom-input active">
@@ -111,6 +112,7 @@
                     <div class="container">
                       <input type="submit" value="Kaydet">
                     </div>
+
             </form>
 								<!-- buraya -->
 								<!-- Sidebar -->
@@ -170,6 +172,7 @@
 
 										</div>
 									</div>
+
 					</div>
 
 		<!-- Scripts -->
@@ -181,26 +184,15 @@
 
 
 			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-	    <script>
-	    // Initialize Firebase
-	      var config = {
-	      apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
-	      authDomain: "sporsepeti-65ea9.firebaseapp.com",
-	      databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
-	      projectId: "sporsepeti-65ea9",
-	      storageBucket: "sporsepeti-65ea9.appspot.com",
-	      messagingSenderId: "932394206290"
-	    };
-	    firebase.initializeApp(config);
-	    </script>
+	    <script src="assets/js/db.js"></script>
 
 	  <script>
 
 	firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in.
-		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
-			firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
+		firebase.database().ref("Users").on("child_added",function(snapshot2){
+			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
 				if(snapshot.key == user.uid){
 					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
 					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
@@ -267,7 +259,7 @@
 	});
 	}
 
-	// RESİM YÜKLEME -------------------->
+	// UPLOAD IMAGE -------------------->
 	const storageService = firebase.storage();
 	const storageRef = storageService.ref();
 
@@ -299,11 +291,11 @@
 			e.target.files[0] = "";
 	  });
 	}
-	// RESİM YÜKLEME BİTTİ -------------->
+	// UPLOAD IMAGE FINISH  -------------->
 
 	function getInfo(uid){
-		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot){
-			firebase.database().ref("Kullanıcılar").child(snapshot.key).on("child_added",function(snapshot2){
+		firebase.database().ref("Users").on("child_added",function(snapshot){
+			firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
 				if(snapshot2.key == uid){
 					document.getElementById("name").value = snapshot2.val().name
 					document.getElementById("surname").value = snapshot2.val().surname
