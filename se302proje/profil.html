@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>SporSepetim</title>
@@ -17,8 +12,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
-	<body class="is-preload">
-
+	<body style="margin: 0" class="is-preload">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -42,33 +38,24 @@
 
 							<!-- Content -->
 								<!-- burdan -->
-<div class="card">
-	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample4.jpg" alt="profile-sample4" class="profile" />
-
-
-</div>
+								<div class="card">
+										<img id="profilImage" src="images/emptyUser.jpg" style="width:200px;height:200px" alt="profile-sample4" class="profile" />
+									</div>
 							<div class="container">
-
 
 								<figure class="snip1336">
 					  <figcaption>
 							<i class="rating fa fa-star">4.5</i>
 
-					    <h2>Hans Down<span>Trainer</span></h2>
+					    <h2 id="profilName"></h2>
 					    <p>I'm looking for something that can deliver a 50sdfsdfsdflsdşlf slşfksşdlfk sdflşsldfkd-pound payload of snow on a small feminine target. Can you suggest something? Hello...? </p>
 					    <a href="#" class="follow">Takip Et</a>
-
-
-
 
 					  </figcaption>
 					</figure>
 
 
 				</div>
-
-
-
 
 				<div class="line-separator"></div>
 
@@ -85,71 +72,77 @@
 
 
 				</div>
-				<!-- buraya -->
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Anasayfa</a></li>
+										<li><a href="generic.html">Hakkımızda</a></li>
+										<li><a href="elements.html">Spor Salonları</a></li>
+										<li><a href="elements.html">Eğitmenler</a></li>
 
 
+								</nav>
 
-								<!-- buraya -->
-
-
-
-								<!-- Sidebar -->
-									<div id="sidebar">
-										<div class="inner">
-
-											<!-- Search -->
-												<section id="search" class="alt">
-													<form method="post" action="#">
-														<input type="text" name="query" id="query" placeholder="Ara" />
-													</form>
-												</section>
-
-											<!-- Menu -->
-												<nav id="menu">
-													<header class="major">
-														<h2>Menu</h2>
-													</header>
-													<ul>
-														<li><a href="index.html">Anasayfa</a></li>
-														<li><a href="#">Hakkımızda</a></li>
-														<li><a href="sportcenters.html">Spor Salonları</a></li>
-														<li><a href="trainers.html">Eğitmenler</a></li>
-														<li><a href="#">İletişim</a></li>
-														<li>
-															<span class="opener">Another Submenu</span>
-															<ul>
-																<li><a href="#">Lorem Dolor</a></li>
-																<li><a href="#">Ipsum Adipiscing</a></li>
-																<li><a href="#">Tempus Magna</a></li>
-																<li><a href="#">Feugiat Veroeros</a></li>
-															</ul>
-														</li>
-													</ul>
-												</nav>
-
-
-												<section>
-													<header class="major">
-														<h2>İletişim</h2>
-													</header>
-													<p>
-														Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
-													için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
-													<ul class="contact">
-														<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
-														<li class="fa-phone">(212) 567-9822</li>
-														<li class="fa-home">1234 Akaretler #8254<br />
-														İstanbul, TR 00000-0000</li>
-													</ul>
-												</section>
-
-											<!-- Footer -->
-												<footer id="footer">
-													<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
-												</footer>
-
-										</div>
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
 									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="#">information@untitled.tld</a></li>
+										<li class="fa-phone">(000) 000-0000</li>
+										<li class="fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
 
 			</div>
 
@@ -159,6 +152,138 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	    <script src="assets/js/db.js"></script>
+
+	  <script>
+	firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+	  // User is signed in.
+		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
+			firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
+				if(snapshot.key == user.uid){
+					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
+					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+				}
+			});
+
+		});
+		//	getPopularTrainersImage(user.uid);
+		//	getInfo(user.uid);
+		notLoading();
+	} else {
+	  // No user is signed in.
+		document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
+		notLoading();
+	}
+	});
+
+	//----------------- LOADING ICON START. -------------------//
+	function notLoading() {
+		document.getElementById("loader").style.display = "none";
+		document.getElementById("myDiv").style.display = "block";
+	}
+
+	function showLoading() {
+		document.getElementById("loader").style.display = "block";
+		document.getElementById("myDiv").style.display = "none";
+	}
+	//----------------- LOADING ICON FINISH. -------------------//
+
+	function login1(){
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("password").value;
+		if(validateEmail(email)){
+			showLoading();
+			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+				// Handle Errors here.
+
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				if (errorCode == 'auth/internal-error') {
+					alert('Sunucumuz beklenmeyen bir hata ile karşılaştı. Lütfen tekrar deneyiniz.');
+				}else if(errorCode == 'auth/email-already-exists'){
+					alert("Girdiğiniz e-mail başkası tarafından kullanılıyor. Lütfen başka bir e-mail giriniz.");
+				}else if(errorCode == 'auth/wrong-password'){
+					alert('Hatalı Şifre!');
+				}else{
+					alert("Bir hata oluştu. Sayfayı yenileyip tekrar deneyiniz.");
+				}
+
+				notLoading();
+			});
+		}else{
+			alert("Lütfen geçerli bir e-mail girin.");
+			notLoading();
+		}
+
+	}
+
+	function logout1(){
+	firebase.auth().signOut().then(function() {
+		console.log('Signed Out');
+	}, function(error) {
+		console.error('Sign Out Error', error);
+	});
+}
+
+// valid email
+	function validateEmail(email) {
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(email).toLowerCase());
+}
+
+	function getInfo(){
+		var userKey = sessionStorage.getItem('label');
+		console.log(userKey);
+
+		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot){
+			firebase.database().ref("Kullanıcılar").child(snapshot.key).on("child_added",function(snapshot2){
+				if(snapshot2.key == userKey){
+					document.getElementById("profilName").innerHTML = snapshot2.val().name + " " + snapshot2.val().surname;
+					getPopularTrainersImage(userKey);
+				}
+			});
+		});
+
+	}
+	getInfo();
+
+	function getPopularTrainersImage(uid){
+		//showLoading(); // RESİM İNDİRME DENEME..
+	  var storageRef = firebase.storage().ref();
+	  var starsRef = storageRef.child('trainers/' + uid);
+	  // Get the download URL
+	  starsRef.getDownloadURL().then(function(url) {
+	  // Insert url into an <img> tag to "download"
+	  if(url.includes(uid)){
+	    document.getElementById("profilImage").src = url;
+			notLoading();
+	  }
+		notLoading();
+	  }).catch(function(error) {
+	  switch (error.code) {
+	    case 'storage/object_not_found':
+	      // File doesn't exist
+	      alert("Üzgünüz. Dosya bulunamıyor.");
+	      break;
+	    case 'storage/unauthorized':
+	      // User doesn't have permission to access the object
+	      alert("Bu resmi çekmenize izniniz yok.");
+	      break;
+	    case 'storage/canceled':
+	      // User canceled the upload
+	      alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+	      break;
+	    case 'storage/unknown':
+	      // Unknown error occurred, inspect the server response
+	      alert("Lütfen bizimle iletişime geçiniz");
+	      break;
+	  }
+	});
+	}
+	</script>
 
 
 
