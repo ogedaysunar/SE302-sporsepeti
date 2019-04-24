@@ -238,8 +238,8 @@
 		var userKey = sessionStorage.getItem('label');
 		console.log(userKey);
 
-		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot){
-			firebase.database().ref("Kullanıcılar").child(snapshot.key).on("child_added",function(snapshot2){
+		firebase.database().ref("Users").on("child_added",function(snapshot){
+			firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
 				if(snapshot2.key == userKey){
 					document.getElementById("profilName").innerHTML = snapshot2.val().name + " " + snapshot2.val().surname;
 					getPopularTrainersImage(userKey);
