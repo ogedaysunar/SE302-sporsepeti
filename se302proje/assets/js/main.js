@@ -1074,7 +1074,7 @@ function removeItem(state, element) {
 function renderList (state, element, item, action) {
 	if (action === 'add') {
 		var itemIndex = findItemIndex(state, item);
-		var itemsHTML = '<li><span class="meal-item">' + state.items[itemIndex].name + '</span><div class="meal-item-controls"><button class="meal-item-delete" style="width: 10%; height: 20px;"><span class="button-label">delete</span></button></div></li>';
+		var itemsHTML = "<li><span class='meal-item'>" + state.items[itemIndex].name + "</span><div class='meal-item-controls'><button onclick='removeFood(\"" + element + "\")' class='meal-item-delete' style='width: 10%; height: 20px;'><span class='button-label'>delete</span></button></div></li>";
 		element.append(itemsHTML);
 	} else if (action === 'remove') {
 		element.closest('li').remove();

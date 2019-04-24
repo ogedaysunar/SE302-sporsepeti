@@ -177,7 +177,6 @@
 										<h2>Popüler Eğitmenler</h2>
 									</header>
 									<div id="trainerList" class="posts">
-
 									</div>
 								</section>
 
@@ -206,15 +205,6 @@
 										<li><a href="sportcenters.html">Spor Salonları</a></li>
 										<li><a href="trainers.html">Eğitmenler</a></li>
 										<li><a href="#">İletişim</a></li>
-										<li>
-											<span class="opener">Another Submenu</span>
-											<ul>
-												<li><a href="#">Lorem Dolor</a></li>
-												<li><a href="#">Ipsum Adipiscing</a></li>
-												<li><a href="#">Tempus Magna</a></li>
-												<li><a href="#">Feugiat Veroeros</a></li>
-											</ul>
-										</li>
 									</ul>
 								</nav>
 
@@ -250,21 +240,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-
 			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-			<script>
-  		// Initialize Firebase
-  			var config = {
-    		apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
-    		authDomain: "sporsepeti-65ea9.firebaseapp.com",
-    		databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
-    		projectId: "sporsepeti-65ea9",
-    		storageBucket: "sporsepeti-65ea9.appspot.com",
-    		messagingSenderId: "932394206290"
-  		};
-  		firebase.initializeApp(config);
-			</script>
+			<script src="assets/js/db.js"></script>
 
 			<script>
 
@@ -401,10 +378,45 @@
 		function getPopularTrainers(){
 			const egitmenListesi = document.querySelector("#trainerList");
 			firebase.database().ref("Kullanıcılar").child("Eğitmen").on("child_added",function(snapshot){
-				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+				getPopularTrainersImage(snapshot.key);
 			});
 		}
 		getPopularTrainers();
+
+		function getPopularTrainersImage(uid){
+			//showLoading(); // RESİM İNDİRME DENEME..
+		  var storageRef = firebase.storage().ref();
+		  var starsRef = storageRef.child('trainers/' + uid);
+		  // Get the download URL
+		  starsRef.getDownloadURL().then(function(url) {
+		  // Insert url into an <img> tag to "download"
+		  if(url.includes(uid)){
+				document.getElementById(uid).src = url;
+				notLoading();
+		  }
+			notLoading();
+		  }).catch(function(error) {
+		  switch (error.code) {
+		    case 'storage/object_not_found':
+		      // File doesn't exist
+		      alert("Üzgünüz. Dosya bulunamıyor.");
+		      break;
+		    case 'storage/unauthorized':
+		      // User doesn't have permission to access the object
+		      alert("Bu resmi çekmenize izniniz yok.");
+		      break;
+		    case 'storage/canceled':
+		      // User canceled the upload
+		      alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+		      break;
+		    case 'storage/unknown':
+		      // Unknown error occurred, inspect the server response
+		      alert("Lütfen bizimle iletişime geçiniz");
+		      break;
+		  }
+		});
+		}
 
 		function sendUserKey(userKey){
 			console.log(userKey);
