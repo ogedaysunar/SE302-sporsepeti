@@ -10,83 +10,58 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="icon" type="image/png" href="images/icons/mainicon.png"/>
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-
 							<!-- Header -->
 								<header id="header">
 									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
-									<ul id="userIcon" class="icons">
-										<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
-										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
 
-										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
-										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
-									</ul>
 								</header>
 
 							<!-- Content -->
 								<section>
 									<header class="main">
-									<center>	<h1>Spor Salonu Oluştur</h1></center>
+										<h1>Spor Salonu Oluştur</h1>
 										<form method="post" action="#">
-											<span class="label-input100">Yönetici Adı*</span>
-											<input style="width:500px;" type="text" name="name" id="name" placeholder="Adınız..."/>
-										</br>
 											<span class="label-input100">Salon İsmi *</span>
-											<input style="width:500px;" type="text" name="name" placeholder="Salon adı...">
-											</br>
+											<input style="width:500px;" type="text" name="salonname" id="salonname" placeholder="Salon adı..."><br>
 											<span class="label-input100">Salon E-mail *</span>
-											<input style="width:500px;" type="text" name="Email" placeholder="Spor salonu e-mail... ">
-											</br>
+											<input style="width:500px;" type="text" name="salonEmail" id="salonEmail" placeholder="Enter Gym E-mail "><br>
 											<span class="label-input100">İlçe *</span>
-											<select style="width:500px" class="js-select2" name="service">
-												<option>Ümraniye</option>
-												<option>Ataşehir</option>
-												<option>Etiler</option>
-												<option>Bebek</option>
-											</select>
-											</br>
+											<select style="width:500px" class="js-select2" name="service" id="ilce">
+												<option value="-1" selected="true" disabled="disabled">Seçiniz</option>
+												<option value="umraniye">Ümraniye</option>
+												<option value="atasehir">Ataşehir</option>
+												<option value="etiler">Etiler</option>
+												<option value="bebek">Bebek</option>
+											</select><br>
 											<span class="label-input100">Salon Telefon *</span>
-											<input style="width:500px" type="text" name="phone" placeholder="Telefon numarası..."/>
-											</br>
+											<input style="width:500px" type="text" name="phone" id="salonphone" placeholder="Telefon numarası..."/><br>
 											<span class="label-input100">Salon Açılış *</span>
-											<input  class="input100" type="time" name="Working" placeholder="Open">
+											<input  class="input100" type="time" name="Working" id="opentime" placeholder="Open">
 											<span class="label-input100">Salon Kapanış *</span>
-											<input class="input100" type="time" name="Working" placeholder="Close">
-											</br>
-  										</br>
-
+											<input class="input100" type="time" name="Working" id="closetime" placeholder="Close">
+											<br><br>
 											<span class="label-input100">Salon Adres *</span>
-											</br>
-											<textarea style="width:500px" class="input100" name="Address" placeholder="Gym Adres ..."></textarea>
-											</br>
+											<textarea style="width:500px" class="input100" name="Address" id="salonAdress" placeholder="Gym Addres ..."></textarea><br>
 											<span class="label-input100">Salon Açıklaması *</span>
-											</br>
-											<textarea style="width:500px" name="message" placeholder="Gym açıklaması ..."></textarea>
-											</br>
+											<textarea style="width:500px" name="message" id="salonaciklama" placeholder="Gym açıklaması ..."></textarea><br>
+											<span class="label-input100">Salon içeriği (Örn:Boks,yüzme...)</span>
+											<textarea style="width:500px" name="message" id="salonicerik" placeholder="Salon içerik ..."></textarea><br>
 
-											<button class="contact100-form-btn">
-												<span>
-													Oluştur
-													<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-												</span>
-											</button>
+											<img id="denemeimg" src="images/emptyUser.jpg" alt="profile-sample4" class="profile" style="width:200px;height:200px" />
+								<div id="filesubmit">
+						      <input type="file" class="file-select" accept="image/*"/>
+						      <progress id="uploader" value="0" max="100">0%</progress>
+						    </div><br>
+
+											<button onclick="start()" type="button">Oluştur</button>
 										</form>
 
 									</header>
@@ -149,6 +124,127 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	    <script>
+	    // Initialize Firebase
+	      var config = {
+	      apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
+	      authDomain: "sporsepeti-65ea9.firebaseapp.com",
+	      databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
+	      projectId: "sporsepeti-65ea9",
+	      storageBucket: "sporsepeti-65ea9.appspot.com",
+	      messagingSenderId: "932394206290"
+	    };
+	    firebase.initializeApp(config);
+	    </script>
+
+			<script>
+
+			var pushID = firebase.database().ref().push().key;
+			// UPLOAD IMAGE START
+		const storageService = firebase.storage();
+		const storageRef = storageService.ref();
+
+		document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
+
+		var selectedFile;
+			function handleFileUploadChange(e) {
+				selectedFile = e.target.files[0];
+		}
+
+	function start() {
+
+		var salonname=document.getElementById("salonname").value;
+		var salonEmail=document.getElementById("salonEmail").value;
+		var salonphone=document.getElementById("salonphone").value;
+		var opentime=document.getElementById("opentime").value;
+		var closetime=document.getElementById("closetime").value;
+		var ilce =document.getElementById("ilce").value;
+		var salonAdress=document.getElementById("salonAdress").value;
+		var salonaciklama=document.getElementById('salonaciklama').value;
+		var salonicerik=document.getElementById('salonicerik').value;
+		if(validateEmail(salonEmail)){
+			if(salonname == ""){
+				alert("Lütfen salon isminizi giriniz.");
+			}else{
+				if(salonEmail == ""){
+					alert("Lütfen email giriniz.");
+				}else{
+					if(salonphone == ""){
+						alert("Lütfen telefon numarası giriniz.");
+					}else{
+						if(ilce == "-1"){
+							alert("Lütfen ilçe seçiniz.");
+						}else {
+							if(opentime == ""){
+								alert("Lütfen açılış zamanı seçin.");
+							}else{
+								if(closetime == ""){
+									alert("Lütfen Kapanış zamanı seçin");
+								}else{
+									if(salonAdress == ""){
+										alert("Lütfen adres giriniz.");
+									}else{
+										if(salonaciklama == ""){
+											alert("Lütfen salon açıklaması giriniz.");
+										}else {
+											if(salonicerik == ""){
+												alert("Lütfen salon içeriğini giriniz.");
+											}else{
+												// run code
+												firebase.database().ref("SportCenters").child(pushID).set({
+													salonName:salonname,
+													saloneEmail:salonEmail,
+													salonPhone:salonphone,
+													ilce:ilce,
+													openTime:opentime,
+													closeTime:closetime,
+													ilce:ilce,
+													salonAdress:salonAdress,
+													salonaciklama:salonaciklama,
+													salonIcerik:salonicerik
+												});
+
+												var downloadURL = "";
+												const uploadTask = storageRef.child('sportcenters/' + pushID).put(selectedFile); //create a child directory called images, and place the file inside this directory
+												uploadTask.on('state_changed', (snapshot) => {
+													var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+													uploader.value = percentage;
+
+												}, (error) => {
+													// Handle unsuccessful uploads
+													console.log(error);
+												}, () => {
+													// Do something once upload is complete
+													//document.getElementById("yuklemeBildirim").innerHTML = "Resminiz eklenmiştir.";
+													console.log('success');
+													location.reload();
+													e.target.files[0] = "";
+												});
+											}
+											// UPLOAD IMAGE FINISH -------------->
+
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}else{
+				alert("Lütfen geçerli bir email giriniz.");
+			}
+		}
+
+
+			function validateEmail(email) {
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(String(email).toLowerCase());
+		}
+
+			</script>
 
 	</body>
 </html>
