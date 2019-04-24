@@ -160,8 +160,8 @@
 	firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in.
-		firebase.database().ref("Kullanıcılar").on("child_added",function(snapshot2){
-			firebase.database().ref("Kullanıcılar").child(snapshot2.key).on("child_added", function(snapshot){
+		firebase.database().ref("Users").on("child_added",function(snapshot2){
+			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
 				if(snapshot.key == user.uid){
 					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
 					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
