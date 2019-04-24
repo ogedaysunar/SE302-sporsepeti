@@ -22,7 +22,7 @@
 	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
-				
+
 
 				<!-- Main -->
 					<div id="main">
@@ -401,11 +401,18 @@
 		function getPopularTrainers(){
 			const egitmenListesi = document.querySelector("#trainerList");
 			firebase.database().ref("Kullanıcılar").child("Eğitmen").on("child_added",function(snapshot){
-				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='resimEkle()' class='button'>İncele</a></li></ul></article>"
+				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
 			});
 		}
 		getPopularTrainers();
 
+		function sendUserKey(userKey){
+			console.log(userKey);
+   		sessionStorage.setItem('label', userKey);
+
+			window.location.href = "file:///Users/ogedaysunar/Documents/GitHub/SE302-sporsepeti/se302proje/profil.html";
+
+		}
 
 
 		//----------------- POPÜLER EĞİTMENLERİ GÖSTERME FINISH. -------------------//
