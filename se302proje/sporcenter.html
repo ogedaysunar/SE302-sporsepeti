@@ -78,7 +78,7 @@
 
 					<h1>Salon Bilgileri</h1>
 
-<div class="metadata"><p class="meta qualifications"><label>Salon Adı: </label><span id="gymName"> Gold Gym</span></p><p class="meta skills"><label>Sporlar: </label>
+<div class="metadata"><p class="meta qualifications"><label>Salon Adı: </label><span id="gymName2"> Gold Gym</span></p><p class="meta skills"><label>Sporlar: </label>
 	<span id="gymSportTypes">Fitness, Body Building, Yüzme, Pilates, Boks </span></p>
 	<p class="meta sports"><label>Adres: </label><span id="gymAdress"> Atatürk Mahallesi yayla caddasi 34-3 </span></p><p class="meta hobbies"><label>Telefon: </label><span id="gymTel"> 0126 718 34 02</span></p>
   <p class="meta sports"><label>Email: </label><span id="gymEmail"> gold.gym@gmail.com</span></p><p class="meta hobbies"><label>Açılış Saati: </label><span id="gymOpenTime"> 10.00</span></p>
@@ -177,30 +177,31 @@
       </script>
       <script>
 
-			function getSportCenterInfo(key){
-				var gymName = document.getElementById("gymName").value
-				var gymTel = document.getElementById("gymTel").value
-				var gymEmail = document.getElementById("gymEmail").value
-				var gymAdress = document.getElementById("gymAdress").value
-				var gymCloseTime = document.getElementById("gymCloseTime").value
-				var gymOpenTime = document.getElementById("gymOpenTime").value
-				var gymDescription = document.getElementById("gymDescription").value
-				var gymSportTypes = document.getElementById("gymSportTypes").value
-
-				firebase.database().ref("Users").child()
-			}
       firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-
-
-
-
 
       } else {
 
       }
       });
+
+			function getSportCenterInfo(){
+				var sportCenterKey = sessionStorage.getItem('label2');
+
+				firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
+					document.getElementById("gymName").innerHTML = snapshot.val().salonName
+					document.getElementById("gymName2").innerHTML = snapshot.val().salonName
+					document.getElementById("gymTel").innerHTML = snapshot.val().salonPhone
+					document.getElementById("gymEmail").innerHTML = snapshot.val().saloneEmail
+					document.getElementById("gymAdress").innerHTML = snapshot.val().salonAdress
+					document.getElementById("gymOpenTime").innerHTML = snapshot.val().openTime
+					document.getElementById("gymCloseTime").innerHTML = snapshot.val().closeTime
+					document.getElementById("gymDescription").innerHTML = snapshot.val().salonaciklama
+					document.getElementById("gymSportTypes").innerHTML = snapshot.val().salonIcerik
+				});
+			}
+			getSportCenterInfo();
     </script>
 
 	</body>
