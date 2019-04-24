@@ -50,7 +50,7 @@
                     </header>
                     <div class="posts">
                       <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+                        <a href="/sporcenter.html" class="image"><img src="images/pic01.jpg" alt="" /></a>
                         <h3>Veritabanından İsim Gelecek</h3>
                         <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
                         <ul class="actions">
@@ -169,6 +169,28 @@
 
 			</div>
 
+			// Initialize Firebase
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script>
+  		// Initialize Firebase
+  			var config = {
+    		apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
+    		authDomain: "sporsepeti-65ea9.firebaseapp.com",
+    		databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
+    		projectId: "sporsepeti-65ea9",
+    		storageBucket: "sporsepeti-65ea9.appspot.com",
+    		messagingSenderId: "932394206290"
+  		};
+  		firebase.initializeApp(config);
+			</script>
+			<script>
+			function getSportCenters(){
+				const egitmenListesi = document.querySelector("#trainerList");
+				firebase.database().ref("Gym").on("child_added",function(snapshot){
+					egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='resimEkle()' class='button'>İncele</a></li></ul></article>"
+				});
+			}
+			</script>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
