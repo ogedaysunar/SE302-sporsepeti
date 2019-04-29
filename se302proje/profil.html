@@ -44,31 +44,26 @@
 							<div class="container">
 
 								<figure class="snip1336">
-					  <figcaption>
-							<i class="rating fa fa-star">4.5</i>
-
-					    <h2 id="profilName"></h2>
-					    <p>I'm looking for something that can deliver a 50sdfsdfsdflsdşlf slşfksşdlfk sdflşsldfkd-pound payload of snow on a small feminine target. Can you suggest something? Hello...? </p>
-					    <a href="#" class="follow">Takip Et</a>
-
-					  </figcaption>
-					</figure>
-
-
+					  			<figcaption>
+										<i class="rating fa fa-star">4.5</i>
+							    	<h2 id="profilName"></h2>
+					    			<p id="userDescription"></p>
+					    			<a href="#" class="follow">Takip Et</a>
+					  		</figcaption>
+							</figure>
 				</div>
 
 				<div class="line-separator"></div>
-
-
-
-				<div class="container">
+					<div class="container">
 
 					<h1>Kişisel Bilgiler</h1>
 
-<div class="metadata"><p class="meta qualifications"><label>Okul: </label><span>Anadolu Üniversitesi Spor Yönetimi</span></p><p class="meta skills"><label>Derece / Lisanslar: </label>
-	<span>1. Kademe Pilates Antrenörlüğü, 1. ve 2. Kademe Fitness Antrenörlüğü, 2014/2015/2016 Atletik Fizik Türkiye Şampiyonluğu, 2015 Avrupa Atletik Fizik 5., 2016 Atletik Fizik 8. 2015 Atletik Fizik Dünya Şampiyonluğu.</span></p>
-	<p class="meta sports"><label>Sporlar: </label><span>Yüzme, Futbol, Fitness, Carossfit, Kickboks, Atletizm, Rugby</span></p><p class="meta hobbies"><label>Hobiler: </label><span>Sabah yürüyüşü deniz kenarında "cardio =)", yemek tarifleri denemek, fotoğraf çekmek, araştırma yapmak</span></p>
-</div>
+					<div class="metadata">
+						<p class="meta qualifications"><label>E-mail: </label><span id="email2"></span></p>
+						<p class="meta qualifications"><label>Telefon: </label><span id="phone"></span></p>
+						<p class="meta qualifications"><label>Doğum Tarihi: </label><span id="birthdate"></span></p>
+						<p class="meta hobbies"><label>Hobiler: </label><span id="hobiID"></span></p>
+					</div>
 
 
 				</div>
@@ -160,7 +155,7 @@
 		firebase.database().ref("Users").on("child_added",function(snapshot2){
 			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
 				if(snapshot.key == user.uid){
-					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
+					userNameAsString = snapshot.val().name + " " + snapshot.val().surname + "(" + snapshot.val().status + ")"
 					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 				}
 			});
@@ -238,7 +233,12 @@
 		firebase.database().ref("Users").on("child_added",function(snapshot){
 			firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
 				if(snapshot2.key == userKey){
-					document.getElementById("profilName").innerHTML = snapshot2.val().name + " " + snapshot2.val().surname;
+					document.getElementById("profilName").innerHTML = snapshot2.val().name + " " + snapshot2.val().surname
+					document.getElementById("email2").innerHTML = " " + snapshot2.val().email
+					document.getElementById("phone").innerHTML = " " + snapshot2.val().phone
+					document.getElementById("userDescription").innerHTML = " " + snapshot2.val().myDescription
+					document.getElementById("birthdate").innerHTML = " " + snapshot2.val().birthdate
+					document.getElementById("hobiID").innerHTML = " " + snapshot2.val().hobiler
 					getPopularTrainersImage(userKey);
 				}
 			});

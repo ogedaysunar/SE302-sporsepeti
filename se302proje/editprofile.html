@@ -45,7 +45,7 @@
 							<!-- Content -->
 								<!-- burdan -->
 								<div class="container1">
-  							<textarea placeholder="Describe yourself here..."></textarea>
+  							<textarea id="myDescriptionTextArea" placeholder="Kendinle ilgili açıklamanı yaz."></textarea>
 								<img id="denemeimg" src="images/emptyUser.jpg" alt="profile-sample4" class="profile" style="width:200px;height:200px" />
 								<div id="filesubmit">
 						      <input type="file" class="file-select" accept="image/*"/>
@@ -87,7 +87,7 @@
                     <div class="form-item">
                         <div class="custom-input">
                             <label>Doğum Tarihi</label>
-														<input type="date" name="bday"  />
+														<input id="birthdateID" type="date" name="bday"  />
                         </div>
                     </div>
                     <div class="form-item">
@@ -98,10 +98,17 @@
                         </div>
                     </div>
 
-                    <div class="form-item">
+										<div class="form-item">
                         <div class="custom-input">
                           <label>Statü</label>
-                            <input class="achieve data-hj-whitelist" id="Achieve" name="Achieve" type="text" value="" />
+                            <input class="phone data-hj-whitelist" id="status" name="statu" type="text" value="" />
+                        </div>
+                    </div>
+
+										<div class="form-item">
+                        <div class="custom-input">
+                          <label>Hobiler</label>
+                            <input class="phone data-hj-whitelist" id="hobiler" name="hobi" type="text" value="" />
                         </div>
                     </div>
 
@@ -110,7 +117,7 @@
                     </div>
 
                     <div class="container">
-                      <input type="submit" value="Kaydet">
+                      <input type="button" value="Kaydet" onclick="saveEditProfile()">
                     </div>
 
             </form>
@@ -194,7 +201,7 @@
 		firebase.database().ref("Users").on("child_added",function(snapshot2){
 			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
 				if(snapshot.key == user.uid){
-					userNameAsString = snapshot.val().name + " " + snapshot.val().surname
+					userNameAsString = snapshot.val().name + " " + snapshot.val().surname + "(" + snapshot.val().status + ")"
 					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 				}
 			});
@@ -301,6 +308,10 @@
 					document.getElementById("surname").value = snapshot2.val().surname
 					document.getElementById("email").value = snapshot2.val().email
 					document.getElementById("phone").value = snapshot2.val().phone
+					document.getElementById("status").value = snapshot2.val().status
+					document.getElementById("myDescriptionTextArea").value = snapshot2.val().myDescription
+					document.getElementById("birthdateID").value = snapshot2.val().birthdate
+					document.getElementById("hobiler").value = snapshot2.val().hobiler
 				}
 			});
 		});
@@ -312,6 +323,67 @@
 	}, function(error) {
 		console.error('Sign Out Error', error);
 	});
+}
+
+function saveEditProfile(){
+	var name = document.getElementById("name").value
+	var surname = document.getElementById("surname").value
+	var email = document.getElementById("email").value
+	var phone = document.getElementById("phone").value
+	var myDescription = document.getElementById("myDescriptionTextArea").value
+	var birthdate = document.getElementById("birthdateID").value
+	var hobi = document.getElementById("hobiler").value
+
+	if(validateEmail(email)){
+		if(name == ""){
+			alert("Lütfen isminizi boş bırakmayınız.");
+		}else{
+			if(surname == ""){
+				alert("Lütfen soyadınızı boş bırakmayınız.");
+			}else{
+				if(email == ""){
+					alert("Lütfen emailinizi boş bırakmayınız.");
+				}else{
+					if(phone == ""){
+						alert("Lütfen telefon kısmını boş bırakmayınız.")
+					}else{
+						if(myDescription == ""){
+							alert("Lütfen açıklama kısmını boş bırakmayınız.");
+						}else{
+							if(birthdate == ""){
+								alert("Lütfen doğum tarihinizi boş bırakmayınız.");
+							}else{
+								// run codee
+								var userID = firebase.auth().currentUser.uid;
+								var statu = document.getElementById("status").value;
+								firebase.database().ref("Users").child(statu).child(userID).update({
+									name: name,
+									surname: surname,
+									phone: phone,
+									email: email,
+									myDescription: myDescription,
+									birthdate: birthdate,
+									hobiler: hobi
+								}).then(function(){
+  								alert("Bilgileriniz başarılı bir şekilde kaydedildi.");
+								}).catch(function(error) {
+  								alert("Opss. Bir hata oluştu, lütfen tekrar deneyiniz.");
+								});
+							}
+						}
+					}
+				}
+			}
+		}
+	}else{
+		alert("Lütfen geçerli bir email giriniz.");
+	}
+
+}
+
+function validateEmail(email) {
+var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+return re.test(String(email).toLowerCase());
 }
 
 	</script>

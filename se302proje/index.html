@@ -197,7 +197,7 @@
 						// User is signed in.
 						firebase.database().ref("Users").on("child_added",function(snapshot2){
 							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).on("value", function(snapshot){
-								userNameAsString = snapshot.val().name
+								userNameAsString = snapshot.val().name + " " + snapshot.val().surname + "(" + snapshot.val().status + ")"
 								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 							});
 							notLoading();
@@ -309,7 +309,7 @@
 		function getPopularTrainers(){
 			const egitmenListesi = document.querySelector("#trainerList");
 			firebase.database().ref("Users").child("Trainers").on("child_added",function(snapshot){
-				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+				egitmenListesi.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().myDescription + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
 				getPopularTrainersImage(snapshot.key);
 			});
 		}
