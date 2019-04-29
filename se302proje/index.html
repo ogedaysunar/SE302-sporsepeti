@@ -49,9 +49,9 @@
 										<header>
 											<h1>Hoşgeldiniz !<br />
 											</h1>
-											<p>Neden SporSepetim ?</p>
+											<p id="nedenSporSepetim">Neden SporSepetim ?</p>
 										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+										<p id="altBaslik">Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 										</ul>
@@ -190,15 +190,29 @@
 						logout1();
 						notLoading();
 					}else{
-						// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
-						document.getElementById("kayitButton").innerHTML = "daha fazla"
-						document.getElementById("kayitButton").onclick = function(){ alert("Eklenecek.");}
-						document.getElementById("kayitButton").href = "resimyukle.html"
 						// User is signed in.
-						firebase.database().ref("Users").on("child_added",function(snapshot2){
-							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).on("value", function(snapshot){
-								userNameAsString = snapshot.val().name + " " + snapshot.val().surname + "(" + snapshot.val().status + ")"
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
 								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+								if(snapshot2.val().status == "Managers"){
+									// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
+									document.getElementById("kayitButton").innerHTML = "Spor Salonu Oluştur"
+									document.getElementById("kayitButton").href = "creategym.html"
+									document.getElementById("nedenSporSepetim").innerHTML = "Spor Salonu Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+									document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
+								}else if(snapshot2.val().status == "Trainers"){
+									document.getElementById("kayitButton").innerHTML = "Spor Programı Oluştur"
+									document.getElementById("kayitButton").href = "createProgram.html"
+									document.getElementById("nedenSporSepetim").innerHTML = "Spor Programı Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+									document.getElementById("altBaslik").innerHTML = "Spor programı oluşturmak için ilk olarak, oluşturduğunuz spor programı kullanıcının isteklerine uyuyor mu uymuyor mu diye kontrol etmeniz gerekiyor. Bu yüzden spor programı oluştururken, spor programı içeriğini çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde kullanıcının isteklerine uymuyorsa sistemimiz tarafından onaylanmayacaktır ve sizinle iletişime geçilmek durumunda kalınacaktır."
+								}else{
+									document.getElementById("kayitButton").innerHTML = "Arama Yap"
+									document.getElementById("kayitButton").href = "#"
+									document.getElementById("altBaslik").innerHTML = "Spor Salonu veya Spor Eğiteni arayıp, isteklerinize uygun salonlara kayıt olabilir, isteklerinize uygun eğitmenler ile iletişime geçip, onların öğrenicisi olabilirsiniz :)"
+								}
 							});
 							notLoading();
 						});
