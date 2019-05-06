@@ -206,13 +206,11 @@
 			//----------------- LOADING ICON FINISH. -------------------//
 
 			function getUsersforSelect(){
-
 		    firebase.database().ref("Users").on("child_added",function(snapshot){
 		      firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
-						console.log(snapshot2.val().name);
 		        var x = document.getElementById("userSelect");
 		        var option = document.createElement("option");
-		        option.text = snapshot2.val().name + " " + snapshot2.val().surname
+		        option.text = snapshot2.val().name + " " + snapshot2.val().surname + " (" + snapshot2.key + ")"
 		        x.add(option);
 		      });
 		    });

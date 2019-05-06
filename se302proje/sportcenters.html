@@ -142,7 +142,7 @@
 				const sportCentersList = document.querySelector("#sportcentersList");
 				firebase.database().ref("SportCenters").on("child_added",function(snapshot){
 					firebase.database().ref("SportCenters").child(snapshot.key).on("value",function(snapshot2){
-						sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+						sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><h4>" + snapshot2.val().ilce + "</h4><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
 						getPopularTSportCentersImage(snapshot.key);
 					});
 				});
@@ -209,7 +209,7 @@
 	    		ul = document.getElementById("sportcentersList");
 	    		li = ul.getElementsByTagName("article");
 	    		for (i = 0; i < li.length; i++) {
-	        	a = li[i].getElementsByTagName("h3")[0];
+	        	a = li[i].getElementsByTagName("h4")[0];
 	        	txtValue = a.textContent || a.innerText;
 	        	if (txtValue.toUpperCase().indexOf(filter) > -1) {
 	            li[i].style.display = "";
