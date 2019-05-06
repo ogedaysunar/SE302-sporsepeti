@@ -104,11 +104,11 @@
 			      </div>
 			      <div class="submit">
 							<div class="styled-select">
-							   <select>
-							     <option></option>
-							   </select>
+								<select id="userSelect">
+									<option selected disabled>Kullanıcı Seçiniz</option>
+								</select>
 							</div>
-			        <button type="submit" class="btn btn-default">Gönder</button>
+			        <button type="button" class="btn btn-default" onclick="usersSelected()">Gönder</button>
 			      </div>
 			    </form>
 			  </div>
@@ -204,6 +204,26 @@
 	      document.getElementById("myDiv").style.display = "none";
 	    }
 			//----------------- LOADING ICON FINISH. -------------------//
+
+			function getUsersforSelect(){
+
+		    firebase.database().ref("Users").on("child_added",function(snapshot){
+		      firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
+						console.log(snapshot2.val().name);
+		        var x = document.getElementById("userSelect");
+		        var option = document.createElement("option");
+		        option.text = snapshot2.val().name + " " + snapshot2.val().surname
+		        x.add(option);
+		      });
+		    });
+		  }
+			getUsersforSelect();
+
+			function usersSelected(){
+				var userSelector = document.getElementById('userSelect');
+		    var userValue = userSelector[userSelector.selectedIndex].value;
+				alert(userValue);
+			}
 			</script>
 
 		<!-- Scripts -->
