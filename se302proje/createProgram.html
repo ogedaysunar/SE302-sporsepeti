@@ -1,3 +1,9 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 	<head>
 		<title>SporSepetim</title>
@@ -15,9 +21,6 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
-
-
 
 				<!-- Main -->
 					<div id="main">
@@ -38,55 +41,72 @@
 								</header>
 
 							<!-- Content -->
-								<!-- burdan -->
-                <div id="component_switcher"></div>
+							<body>
+			  <div class="table container">
+			    <form>
+			      <div class="day col-sm-2">
+			        <h3>Pazartesi</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="sun-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-								<div class="section-body">
-									<div class="panel-group accordion" id="days">
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Salı</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="mon-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-										<div class="panel panel-default workout-is-hidden" id="panel_container_day_0">
-												<div id="collapse_panel_day_0_meal_0" class="workout-is-hidden">
-													<h1>Sabah</h1>
-													<ul class="articles-primary">
-														<li class="article-primary article-primary-alpha">
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Çarşamba</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="tue-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Perşembe</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="wed-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-													<div class="article-content">
-														<h4 class="article-title">
-                              <div class="custom-input-active">
-                                <label>Yemek İsmi</label>
-                                <input type="text" placeholder="örnek: Yulaf Ezmesi">
-                              </div>
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Cuma</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="thu-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-														</h4><!-- /.article-title -->
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Cumartesi</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="fri-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-                            <link rel="stylesheet" href="main.css">
-</head>
-<body>
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Pazar</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="sat-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-  <div class="container">
-
-    <form id="js-meal-list-form">
-      <label for="meal-list-entry">Yiyecek Ekle</label>
-      <div class="add-btn">
-        <input type="text" name="meal-list-entry" id="meal-list-entry" placeholder="örnek: 100 gr brokoli">
-        <button type="submit">Ekle</button>
-      </div>
-
-    </form>
-
-    <ul class="meal-list"></ul>
-  </div>
-
-													</div><!-- /.article-content -->
-												</li><!-- /.article-primary -->
-											</ul><!-- /.articles-primary -->
-
-
-										</div>
-
-
-
+			      </div>
+			      <div class="submit">
+			        <input type="text" id="name" placeholder="Name"/>
+			        <button type="submit" class="btn btn-default">Gönder</button>
+			      </div>
+			    </form>
+			  </div>
+			</body>
 
 								<!-- Sidebar -->
 									<div id="sidebar">
@@ -147,6 +167,70 @@
 									</div>
 
 			</div>
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+			
+			<script type="text/javascript">
+			//Program
+			firebase.auth().signInWithPopup(provider).then(function(result) {
+			  // This gives you a Google Access Token. You can use it to access the Google API.
+			  var token = result.credential.accessToken;
+			  // The signed-in user info.
+			  var user = result.user;
+			  // ...
+			}).catch(function(error) {
+			  // Handle Errors here.
+			  var errorCode = error.code;
+			  var errorMessage = error.message;
+			  // The email of the user's account used.
+			  var email = error.email;
+			  // The firebase.auth.AuthCredential type that was used.
+			  var credential = error.credential;
+			  // ...
+			});
+
+			function writeUserData(userId, name, email, imageUrl) {
+			  firebase.database().ref('users/' + userId).set({
+			    username: name,
+			    email: email,
+			    profile_picture : imageUrl
+			  });
+			}
+
+			  $(document).ready(function(){
+			    //Allow posting to current url
+			    var currentUrl = window.location.href;
+			    currentUrl = currentUrl.split("")[1] + "_msg";
+			    console.log(currentUrl);
+
+			  	var $rocky = $("#rockyMtnReport").html();
+
+			    var result = $rocky.split("&nbsp;ft    ").pop();
+			  	result = result.substring(0, result.indexOf("Report Updated On"));
+			    $("#rockyMtnReport").text(result);
+
+			    $updateDate = $rocky.substring($rocky.indexOf("Report Updated On"));
+
+			    $("#rockyMtnReport").append("<p class='lastUpdate'>" + $updateDate + "</p>");
+
+			    $("#contact-form").attr("action", currentUrl);
+			    console.log($("#contact-form").attr("action"));
+			  })
+
+
+
+
+
+
+			</script>
+
+
+
+
+
+
+
+
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -154,8 +238,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-
 
 
 
