@@ -41,7 +41,7 @@
                   <!-- Search -->
     								<section id="search" class="alt">
     									<form method="post" action="#">
-    										<input type="text" name="query" id="query" placeholder="Arama" />
+    										<input type="text" name="query" id="trainersSearchInput" placeholder="Arama" onkeyup="searchTrainers()" />
     									</form>
     								</section>
 									<!-- Content -->
@@ -220,6 +220,24 @@
 				document.getElementById("myDiv").style.display = "none";
 			}
 			//----------------- LOADING ICON FINISH. -------------------//
+			//searchTrainers
+			function searchTrainers(){
+					var input, filter, ul, li, a, i, txtValue;
+	    		input = document.getElementById("trainersSearchInput");
+	    		filter = input.value.toUpperCase();
+	    		ul = document.getElementById("trainerList");
+	    		li = ul.getElementsByTagName("article");
+	    		for (i = 0; i < li.length; i++) {
+	        	a = li[i].getElementsByTagName("h3")[0];
+	        	txtValue = a.textContent || a.innerText;
+	        	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        	} else {
+	            li[i].style.display = "none";
+	        	}
+	    	}
+			}
+			searchTrainers();
 			</script>
 
 		<!-- Scripts -->
