@@ -50,7 +50,7 @@
 			        <h3>Pazartesi</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="sun-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			          <textarea id="monday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
 			        </div>
 
 			      </div>
@@ -58,7 +58,7 @@
 			        <h3>Salı</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="mon-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			          <textarea id="tuesday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
 			        </div>
 
 			      </div>
@@ -66,7 +66,7 @@
 			        <h3>Çarşamba</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="tue-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			          <textarea id="wednesday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
 			        </div>
 
 			      </div>
@@ -74,7 +74,7 @@
 			        <h3>Perşembe</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="wed-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			          <textarea id="thursday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
 			        </div>
 
 			      </div>
@@ -82,7 +82,7 @@
 			        <h3>Cuma</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="thu-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			          <textarea id="friday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
 			        </div>
 
 			      </div>
@@ -90,7 +90,7 @@
 			        <h3>Cumartesi</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="fri-brk" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			          <textarea id="saturday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
 			        </div>
 
 			      </div>
@@ -98,7 +98,7 @@
 			        <h3>Pazar</h3>
 			        <div class="meal">
 			          <h5>Antrenman/Beslenme Programı</h5>
-			          <textarea id="sat-brk" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			          <textarea id="sunday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
 			        </div>
 
 			      </div>
@@ -205,22 +205,75 @@
 	    }
 			//----------------- LOADING ICON FINISH. -------------------//
 
+			var userInfo = []
 			function getUsersforSelect(){
 		    firebase.database().ref("Users").on("child_added",function(snapshot){
 		      firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
-		        var x = document.getElementById("userSelect");
-		        var option = document.createElement("option");
-		        option.text = snapshot2.val().name + " " + snapshot2.val().surname + " (" + snapshot2.key + ")"
-		        x.add(option);
+						if(snapshot.key != "Trainers"){
+							userInfo.push({
+	    					userid:  snapshot2.key,
+	    					name: snapshot2.val().name,
+								surname: snapshot2.val().surname,
+								email: snapshot2.val().email,
+								status: snapshot.key
+							});
+			        var x = document.getElementById("userSelect");
+			        var option = document.createElement("option");
+			        option.text = snapshot2.val().name + " " + snapshot2.val().surname
+			        x.add(option);
+						}
 		      });
 		    });
 		  }
 			getUsersforSelect();
 
+
 			function usersSelected(){
+				var monday = document.getElementById("monday").value;
+				var tuesday = document.getElementById("tuesday").value;
+				var wednesday = document.getElementById("wednesday").value;
+				var thursday = document.getElementById("thursday").value;
+				var friday = document.getElementById("friday").value;
+				var saturday = document.getElementById("saturday").value;
+				var sunday = document.getElementById("sunday").value;
+
 				var userSelector = document.getElementById('userSelect');
 		    var userValue = userSelector[userSelector.selectedIndex].value;
-				alert(userValue);
+
+				if(monday == "" || tuesday == "" || wednesday == "" || thursday == "" || friday == "" || saturday == "" || sunday == ""){
+					alert("Lütfen tüm günleri doldurun.");
+				}else{
+					var i;
+					for (i = 0; i < userInfo.length; i++) {
+						var isEqualNameAndSurname = userInfo[i].name + " " + userInfo[i].surname;
+						if(isEqualNameAndSurname == userValue){
+							firebase.database().ref("Users").child(userInfo[i].status).child(userInfo[i].userid).child("Programs").push().set({
+								monday:{
+									text:monday
+								},
+								tuesday:{
+									text:tuesday
+								},
+								wednesday:{
+									text:wednesday
+								},
+								thursday:{
+									text:thursday
+								},
+								friday:{
+									text:friday
+								},
+								saturday:{
+									text:saturday
+								},
+								sunday:{
+									text:sunday
+								}
+							});
+						}
+					}
+				}
+
 			}
 			</script>
 

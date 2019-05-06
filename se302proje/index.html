@@ -50,6 +50,7 @@
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 											<li><a id="aramaButton1" href="" class="button big" hidden>Eğitmenler</a></li>
+											<li><a id="myProgramsButton" href="" class="button big" hidden>Spor Programlarım</a></li>
 										</ul>
 									</div>
 									<span class="image object">
@@ -202,6 +203,8 @@
 									document.getElementById("aramaButton1").style.display = "block"
 									document.getElementById("kayitButton").href = "sportcenters.html"
 									document.getElementById("aramaButton1").href = "trainers.html"
+									document.getElementById("myProgramsButton").style.display = "block"
+									document.getElementById("myProgramsButton").href = "viewProgram.html"
 									document.getElementById("altBaslik").innerHTML = "Spor Salonu veya Spor Eğiteni arayıp, isteklerinize uygun salonlara kayıt olabilir, isteklerinize uygun eğitmenler ile iletişime geçip, onların öğrenicisi olabilirsiniz :)"
 								}
 							});
@@ -285,6 +288,7 @@
 			function logout1(){
 				// trainers search button is hidden
 				document.getElementById("aramaButton1").style.display = "none"
+				document.getElementById("myProgramsButton").style.display = "none"
       firebase.auth().signOut().then(function() {
         console.log('Signed Out');
       }, function(error) {
