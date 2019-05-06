@@ -8,8 +8,9 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 
 	</head>
-	<body class="is-preload">
-
+	<body style="margin:0;" class="is-preload">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -20,11 +21,15 @@
 							<!-- Header -->
 								<header id="header">
 									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
-									<ul class="icons">
-                    <li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
+									<ul id="userIcon" class="icons">
+										<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
 										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
 
 										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+										<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
+										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
 									</ul>
 								</header>
 
@@ -43,92 +48,13 @@
 
 									<hr class="major" />
 
-                  <section>
-                    <header class="major">
-                      <h2>Eğitmenler</h2>
-                    </header>
-                    <div class="posts">
-                      <article>
-												<h1 style="font-size:150%">4.0
-													<span style="color:orange;">&starf;</span>
-												</h1>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" />
-												</a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-												<h1 style="font-size:150%">4.0
-													<span style="color:orange;">&starf;</span>
-												</h1>
-                        <a href="#" class="image"><img src="images/pic02.jpg" alt="" />
-                        </a>
-
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-												<h1 style="font-size:150%">4.0
-													<span style="color:orange;">&starf;</span>
-												</h1>
-                        <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-												<h1 style="font-size:150%">4.0
-													<span style="color:orange;">&starf;&starf;</span>
-												</h1>
-                        <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                    </div>
-                  </section>
+									<section>
+										<header class="major">
+											<h2>Tüm Eğitmenler</h2>
+										</header>
+										<div id="trainerList" class="posts">
+										</div>
+									</section>
 
 
 				<!-- Sidebar -->
@@ -143,9 +69,8 @@
 									<ul>
 										<li><a href="index.html">Anasayfa</a></li>
 										<li><a href="hakkimizda.html">Hakkımızda</a></li>
-										<li><a href="elements.html">Spor Salonları</a></li>
-										<li><a href="elements.html">Eğitmenler</a></li>
-										<li><a href="elements.html">İletişim</a></li>
+										<li><a href="sportcenters.html">Spor Salonları</a></li>
+										<li><a href="trainers.html">Eğitmenler</a></li>
 
 									</ul>
 								</nav>
@@ -175,6 +100,127 @@
 					</div>
 
 			</div>
+			<!--Initiliaze Firebase -->
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+
+			<script>
+
+			var userNameAsString = "";
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					if(!user.emailVerified){
+						alert("Lütfen size gönderdiğimiz e-maili onaylayınız. E-mail tekrar yollanmıştır.");
+						sendEmailVerification();
+						logout1();
+						notLoading();
+					}else{
+						// User is signed in.
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+								if(snapshot2.val().status == "Managers"){
+									// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
+									document.getElementById("kayitButton").innerHTML = "Spor Salonu Oluştur"
+									document.getElementById("kayitButton").href = "creategym.html"
+									document.getElementById("nedenSporSepetim").innerHTML = "Spor Salonu Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+									document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
+								}else if(snapshot2.val().status == "Trainers"){
+									document.getElementById("kayitButton").innerHTML = "Spor Programı Oluştur"
+									document.getElementById("kayitButton").href = "createProgram.html"
+									document.getElementById("nedenSporSepetim").innerHTML = "Spor Programı Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+									document.getElementById("altBaslik").innerHTML = "Spor programı oluşturmak için ilk olarak, oluşturduğunuz spor programı kullanıcının isteklerine uyuyor mu uymuyor mu diye kontrol etmeniz gerekiyor. Bu yüzden spor programı oluştururken, spor programı içeriğini çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde kullanıcının isteklerine uymuyorsa sistemimiz tarafından onaylanmayacaktır ve sizinle iletişime geçilmek durumunda kalınacaktır."
+								}else{
+									document.getElementById("kayitButton").innerHTML = "Spor Salonları"
+									document.getElementById("aramaButton1").style.display = "block"
+									document.getElementById("kayitButton").href = "sportcenters.html"
+									document.getElementById("aramaButton1").href = "trainers.html"
+									document.getElementById("altBaslik").innerHTML = "Spor Salonu veya Spor Eğiteni arayıp, isteklerinize uygun salonlara kayıt olabilir, isteklerinize uygun eğitmenler ile iletişime geçip, onların öğrenicisi olabilirsiniz :)"
+								}
+							});
+							notLoading();
+						});
+					}
+				} else {
+					// No user is signed in.
+					// We put login inputs again.
+					document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
+					// WE CHANGE KATITBUTTON VALUE.
+					document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
+					document.getElementById("kayitButton").href = "register.html"
+					notLoading();
+				}
+			});
+
+			//----------------- VİEW POPULAR TRAINER START. -------------------//
+			function getPopularTrainers(){
+				const egitmenListesi = document.querySelector("#trainerList");
+				firebase.database().ref("Users").child("Trainers").on("child_added",function(snapshot){
+					egitmenListesi.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().myDescription + "</p><ul class='actions'><li><a onclick='sendUserKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+					getPopularTrainersImage(snapshot.key);
+				});
+			}
+			getPopularTrainers();
+
+			function getPopularTrainersImage(uid){
+				//showLoading(); // RESİM İNDİRME DENEME..
+				var storageRef = firebase.storage().ref();
+				var starsRef = storageRef.child('trainers/' + uid);
+				// Get the download URL
+				starsRef.getDownloadURL().then(function(url) {
+				// Insert url into an <img> tag to "download"
+				if(url.includes(uid)){
+					document.getElementById(uid).src = url;
+					notLoading();
+				}
+				notLoading();
+				}).catch(function(error) {
+				switch (error.code) {
+					case 'storage/object_not_found':
+						// File doesn't exist
+						alert("Üzgünüz. Dosya bulunamıyor.");
+						break;
+					case 'storage/unauthorized':
+						// User doesn't have permission to access the object
+						alert("Bu resmi çekmenize izniniz yok.");
+						break;
+					case 'storage/canceled':
+						// User canceled the upload
+						alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+						break;
+					case 'storage/unknown':
+						// Unknown error occurred, inspect the server response
+						alert("Lütfen bizimle iletişime geçiniz");
+						break;
+				}
+			});
+			}
+
+			// send the key for view the popular trainer profile.
+			function sendUserKey(userKey){
+				console.log(userKey);
+				sessionStorage.setItem('label', userKey);
+				window.location.href = "profil.html";
+			}
+
+			//----------------- VİEW POPULAR TRAINER FINISH. -------------------//
+			//**********************//
+
+			//----------------- LOADING ICON START. -------------------//
+			function notLoading() {
+				document.getElementById("loader").style.display = "none";
+				document.getElementById("myDiv").style.display = "block";
+			}
+
+			function showLoading() {
+				document.getElementById("loader").style.display = "block";
+				document.getElementById("myDiv").style.display = "none";
+			}
+			//----------------- LOADING ICON FINISH. -------------------//
+			</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -183,23 +229,6 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<li><a href="#"  style="margin-left:44%; margin-bottom:30px"	class="button">Daha Fazla</a></li>
-
-
-      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-			<script>
-  		// Initialize Firebase
-  			var config = {
-    		apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
-    		authDomain: "sporsepeti-65ea9.firebaseapp.com",
-    		databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
-    		projectId: "sporsepeti-65ea9",
-    		storageBucket: "sporsepeti-65ea9.appspot.com",
-    		messagingSenderId: "932394206290"
-  		};
-  		firebase.initializeApp(config);
-			</script>
-
-
 
 	</body>
 </html>
