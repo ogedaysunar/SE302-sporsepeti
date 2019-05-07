@@ -127,7 +127,7 @@
 							</header>
 							<ul>
 								<li><a href="index.html">Anasayfa</a></li>
-								<li><a href="#">Hakkımızda</a></li>
+								<li><a href="hakkimizda.html">Hakkımızda</a></li>
 								<li><a href="sportcenters.html">Spor Salonları</a></li>
 								<li><a href="trainers.html">Eğitmenler</a></li>
 
@@ -178,6 +178,7 @@
 							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
 								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
 								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+								getUsersforSelect(userID);
 							});
 							notLoading();
 						});
@@ -189,6 +190,7 @@
 					// WE CHANGE KATITBUTTON VALUE.
 					//document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
 					//document.getElementById("kayitButton").href = "register.html"
+					window.location.href = "index.html";
 					notLoading();
 				}
 			});
@@ -206,27 +208,36 @@
 			//----------------- LOADING ICON FINISH. -------------------//
 
 			var userInfo = []
-			function getUsersforSelect(){
+			function getUsersforSelect(trainerID){
 		    firebase.database().ref("Users").on("child_added",function(snapshot){
 		      firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
 						if(snapshot.key != "Trainers"){
-							userInfo.push({
-	    					userid:  snapshot2.key,
-	    					name: snapshot2.val().name,
-								surname: snapshot2.val().surname,
-								email: snapshot2.val().email,
-								status: snapshot.key
+							firebase.database().ref("Users").child("Users").child(snapshot2.key).child("myTrainers").on("value",function(deneme){
+								var exist = (deneme.val() !== null);
+								if(exist){
+									firebase.database().ref("Users").child("Users").child(snapshot2.key).child("myTrainers").on("child_added",function(deneme2){
+										if(trainerID == deneme2.val().trainerID){
+											userInfo.push({
+					    					userid:  snapshot2.key,
+					    					name: snapshot2.val().name,
+												surname: snapshot2.val().surname,
+												email: snapshot2.val().email,
+												status: snapshot.key
+											});
+							        var x = document.getElementById("userSelect");
+							        var option = document.createElement("option");
+							        option.text = snapshot2.val().name + " " + snapshot2.val().surname
+							        x.add(option);
+										}
+									});
+								}else{
+
+								}
 							});
-			        var x = document.getElementById("userSelect");
-			        var option = document.createElement("option");
-			        option.text = snapshot2.val().name + " " + snapshot2.val().surname
-			        x.add(option);
 						}
 		      });
 		    });
 		  }
-			getUsersforSelect();
-
 
 			function usersSelected(){
 				var monday = document.getElementById("monday").value;

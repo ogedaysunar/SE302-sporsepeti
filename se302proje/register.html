@@ -190,10 +190,14 @@
                         var errorMessage = error.message;
                         if (errorCode == 'auth/internal-error') {
                           alert('Sunucumuz beklenmeyen bir hata ile karşılaştı. Lütfen tekrar deneyiniz.');
-                        }else if(errorCode == 'auth/email-already-exists'){
+                          location.reload();
+                        }else if(errorCode == 'auth/email-already-in-use'){
                           alert("Girdiğiniz e-mail başkası tarafından kullanılıyor. Lütfen başka bir e-mail giriniz.");
+                          location.reload();
                         }else{
                           alert("Bir hata oluştu. Sayfayı yenileyip tekrar deneyiniz.");
+                          location.reload(); 
+                          console.log(errorMessage);
                         }
                       });
                     }
