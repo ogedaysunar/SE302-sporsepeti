@@ -199,6 +199,24 @@
 			});
 			}
 
+			function searchSportCenters(){
+					var input, filter, ul, li, a, i, txtValue;
+	    		input = document.getElementById("trainersSearchInput");
+	    		filter = input.value.toUpperCase();
+	    		ul = document.getElementById("trainerList");
+	    		li = ul.getElementsByTagName("article");
+	    		for (i = 0; i < li.length; i++) {
+	        	a = li[i].getElementsByTagName("h4")[0];
+	        	txtValue = a.textContent || a.innerText;
+	        	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        	} else {
+	            li[i].style.display = "none";
+	        	}
+	    	}
+			}
+			searchSportCenters();
+
 			// send the key for view the popular trainer profile.
 			function sendUserKey(userKey){
 				console.log(userKey);
