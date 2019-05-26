@@ -12,8 +12,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
-	<body class="is-preload">
-
+	<body class="is-preload" style="margin:0">
+		<div id="loader"></div>
+		<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -53,7 +54,7 @@
 
 					    <a href="#" class="follow">KATIL</a>
 
-							<a href="editSporCenter.html" class="follow">Güncelle</a>
+							<a href="editSporCenter.html" class="follow" id="guncelleButton" style="display:none">Güncelle</a>
 
 					  </figcaption>
 					</figure>
@@ -90,15 +91,6 @@
 														<li><a href="sportcenters.html">Spor Salonları</a></li>
 														<li><a href="trainers.html">Eğitmenler</a></li>
 														<li><a href="#">İletişim</a></li>
-														<li>
-															<span class="opener">Another Submenu</span>
-															<ul>
-																<li><a href="#">Lorem Dolor</a></li>
-																<li><a href="#">Ipsum Adipiscing</a></li>
-																<li><a href="#">Tempus Magna</a></li>
-																<li><a href="#">Feugiat Veroeros</a></li>
-															</ul>
-														</li>
 													</ul>
 												</nav>
 
@@ -151,13 +143,13 @@
 					});
 
 				});
+				getSportCenterInfo1(user);
 				//	getPopularTrainersImage(user.uid);
 				//	getInfo(user.uid);
-				notLoading();
 			} else {
 			  // No user is signed in.
+				getSportCenterInfo2();
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
-				notLoading();
 			}
 			});
 
@@ -217,7 +209,40 @@
 		}
 
 
-			function getSportCenterInfo(){
+			function getSportCenterInfo1(user){
+				var sportCenterKey = sessionStorage.getItem('label2');
+				firebase.database().ref("Users").on("child_added",function(snapshot2){
+					if(snapshot2.key == "Managers"){
+						firebase.database().ref("Users").child(snapshot2.key).on("child_added",function(snapshot3){
+							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).child("mySportCenters").on("child_added",function(snapshot4){
+								var exists = (snapshot4.key != null);
+								if(exists){
+									console.log(snapshot4.val());
+									console.log(sportCenterKey);
+									if(sportCenterKey == snapshot4.val()){
+										document.getElementById("guncelleButton").style.display = "block";
+									}
+								}
+							});
+						});
+					}
+				});
+
+				firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
+					document.getElementById("gymName").innerHTML = snapshot.val().salonName
+					document.getElementById("gymName2").innerHTML = snapshot.val().salonName
+					document.getElementById("gymTel").innerHTML = snapshot.val().salonPhone
+					document.getElementById("gymEmail").innerHTML = snapshot.val().saloneEmail
+					document.getElementById("gymAdress").innerHTML = snapshot.val().salonAdress
+					document.getElementById("gymOpenTime").innerHTML = snapshot.val().openTime
+					document.getElementById("gymCloseTime").innerHTML = snapshot.val().closeTime
+					document.getElementById("gymDescription").innerHTML = snapshot.val().salonaciklama
+					document.getElementById("gymSportTypes").innerHTML = snapshot.val().salonIcerik
+					getSportCenterImage(sportCenterKey);
+				});
+			}
+
+			function getSportCenterInfo2(){
 				var sportCenterKey = sessionStorage.getItem('label2');
 				firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
 					document.getElementById("gymName").innerHTML = snapshot.val().salonName
@@ -232,7 +257,6 @@
 					getSportCenterImage(sportCenterKey);
 				});
 			}
-			getSportCenterInfo();
 
 
 			// valid email

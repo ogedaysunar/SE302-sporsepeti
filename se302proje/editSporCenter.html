@@ -143,15 +143,6 @@
 														<li><a href="sportcenters.html">Spor Salonları</a></li>
 														<li><a href="trainers.html">Eğitmenler</a></li>
 														<li><a href="#">İletişim</a></li>
-														<li>
-															<span class="opener">Another Submenu</span>
-															<ul>
-																<li><a href="#">Lorem Dolor</a></li>
-																<li><a href="#">Ipsum Adipiscing</a></li>
-																<li><a href="#">Tempus Magna</a></li>
-																<li><a href="#">Feugiat Veroeros</a></li>
-															</ul>
-														</li>
 													</ul>
 												</nav>
 
@@ -204,14 +195,7 @@
 					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
 				}
 			});
-
 		});
-
-		getPopularTrainersImage(user.uid);
-		getInfo(user.uid);
-		notLoading();
-
-
 	} else {
 	  // No user is signed in.
 
@@ -236,10 +220,10 @@
 	 * getPopularTrainersImage function get trainer image.
 	 */
 
-	function getPopularTrainersImage(uid){
+	function getSportCenterImage(uid){
 		showLoading(); // RESİM İNDİRME DENEME..
 	  var storageRef = firebase.storage().ref();
-	  var starsRef = storageRef.child('trainers/' + uid);
+	  var starsRef = storageRef.child('sportcenters/' + uid);
 	  // Get the download URL
 	  starsRef.getDownloadURL().then(function(url) {
 	  // Insert url into an <img> tag to "download"
@@ -323,18 +307,19 @@
 	function getInfoSportCenterEdit(){
 		var sportCenterKey = sessionStorage.getItem('label2');
 		firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
-			document.getElementById("salonName").innerHTML = snapshot.val().salonName
-			document.getElementById("salonPhone").innerHTML = snapshot.val().salonPhone
-			document.getElementById("gymEmail").innerHTML = snapshot.val().saloneEmail
-			document.getElementById("gymAdress").innerHTML = snapshot.val().salonAdress
-			document.getElementById("gymOpenTime").innerHTML = snapshot.val().openTime
-			document.getElementById("gymCloseTime").innerHTML = snapshot.val().closeTime
-			document.getElementById("gymDescription").innerHTML = snapshot.val().salonaciklama
-			document.getElementById("gymSportTypes").innerHTML = snapshot.val().salonIcerik
+			document.getElementById("salonName").value = snapshot.val().salonName
+			document.getElementById("salonPhone").value = snapshot.val().salonPhone
+			document.getElementById("saloneEmail").value = snapshot.val().saloneEmail
+			document.getElementById("salonAdress").value = snapshot.val().salonAdress
+			document.getElementById("openTime").value = snapshot.val().openTime
+			document.getElementById("closeTime").value = snapshot.val().closeTime
+			document.getElementById("salonaciklama").value = snapshot.val().salonaciklama
+			document.getElementById("salonIcerik").value = snapshot.val().salonIcerik
 			getSportCenterImage(sportCenterKey);
 		});
 	}
-getInfoSportCenterEdit()
+getInfoSportCenterEdit();
+
 	function logout1(){
 	firebase.auth().signOut().then(function() {
 		console.log('Signed Out');
@@ -349,55 +334,38 @@ getInfoSportCenterEdit()
  */
 
 function saveEditSportCenter(){
-	var name = document.getElementById("salonName").value
-	var surname = document.getElementById("surname").value
-	var email = document.getElementById("saloneEmail").value
-	var phone = document.getElementById("salonPhone").value
-	var myDescription = document.getElementById("myDescriptionTextArea").value
-	var birthdate = document.getElementById("birthdateID").value
-	var hobi = document.getElementById("hobiler").value
+	var sportCenterKey = sessionStorage.getItem('label2');
+	var salonName = document.getElementById("salonName").value
+	var salonPhone = document.getElementById("salonPhone").value
+	var saloneEmail = document.getElementById("saloneEmail").value
+	var salonAdress = document.getElementById("salonAdress").value
+	var openTime = document.getElementById("openTime").value
+	var closeTime = document.getElementById("closeTime").value
+	var salonaciklama = document.getElementById("salonaciklama").value
+	var salonIcerik = document.getElementById("salonIcerik").value
 
-	if(validateEmail(email)){
-		if(name == ""){
-			alert("Lütfen isminizi boş bırakmayınız.");
+	if(validateEmail(saloneEmail)){
+		// run codee
+		if(salonName == "" || salonPhone == "" || saloneEmail == "" || salonAdress == "" || openTime == "" || closeTime == "" || salonaciklama == "" || salonIcerik == ""){
+			alert("Lütfen boşluk bırakmayınız.");
 		}else{
-			if(surname == ""){
-				alert("Lütfen soyadınızı boş bırakmayınız.");
-			}else{
-				if(email == ""){
-					alert("Lütfen emailinizi boş bırakmayınız.");
-				}else{
-					if(phone == ""){
-						alert("Lütfen telefon kısmını boş bırakmayınız.")
-					}else{
-						if(myDescription == ""){
-							alert("Lütfen açıklama kısmını boş bırakmayınız.");
-						}else{
-							if(birthdate == ""){
-								alert("Lütfen doğum tarihinizi boş bırakmayınız.");
-							}else{
-								// run codee
-								var userID = firebase.auth().currentUser.uid;//salon id olarak al oge beyefendi
-								//var statu = document.getElementById("status").value;
-								firebase.database().ref("SportCenters").child(userID).update({
-									salonName: salonName,
-									salonIcerik: salonIcerik,
-									salonAdress: salonAdress,
-									salonPhone: salonPhone,
-									saloneEmail: saloneEmail,
-									openTime: openTime,
-									closeTime: closeTime,
-									salonaciklama: salonaciklama
-								}).then(function(){
-  								alert("Bilgileriniz başarılı bir şekilde kaydedildi.");
-								}).catch(function(error) {
-  								alert("Opss. Bir hata oluştu, lütfen tekrar deneyiniz.");
-								});
-							}
-						}
-					}
-				}
-			}
+			var userID = firebase.auth().currentUser.uid;//salon id olarak al oge beyefendi
+			//var statu = document.getElementById("status").value;
+			firebase.database().ref("SportCenters").child(sportCenterKey).update({
+				salonName: salonName,
+				salonIcerik: salonIcerik,
+				salonAdress: salonAdress,
+				salonPhone: salonPhone,
+				saloneEmail: saloneEmail,
+				openTime: openTime,
+				closeTime: closeTime,
+				salonaciklama: salonaciklama,
+				status: true,
+			}).then(function(){
+				alert("Bilgileriniz başarılı bir şekilde kaydedildi.");
+			}).catch(function(error) {
+				alert("Opss. Bir hata oluştu, lütfen tekrar deneyiniz.");
+			});
 		}
 	}else{
 		alert("Lütfen geçerli bir email giriniz.");
