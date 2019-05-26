@@ -52,7 +52,7 @@
 
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
-					    <button onclick="joinsportCenter()" class="follow">KATIL</button>
+					    <button id="katilID" onclick="joinsportCenter()" class="follow" value="Katıl">Katıl</button>
 
 							<a href="editSporCenter.html" class="follow" id="guncelleButton" style="display:none">Güncelle</a>
 
@@ -130,10 +130,12 @@
 			<script src="assets/js/db.js"></script>
 
       <script>
-
+			var counter = 0;
 			firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
 			  // User is signed in.
+				haveSportCenter(user);
+				getSportCenterInfo1(user);
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
 					firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
 						if(snapshot.key == user.uid){
@@ -143,7 +145,9 @@
 					});
 
 				});
-				getSportCenterInfo1(user);
+				firebase.database().ref("Users").child("Users").child(user.uid).child("mySportCenters").on("child_added",function(snapshot){
+					counter += 1;
+				});
 				//	getPopularTrainersImage(user.uid);
 				//	getInfo(user.uid);
 			} else {
@@ -152,6 +156,21 @@
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 			}
 			});
+
+			function haveSportCenter(user){
+				var sportCenterKey = sessionStorage.getItem('label2');
+				var counter = 0;
+				firebase.database().ref("Users").child("Users").child(user.uid).child("mySportCenters").on("child_added",function(snapshot){
+					if(sportCenterKey == snapshot.key){
+						document.getElementById("katilID").value = "Ayrıl";
+						document.getElementById("katilID").innerHTML = "Ayrıl";
+					}else{
+						document.getElementById("katilID").innerHTML = "Katıl";
+						document.getElementById("katilID").value = "Katıl";
+					}
+				});
+				notLoading();
+			}
 
 			//----------------- LOADING ICON START. -------------------//
 			function notLoading() {
@@ -260,8 +279,42 @@
 
 			function joinsportCenter(){
 				var sportCenterKey = sessionStorage.getItem('label2');
+				var userID = firebase.auth().currentUser.uid;
 
-			}
+				console.log(counter);
+				if(counter == 0){
+						firebase.database().ref("Users").child("Users").child(userID).child("mySportCenters").update({
+							[sportCenterKey]:sportCenterKey
+						}).then(function(error){
+							if(error){
+								alert("Hata! Lütfen tekrar deneyiniz!");
+							}else {
+								alert("Spor salonuna katıldınız.");
+								location.reload();
+							}
+						});
+				}else{
+					if(document.getElementById("katilID").value != "Katıl"){
+						var count = 0;
+						firebase.database().ref("Users").child("Users").child(userID).child("mySportCenters").on("value",function(snapshot){
+							count += 1;
+							snapshot.ref.remove(function(error){
+								if(error){
+									alert("Bir hata oluştu. Lütfen tekrar deneyiniz.");
+								}else{
+									if(count > 0){
+										alert("Spor salonundan ayrıldınız.");
+										location.reload();
+									}
+								}
+							});
+						});
+					}else{
+						alert("Sadece bir tane spor salonuna katılabilirsiniz.");
+
+					}
+				}
+		}
 
 
 			// valid email
