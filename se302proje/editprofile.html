@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>SporSepetim</title>
@@ -126,13 +121,6 @@
 									<div id="sidebar">
 										<div class="inner">
 
-											<!-- Search -->
-												<section id="search" class="alt">
-													<form method="post" action="#">
-														<input type="text" name="query" id="query" placeholder="Ara" />
-													</form>
-												</section>
-
 											<!-- Menu -->
 												<nav id="menu">
 													<header class="major">
@@ -140,7 +128,7 @@
 													</header>
 													<ul>
 														<li><a href="index.html">Anasayfa</a></li>
-														<li><a href="#">Hakkımızda</a></li>
+														<li><a href="hakkimizda.html">Hakkımızda</a></li>
 														<li><a href="sportcenters.html">Spor Salonları</a></li>
 														<li><a href="trainers.html">Eğitmenler</a></li>
 														<li><a href="#">İletişim</a></li>
@@ -216,7 +204,7 @@
 	} else {
 	  // No user is signed in.
 
-		window.location.href = "file:///Users/ogedaysunar/Documents/GitHub/SE302-sporsepeti/se302proje/index.html";
+		window.location.href = "index.html";
 	}
 	});
 
@@ -231,6 +219,11 @@
 		document.getElementById("myDiv").style.display = "none";
 	}
 	//----------------- LOADING ICON FINISH. -------------------//
+	//
+
+	/**
+	 * getPopularTrainersImage function get trainer image.
+	 */
 
 	function getPopularTrainersImage(uid){
 		showLoading(); // RESİM İNDİRME DENEME..
@@ -273,10 +266,20 @@
 	document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
 	document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
 
+
+	/**
+	 * handleFileUploadChange function select the image for computer.
+	 */
+
 	var selectedFile;
 	  function handleFileUploadChange(e) {
 	    selectedFile = e.target.files[0];
 	}
+
+
+	/**
+	 * handleFileUploadSubmit function upload the image on firebase storage.
+	 */
 
 	function handleFileUploadSubmit(e) {
 	  var user = firebase.auth().currentUser;
@@ -299,6 +302,12 @@
 	  });
 	}
 	// UPLOAD IMAGE FINISH  -------------->
+	//
+
+
+	/**
+	 * getInfo function get selected user informations.
+	 */
 
 	function getInfo(uid){
 		firebase.database().ref("Users").on("child_added",function(snapshot){
@@ -324,6 +333,11 @@
 		console.error('Sign Out Error', error);
 	});
 }
+
+
+/**
+ * saveEditProfile function save the current user informations on firebase database.
+ */
 
 function saveEditProfile(){
 	var name = document.getElementById("name").value

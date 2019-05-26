@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="" />
+    <title>SporSepetim Admin</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="assets2/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets2/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets2/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+  display: inline-block;
+  padding: 5px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 3px;
+}
+
+.titleHead{
+  text-align:center;
+  background-color:#dddddd;
+}
+
+.titleHead2{
+  text-align:center;
+}
+
+.tableRow1{
+  width: 20%;
+  height: 100px;
+}
+
+</style>
+<body style="margin:0;">
+
+<div id="loader"></div>
+<div style="display:none;" class="animate-bottom" id="myDiv">
+<form id="formAdminMain">
+  <div id="wrapper">
+       <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="adjust-nav">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">
+                      <img src="" />
+
+                  </a>
+
+              </div>
+          </div>
+      </div>
+      <!-- /. NAV TOP  -->
+      <nav class="navbar-default navbar-side" role="navigation">
+          <div class="sidebar-collapse">
+              <ul class="nav" id="main-menu">
+
+                  <li class="active-link">
+                      <a href="admin.html" ><i class="fa fa-desktop "></i>Anasayfa <span id="spanID5" class="badge">Main</span></a>
+                  </li>
+                   <li>
+                      <a href="changepassword.html"><i class="fa fa-lock "></i>Şifre Değiştir</a>
+                  </li>
+
+
+                  <li>
+                     <a onclick="logout1()" href="#"><i class="fa fa-power-off "></i>Çıkış</a>
+                 </li>
+              </ul>
+            </div>
+
+      </nav>
+      <!-- /. NAV SIDE  -->
+      <div id="page-wrapper" >
+          <div id="page-inner">
+              <div class="row">
+                  <div class="col-lg-12">
+                   <h2>Spor Salonu Kabul / Red</h2>
+                  </div>
+              </div>
+               <!-- /. ROW  -->
+                <hr />
+
+                <div class="row text-center pad-top" style="margin-left:15px;margin-right:15px">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 id="nameID" style="text-align:left"class="panel-title">Spor Salonu Adı</h3>
+                    </div>
+                    <ul style="text-align:left"class="list-group" id="sportCentersList">
+                </ul>
+              </div>
+            </div>
+
+           <!-- /. PAGE INNER  -->
+          </div>
+       <!-- /. PAGE WRAPPER  -->
+      </div>
+  <div class="footer">
+
+
+          <div class="row">
+              <div class="col-lg-12" >
+                  &copy;  2018 | Design by: <a style="color:#fff;" target="_blank">SE302-SporSepetim Group</a>
+              </div>
+          </div>
+      </div>
+
+</from>
+</div>
+
+
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script src="assets/js/db.js"></script>
+
+    <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        //document.getElementById("formAdminLogin").action = "admin.html";
+        //document.getElementById("formAdminLogin").submit();
+        getWaitingSportCenter();
+        showPage();
+      } else {
+        // No user is signed in.
+        //document.getElementById("formAdminMain").action = "login.html";
+        //document.getElementById("formAdminMain").submit();
+        window.location.href = "index.html";
+      }
+    });
+    function logout1(){
+      firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+      }, function(error) {
+        console.error('Sign Out Error', error);
+      });
+    }
+
+    function getWaitingSportCenter(){
+
+      var adminCount = 0;
+      var admintoogleID = "";
+      const list_div = document.querySelector("#sportCentersList");
+      list_div.innerHTML = "";
+
+        firebase.database().ref("SportCenters").on("value",function(snapshot){
+          var exists = (snapshot.key !== null);
+          if(exists){
+            firebase.database().ref("SportCenters").on("child_added",function(snapshot2){
+              firebase.database().ref("SportCenters").child(snapshot2.key).on("value",function(snapshot3){
+
+                var sportcentersName = snapshot3.val().salonName
+                if(!snapshot3.val().status){
+                  adminCount += 1;
+                  admintoogleID = adminCount.toString();
+                  list_div.innerHTML += "<li class='list-group-item'><div class='row toggle' id='dropdown-detail' data-toggle='detail'><div onclick='ready(\"" +  admintoogleID + "\")' style='text-align:left' class='col-xs-10'><b>" + admintoogleID + "- </b>" + sportcentersName.toUpperCase() + "</div><div class='col-xs-2'><button type='button' class='btn' style='margin-left:2px;background-color:green;color:white' onclick='approveSportCenter(\"" +  snapshot3.key + "\")'><i id='i" + admintoogleID + "' class='fa fa-check'></i></button><button onclick='rejectSportCenter(\"" +  snapshot3.key + "\")'style='background-color:red;color:white' type='button' class='btn'><i id='i" + admintoogleID + "' class='fa fa-close'></i></button><i onclick='ready(\"" +  admintoogleID + "\")' style='margin-top:7px;margin-right:20px' class='fa fa-chevron-down pull-right'></i></div></div><div style='display: none;' id=\"" + admintoogleID + "\"><hr></hr><div class='container'><div style='display:inline-block;' class='fluid-row'>" +
+                  "<table>" +
+                  "<tr>" +
+                    "<td class='titleHead' colspan='7'><b><label id=2titleDateID'>Bilgiler</label></b></td>"
+                 + "</tr>" +
+                  "<tr>" +
+                    "<th>Adı</th>" +
+                    "<th>İlçe</th>" +
+                    "<th>Adres</th>" +
+                    "<th>E-mail</th>" +
+                    "<th>Telefon</th>" +
+                    "<th>Açılış Saati</th>" +
+                    "<th>Kapanış Saati</th>" +
+                  "</tr>" +
+                  "<tr>" +
+                    "<td>" + sportcentersName + "</td>" +
+                    "<td>" + snapshot3.val().ilce  + "</td>" +
+                    "<td>" + snapshot3.val().salonAdress + "</td>" +
+                    "<td>" + snapshot3.val().saloneEmail + "</td>" +
+                    "<td>" + snapshot3.val().salonPhone + "</td>" +
+                    "<td>" + snapshot3.val().openTime + "</td>" +
+                    "<td>" + snapshot3.val().closeTime + "</td>" +
+                  "</tr>" +
+                 "<tr>" +
+                   "<td class='tableRow1' colspan='7'><b><p><u>Açıklama:</u><br>" + snapshot3.val().salonaciklama + "</p></b></td>"
+                + "</tr>" +
+                  "</table>" +
+                  "</div></div></div></li>"
+                }
+              });
+            });
+            if(adminCount == 0){
+              list_div.innerHTML = "<h5>Hiçbir spor salonu isteği bulunmamaktadır.</h5>"
+            }
+          }else{
+            list_div.innerHTML = "<h5>Hiçbir spor salonu isteği bulunmamaktadır.</h5>"
+          }
+        });
+    }
+
+    function approveSportCenter(sporcenterID){
+      firebase.database().ref("SportCenters").child(sporcenterID).update({
+        status: true
+      }).then(function(error){
+        if(error){
+          alert("Hata! Lütfen tekrar deneyiniz!");
+        }else {
+          alert("Kabul edildi.");
+          location.reload();
+        }
+      });
+    }
+
+    function rejectSportCenter(sporcenterID){
+      firebase.database().ref("SportCenters").child(sporcenterID).on("value",function(snapshot){
+        snapshot.ref.remove(function(error){
+          if(error){
+            alert("Bir hata oluştu. Lütfen tekrar deneyiniz.");
+          }else{
+            alert("Reddedildi. Yönetici bilgilendirildi.");
+            location.reload();
+          }
+        });
+      });
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+
+    function showLoading() {
+      document.getElementById("loader").style.display = "block";
+      document.getElementById("myDiv").style.display = "none";
+    }
+
+    </script>
+</body>
+</html>

@@ -3982,6 +3982,61 @@ border-bottom:1px solid #313030;
 
 }
 
+/* program */
+h3 {font-size:18px;}
+.day {
+  border:2px solid grey;
+  padding:0px;
+  width:calc(100% / 7);
+	margin-top: 30px;
+	margin-left: 20px;
+	padding-bottom: 20px;
+
+}
+
+
+
+
+
+.meal {
+  min-height: 112px;
+  border-top:2px solid grey;
+  border-bottom:2px solid grey;
+  padding-left:4px;
+}
+
+div.table { display:table; }
+div.table > form { display:table-row; }
+div.table > form > div.day { display:table-cell; }
+
+textarea {
+  max-width:95%;
+  resize:none;
+}
+
+.submit {
+  margin: 250px;
+	margin-top: 90px;
+	height: 20px;
+  float: left;
+}
+
+.submit input{
+	margin-top: 90px;
+
+}
+
+.submit button{
+	position: absolute;
+	margin-left: 200px;
+	margin-top: -45px;
+	height: 45px;
+
+}
+
+/* program*/
+
+
 
 
 =======

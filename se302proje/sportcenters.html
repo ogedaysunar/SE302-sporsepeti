@@ -7,7 +7,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="is-preload">
+	<body style="margin:0;" class="is-preload">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -19,11 +21,15 @@
 							<!-- Header -->
 								<header id="header">
 									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
-									<ul class="icons">
-                    <li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
+									<ul id="userIcon" class="icons">
+										<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
 										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
 
 										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+										<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
+										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
 									</ul>
 								</header>
 
@@ -35,7 +41,7 @@
                   <!-- Search -->
     								<section id="search" class="alt">
     									<form method="post" action="#">
-    										<input type="text" name="query" id="query" placeholder="Arama" />
+    										<input type="text" name="query" id="sportcentersSearchInput" placeholder="Arama" onkeyup="searchSportCenters()" />
     									</form>
     								</section>
 									<!-- Content -->
@@ -44,89 +50,17 @@
 
 									<hr class="major" />
 
-                  <section>
-                    <header class="major">
-                      <h2>Spor Salonları</h2>
-                    </header>
-                    <div class="posts">
-                      <article>
-                        <a href="/sporcenter.html" class="image"><img src="images/pic01.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Veritabanından İsim Gelecek</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                    </div>
-                  </section>
-
+									<section>
+										<header class="major">
+											<h2>Tüm Spor Salonları</h2>
+										</header>
+										<div id="sportcentersList" class="posts">
+										</div>
+									</section>
 
 				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
-
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Arama" />
-									</form>
-								</section>
 
 							<!-- Menu -->
 								<nav id="menu">
@@ -136,10 +70,8 @@
 									<ul>
 										<li><a href="index.html">Anasayfa</a></li>
 										<li><a href="hakkimizda.html">Hakkımızda</a></li>
-										<li><a href="elements.html">Spor Salonları</a></li>
-										<li><a href="elements.html">Eğitmenler</a></li>
-										<li><a href="elements.html">İletişim</a></li>
-
+										<li><a href="#">Spor Salonları</a></li>
+										<li><a href="trainers.html">Eğitmenler</a></li>
 									</ul>
 								</nav>
 
@@ -168,28 +100,125 @@
 					</div>
 
 			</div>
-
-			// Initialize Firebase
+			<!--Initiliaze Firebase -->
 			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+
 			<script>
-  		// Initialize Firebase
-  			var config = {
-    		apiKey: "AIzaSyDL--Ni0Jcno-IcsDefYq64ZHZQAi2gnsc",
-    		authDomain: "sporsepeti-65ea9.firebaseapp.com",
-    		databaseURL: "https://sporsepeti-65ea9.firebaseio.com",
-    		projectId: "sporsepeti-65ea9",
-    		storageBucket: "sporsepeti-65ea9.appspot.com",
-    		messagingSenderId: "932394206290"
-  		};
-  		firebase.initializeApp(config);
-			</script>
-			<script>
-			function getSportCenters(){
-				const egitmenListesi = document.querySelector("#trainerList");
-				firebase.database().ref("Gym").on("child_added",function(snapshot){
-					egitmenListesi.innerHTML += "<article><a href='#' class='image'><img src='images/emptyUser.jpg'/></a><h3>" + snapshot.val().name + " " + snapshot.val().surname + "</h3><p>" + snapshot.val().info + "</p><ul class='actions'><li><a onclick='resimEkle()' class='button'>İncele</a></li></ul></article>"
+
+			var userNameAsString = "";
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					if(!user.emailVerified){
+						alert("Lütfen size gönderdiğimiz e-maili onaylayınız. E-mail tekrar yollanmıştır.");
+						sendEmailVerification();
+						logout1();
+						notLoading();
+					}else{
+						// User is signed in.
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+							});
+							notLoading();
+						});
+					}
+				} else {
+					// No user is signed in.
+					// We put login inputs again.
+					document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
+					// WE CHANGE KATITBUTTON VALUE.
+					document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
+					document.getElementById("kayitButton").href = "register.html"
+					notLoading();
+				}
+			});
+
+			//----------------- VİEW POPULAR SPORT CENTER START. -------------------//
+			function getPopularSportCenters(){
+				const sportCentersList = document.querySelector("#sportcentersList");
+				firebase.database().ref("SportCenters").on("child_added",function(snapshot){
+					firebase.database().ref("SportCenters").child(snapshot.key).on("value",function(snapshot2){
+						sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><h4>" + snapshot2.val().ilce + "</h4><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+						getPopularTSportCentersImage(snapshot.key);
+					});
 				});
 			}
+			getPopularSportCenters();
+
+			function getPopularTSportCentersImage(sportcentersKey){
+				//showLoading(); // RESİM İNDİRME DENEME..
+			  var storageRef = firebase.storage().ref();
+			  var starsRef = storageRef.child('sportcenters/' + sportcentersKey);
+			  // Get the download URL
+			  starsRef.getDownloadURL().then(function(url) {
+			  // Insert url into an <img> tag to "download"
+			  if(url.includes(sportcentersKey)){
+					document.getElementById(sportcentersKey).src = url;
+					notLoading();
+			  }
+				notLoading();
+			  }).catch(function(error) {
+			  switch (error.code) {
+			    case 'storage/object_not_found':
+			      // File doesn't exist
+			      alert("Üzgünüz. Dosya bulunamıyor.");
+			      break;
+			    case 'storage/unauthorized':
+			      // User doesn't have permission to access the object
+			      alert("Bu resmi çekmenize izniniz yok.");
+			      break;
+			    case 'storage/canceled':
+			      // User canceled the upload
+			      alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+			      break;
+			    case 'storage/unknown':
+			      // Unknown error occurred, inspect the server response
+			      alert("Lütfen bizimle iletişime geçiniz");
+			      break;
+			  }
+			});
+			}
+			//----------------- VİEW POPULAR SPORT CENTER FINISH. -------------------//
+			// send the key for view the popular sport center profile.
+			function sendSportCenterKey(centerKey){
+	   		sessionStorage.setItem('label2', centerKey);
+				window.location.href = "sporcenter.html";
+			}
+
+			//----------------- LOADING ICON START. -------------------//
+			function notLoading() {
+	      document.getElementById("loader").style.display = "none";
+	      document.getElementById("myDiv").style.display = "block";
+	    }
+
+	    function showLoading() {
+	      document.getElementById("loader").style.display = "block";
+	      document.getElementById("myDiv").style.display = "none";
+	    }
+			//----------------- LOADING ICON FINISH. -------------------//
+
+			// searchSportCenters
+			function searchSportCenters(){
+					var input, filter, ul, li, a, i, txtValue;
+	    		input = document.getElementById("sportcentersSearchInput");
+	    		filter = input.value.toUpperCase();
+	    		ul = document.getElementById("sportcentersList");
+	    		li = ul.getElementsByTagName("article");
+	    		for (i = 0; i < li.length; i++) {
+	        	a = li[i].getElementsByTagName("h4")[0];
+	        	txtValue = a.textContent || a.innerText;
+	        	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        	} else {
+	            li[i].style.display = "none";
+	        	}
+	    	}
+			}
+			searchSportCenters();
 			</script>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

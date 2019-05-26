@@ -1,3 +1,9 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 	<head>
 		<title>SporSepetim</title>
@@ -11,13 +17,11 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
-	<body class="is-preload">
-
+	<body style="margin:0;" class="is-preload">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
-
-
-
 
 				<!-- Main -->
 					<div id="main">
@@ -31,6 +35,7 @@
 										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
 
 										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+										<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
 										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
@@ -38,115 +43,250 @@
 								</header>
 
 							<!-- Content -->
-								<!-- burdan -->
-                <div id="component_switcher"></div>
+							<body>
+			  <div class="table container">
+			    <form>
+			      <div class="day col-sm-2">
+			        <h3>Pazartesi</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="monday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-								<div class="section-body">
-									<div class="panel-group accordion" id="days">
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Salı</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="tuesday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-										<div class="panel panel-default workout-is-hidden" id="panel_container_day_0">
-												<div id="collapse_panel_day_0_meal_0" class="workout-is-hidden">
-													<h1>Sabah</h1>
-													<ul class="articles-primary">
-														<li class="article-primary article-primary-alpha">
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Çarşamba</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="wednesday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Perşembe</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="thursday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-													<div class="article-content">
-														<h4 class="article-title">
-                              <div class="custom-input-active">
-                                <label>Yemek İsmi</label>
-                                <input type="text" placeholder="örnek: Yulaf Ezmesi">
-                              </div>
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Cuma</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="friday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-														</h4><!-- /.article-title -->
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Cumartesi</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="saturday" rows="3" cols="30" placeholder="Yulaf Ezmesi, Brokoli, Muz"></textarea>
+			        </div>
 
-                            <link rel="stylesheet" href="main.css">
-</head>
-<body>
+			      </div>
+			      <div class="day col-sm-2">
+			        <h3>Pazar</h3>
+			        <div class="meal">
+			          <h5>Antrenman/Beslenme Programı</h5>
+			          <textarea id="sunday" rows="3" cols="30" placeholder="barbell bench press: 3x10"></textarea>
+			        </div>
 
-  <div class="container">
+			      </div>
+			      <div class="submit">
+							<div class="styled-select">
+								<select id="userSelect">
+									<option selected disabled>Kullanıcı Seçiniz</option>
+								</select>
+							</div>
+			        <button type="button" class="btn btn-default" onclick="usersSelected()">Gönder</button>
+			      </div>
+			    </form>
+			  </div>
+			</body>
 
-    <form id="js-meal-list-form">
-      <label for="meal-list-entry">Yiyecek Ekle</label>
-      <div class="add-btn">
-        <input type="text" name="meal-list-entry" id="meal-list-entry" placeholder="örnek: 100 gr brokoli">
-        <button type="submit">Ekle</button>
-      </div>
+		</div>
 
-    </form>
+		<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
 
-    <ul class="meal-list"></ul>
-  </div>
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Anasayfa</a></li>
+								<li><a href="hakkimizda.html">Hakkımızda</a></li>
+								<li><a href="sportcenters.html">Spor Salonları</a></li>
+								<li><a href="trainers.html">Eğitmenler</a></li>
 
-													</div><!-- /.article-content -->
-												</li><!-- /.article-primary -->
-											</ul><!-- /.articles-primary -->
+							</ul>
+						</nav>
 
+						<section>
+							<header class="major">
+								<h2>İletişim</h2>
+							</header>
+							<p>
+								Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+							için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
+								<li class="fa-phone">(212) 567-9822</li>
+								<li class="fa-home">1234 Akaretler #8254<br />
+								İstanbul, TR 00000-0000</li>
+							</ul>
+						</section>
 
-										</div>
+					<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
+						</footer>
 
-
-
-
-								<!-- Sidebar -->
-									<div id="sidebar">
-										<div class="inner">
-
-											<!-- Search -->
-												<section id="search" class="alt">
-													<form method="post" action="#">
-														<input type="text" name="query" id="query" placeholder="Ara" />
-													</form>
-												</section>
-
-											<!-- Menu -->
-												<nav id="menu">
-													<header class="major">
-														<h2>Menu</h2>
-													</header>
-													<ul>
-														<li><a href="index.html">Anasayfa</a></li>
-														<li><a href="#">Hakkımızda</a></li>
-														<li><a href="sportcenters.html">Spor Salonları</a></li>
-														<li><a href="trainers.html">Eğitmenler</a></li>
-														<li><a href="#">İletişim</a></li>
-														<li>
-															<span class="opener">Another Submenu</span>
-															<ul>
-																<li><a href="#">Lorem Dolor</a></li>
-																<li><a href="#">Ipsum Adipiscing</a></li>
-																<li><a href="#">Tempus Magna</a></li>
-																<li><a href="#">Feugiat Veroeros</a></li>
-															</ul>
-														</li>
-													</ul>
-												</nav>
-
-
-												<section>
-													<header class="major">
-														<h2>İletişim</h2>
-													</header>
-													<p>
-														Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
-													için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
-													<ul class="contact">
-														<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
-														<li class="fa-phone">(212) 567-9822</li>
-														<li class="fa-home">1234 Akaretler #8254<br />
-														İstanbul, TR 00000-0000</li>
-													</ul>
-												</section>
-
-											<!-- Footer -->
-												<footer id="footer">
-													<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
-												</footer>
-
-										</div>
-									</div>
+				</div>
+			</div>
 
 			</div>
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+
+			<script>
+			var userNameAsString = "";
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					if(!user.emailVerified){
+						alert("Lütfen size gönderdiğimiz e-maili onaylayınız. E-mail tekrar yollanmıştır.");
+						//sendEmailVerification();
+						//logout1();
+						notLoading();
+					}else{
+						// User is signed in.
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+								getUsersforSelect(userID);
+							});
+							notLoading();
+						});
+					}
+				} else {
+					// No user is signed in.
+					// We put login inputs again.
+					document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
+					// WE CHANGE KATITBUTTON VALUE.
+					//document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
+					//document.getElementById("kayitButton").href = "register.html"
+					window.location.href = "index.html";
+					notLoading();
+				}
+			});
+
+			//----------------- LOADING ICON START. -------------------//
+			function notLoading() {
+	      document.getElementById("loader").style.display = "none";
+	      document.getElementById("myDiv").style.display = "block";
+	    }
+
+	    function showLoading() {
+	      document.getElementById("loader").style.display = "block";
+	      document.getElementById("myDiv").style.display = "none";
+	    }
+			//----------------- LOADING ICON FINISH. -------------------//
+
+			var userInfo = []
+			function getUsersforSelect(trainerID){
+		    firebase.database().ref("Users").on("child_added",function(snapshot){
+		      firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
+						if(snapshot.key != "Trainers"){
+							firebase.database().ref("Users").child("Users").child(snapshot2.key).child("myTrainers").on("value",function(deneme){
+								var exist = (deneme.val() !== null);
+								if(exist){
+									firebase.database().ref("Users").child("Users").child(snapshot2.key).child("myTrainers").on("child_added",function(deneme2){
+										if(trainerID == deneme2.val().trainerID){
+											userInfo.push({
+					    					userid:  snapshot2.key,
+					    					name: snapshot2.val().name,
+												surname: snapshot2.val().surname,
+												email: snapshot2.val().email,
+												status: snapshot.key
+											});
+							        var x = document.getElementById("userSelect");
+							        var option = document.createElement("option");
+							        option.text = snapshot2.val().name + " " + snapshot2.val().surname
+							        x.add(option);
+										}
+									});
+								}else{
+
+								}
+							});
+						}
+		      });
+		    });
+		  }
+
+			function usersSelected(){
+				var monday = document.getElementById("monday").value;
+				var tuesday = document.getElementById("tuesday").value;
+				var wednesday = document.getElementById("wednesday").value;
+				var thursday = document.getElementById("thursday").value;
+				var friday = document.getElementById("friday").value;
+				var saturday = document.getElementById("saturday").value;
+				var sunday = document.getElementById("sunday").value;
+
+				var userSelector = document.getElementById('userSelect');
+		    var userValue = userSelector[userSelector.selectedIndex].value;
+
+				if(monday == "" || tuesday == "" || wednesday == "" || thursday == "" || friday == "" || saturday == "" || sunday == ""){
+					alert("Lütfen tüm günleri doldurun.");
+				}else{
+					var i;
+					for (i = 0; i < userInfo.length; i++) {
+						var isEqualNameAndSurname = userInfo[i].name + " " + userInfo[i].surname;
+						if(isEqualNameAndSurname == userValue){
+							firebase.database().ref("Users").child(userInfo[i].status).child(userInfo[i].userid).child("Programs").push().set({
+								monday:{
+									text:monday
+								},
+								tuesday:{
+									text:tuesday
+								},
+								wednesday:{
+									text:wednesday
+								},
+								thursday:{
+									text:thursday
+								},
+								friday:{
+									text:friday
+								},
+								saturday:{
+									text:saturday
+								},
+								sunday:{
+									text:sunday
+								}
+							});
+						}
+					}
+				}
+
+			}
+			</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -154,10 +294,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-
-
-
 
 	</body>
 </html>
