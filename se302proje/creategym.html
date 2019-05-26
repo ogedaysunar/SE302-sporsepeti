@@ -265,7 +265,7 @@
 
 		function setSportCenterIDforManager(sportcentersID){
 			var managerID = firebase.auth().currentUser.uid;
-			firebase.database().ref("Users").child("Manager").child(managerID).child("mySportCenters").update({
+			firebase.database().ref("Users").child("Managers").child(managerID).child("mySportCenters").update({
 				[sportcentersID]:sportcentersID,
 			});
 		}
