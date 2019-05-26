@@ -52,7 +52,7 @@
 
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
-					    <a href="#" class="follow">KATIL</a>
+					    <button onclick="joinsportCenter()" class="follow">KATIL</button>
 
 							<a href="editSporCenter.html" class="follow" id="guncelleButton" style="display:none">Güncelle</a>
 
@@ -256,6 +256,11 @@
 					document.getElementById("gymSportTypes").innerHTML = snapshot.val().salonIcerik
 					getSportCenterImage(sportCenterKey);
 				});
+			}
+
+			function joinsportCenter(){
+				var sportCenterKey = sessionStorage.getItem('label2');
+
 			}
 
 
