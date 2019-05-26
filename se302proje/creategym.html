@@ -99,7 +99,8 @@
 								<header class="major">
 									<h2>İletişim</h2>
 								</header>
-								<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<p>Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+							için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
 								<ul class="contact">
 									<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
 									<li class="fa-phone">(212) 567-9822</li>
@@ -150,10 +151,18 @@
 
 		var selectedFile;
 			function handleFileUploadChange(e) {
+				/**
+				*function handleFileUploadChange(e)
+				*This function gets triggered any time someone selects a new file via the upload via the choose file upload button
+				*/
 				selectedFile = e.target.files[0];
 		}
 
 	function start() {
+		/**
+		*function(start)
+		*This function gets triggered when Oluştur button clicked.Check all textfields and register new sport center.
+		**/
 
 		var salonname=document.getElementById("salonname").value;
 		var salonEmail=document.getElementById("salonEmail").value;
@@ -203,7 +212,8 @@
 													ilce:ilce,
 													salonAdress:salonAdress,
 													salonaciklama:salonaciklama,
-													salonIcerik:salonicerik
+													salonIcerik:salonicerik,
+													status:false
 												});
 
 												var downloadURL = "";
