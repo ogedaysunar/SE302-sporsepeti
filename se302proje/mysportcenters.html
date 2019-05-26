@@ -76,9 +76,9 @@
 								</section>
 
 							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
+							<footer id="footer">
+								<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
+							</footer>
 
 						</div>
 					</div>
@@ -101,6 +101,7 @@
 					}else{
 						// User is signed in.
 						//what is the user status ?
+						getPopularSportCenters(user);
 						var userID = user.uid;
 						firebase.database().ref("Users").on("child_added",function(snapshot){
 							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
@@ -114,26 +115,36 @@
 					// No user is signed in.
 					// We put login inputs again.
 					document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
-					// WE CHANGE KATITBUTTON VALUE.
-					document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
-					document.getElementById("kayitButton").href = "register.html"
+
 					notLoading();
 				}
 			});
 
 			//----------------- VİEW POPULAR SPORT CENTER START. -------------------//
-			function getPopularSportCenters(){
+			function getPopularSportCenters(user){
+				var counter = 0;
 				const sportCentersList = document.querySelector("#sportcentersList");
-				firebase.database().ref("SportCenters").on("child_added",function(snapshot){
-					firebase.database().ref("SportCenters").child(snapshot.key).on("value",function(snapshot2){
-						if(snapshot2.val().status){
-							sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><h4>" + snapshot2.val().ilce + "</h4><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
-							getPopularTSportCentersImage(snapshot.key);
-						}
-					});
+				firebase.database().ref("Users").on("child_added",function(snapshot2){
+					if(snapshot2.key == "Managers" || snapshot2.key == "Users"){
+						firebase.database().ref("Users").child(snapshot2.key).on("child_added",function(snapshot3){
+							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).child("mySportCenters").on("child_added",function(snapshot4){
+								var exists = (snapshot4.key != null);
+								if(exists){
+									firebase.database().ref("SportCenters").child(snapshot4.key).on("value",function(snapshot2){
+										if(snapshot2.val().status){
+											counter += 1;
+											if(counter == 1){
+												sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><h4>" + snapshot2.val().ilce + "</h4><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot4.key + "\")' class='button'>İncele</a></li></ul></article>"
+												getPopularTSportCentersImage(snapshot4.key);
+											}
+										}
+									});
+								}
+							});
+						});
+					}
 				});
 			}
-			getPopularSportCenters();
 
 			function getPopularTSportCentersImage(sportcentersKey){
 				//showLoading(); // RESİM İNDİRME DENEME..
@@ -187,24 +198,6 @@
 	    }
 			//----------------- LOADING ICON FINISH. -------------------//
 
-			// searchSportCenters
-			function searchSportCenters(){
-					var input, filter, ul, li, a, i, txtValue;
-	    		input = document.getElementById("sportcentersSearchInput");
-	    		filter = input.value.toUpperCase();
-	    		ul = document.getElementById("sportcentersList");
-	    		li = ul.getElementsByTagName("article");
-	    		for (i = 0; i < li.length; i++) {
-	        	a = li[i].getElementsByTagName("h4")[0];
-	        	txtValue = a.textContent || a.innerText;
-	        	if (txtValue.toUpperCase().indexOf(filter) > -1) {
-	            li[i].style.display = "";
-	        	} else {
-	            li[i].style.display = "none";
-	        	}
-	    	}
-			}
-			searchSportCenters();
 			</script>
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
