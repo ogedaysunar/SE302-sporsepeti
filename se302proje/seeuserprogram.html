@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SporSepetim</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" type="image/png" href="images/icons/mainicon.png"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body style="margin:0;" class="is-preload">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
+									<ul id="userIcon" class="icons">
+										<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
+										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
+
+										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+										<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
+										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<!-- burdan -->
+
+				<body>
+					<div class="table container">
+						<form>
+							<div class="day col-sm-2">
+								<h3>Pazartesi</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="monday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Salı</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="tuesday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Çarşamba</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="wednesday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Perşembe</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="thursday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Cuma</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="friday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Cumartesi</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="saturday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+							<div class="day col-sm-2">
+								<h3>Pazar</h3>
+								<div class="meal">
+									<h5>Antrenman/Beslenme Programı</h5>
+									<label id="sunday" rows="3" cols="30"></label>
+								</div>
+
+							</div>
+
+						</form>
+					</div>
+				</body>
+
+	<!-- buraya -->
+
+		<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Anasayfa</a></li>
+								<li><a href="#">Hakkımızda</a></li>
+								<li><a href="sportcenters.html">Spor Salonları</a></li>
+								<li><a href="trainers.html">Eğitmenler</a></li>
+								<li><a href="myStudents.html">Öğrencilerim</a></li>
+								<li><a href="#">İletişim</a></li>
+							</ul>
+						</nav>
+
+
+						<section>
+							<header class="major">
+								<h2>İletişim</h2>
+							</header>
+							<p>
+								Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+							için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
+								<li class="fa-phone">(212) 567-9822</li>
+								<li class="fa-home">1234 Akaretler #8254<br />
+								İstanbul, TR 00000-0000</li>
+							</ul>
+						</section>
+
+					<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
+						</footer>
+
+				</div>
+			</div>
+
+			</div>
+
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+
+			<script>
+			var userNameAsString = "";
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					if(!user.emailVerified){
+						alert("Lütfen size gönderdiğimiz e-maili onaylayınız. E-mail tekrar yollanmıştır.");
+						//sendEmailVerification();
+						//logout1();
+						notLoading();
+					}else{
+						// User is signed in.
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+							});
+							notLoading();
+						});
+						getUserProgram();
+					}
+				} else {
+					// No user is signed in.
+					// We put login inputs again.
+					document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
+					// WE CHANGE KATITBUTTON VALUE.
+					//document.getElementById("kayitButton").innerHTML = "Kayıt Ol"
+					//document.getElementById("kayitButton").href = "register.html"
+					notLoading();
+				}
+			});
+
+			//----------------- LOADING ICON START. -------------------//
+			function notLoading() {
+	      document.getElementById("loader").style.display = "none";
+	      document.getElementById("myDiv").style.display = "block";
+	    }
+
+	    function showLoading() {
+	      document.getElementById("loader").style.display = "block";
+	      document.getElementById("myDiv").style.display = "none";
+	    }
+
+			function getUserProgram(){
+				var userKey = sessionStorage.getItem('userProgramKey');
+				firebase.database().ref("Users").on("child_added",function(snapshot){
+					firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
+						if(snapshot.key != "Trainers"){
+							if(userKey == snapshot2.key){
+								firebase.database().ref("Users").child(snapshot.key).child(userKey).child("Programs").on("child_added",function(snapshot3){
+									firebase.database().ref("Users").child(snapshot.key).child(userKey).child("Programs").child(snapshot3.key).on("child_added",function(snapshot4){
+										if(snapshot4.key == "monday"){
+											document.getElementById("monday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "tuesday"){
+											document.getElementById("tuesday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "wednesday"){
+											document.getElementById("wednesday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "thursday"){
+											document.getElementById("thursday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "friday"){
+											document.getElementById("friday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "saturday"){
+											document.getElementById("saturday").innerHTML = snapshot4.val().text
+										}else if(snapshot4.key == "sunday"){
+											document.getElementById("sunday").innerHTML = snapshot4.val().text
+										}
+									});
+								});
+							}
+						}
+					});
+				});
+			}
+			//----------------- LOADING ICON FINISH. -------------------//
+			</script>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -15,6 +15,7 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 </head>
 <style>
@@ -175,9 +176,8 @@ td, th {
           if(exists){
             firebase.database().ref("SportCenters").on("child_added",function(snapshot2){
               firebase.database().ref("SportCenters").child(snapshot2.key).on("value",function(snapshot3){
-
-                var sportcentersName = snapshot3.val().salonName
                 if(!snapshot3.val().status){
+                  var sportcentersName = snapshot3.val().salonName;
                   adminCount += 1;
                   admintoogleID = adminCount.toString();
                   list_div.innerHTML += "<li class='list-group-item'><div class='row toggle' id='dropdown-detail' data-toggle='detail'><div onclick='ready(\"" +  admintoogleID + "\")' style='text-align:left' class='col-xs-10'><b>" + admintoogleID + "- </b>" + sportcentersName.toUpperCase() + "</div><div class='col-xs-2'><button type='button' class='btn' style='margin-left:2px;background-color:green;color:white' onclick='approveSportCenter(\"" +  snapshot3.key + "\")'><i id='i" + admintoogleID + "' class='fa fa-check'></i></button><button onclick='rejectSportCenter(\"" +  snapshot3.key + "\")'style='background-color:red;color:white' type='button' class='btn'><i id='i" + admintoogleID + "' class='fa fa-close'></i></button><i onclick='ready(\"" +  admintoogleID + "\")' style='margin-top:7px;margin-right:20px' class='fa fa-chevron-down pull-right'></i></div></div><div style='display: none;' id=\"" + admintoogleID + "\"><hr></hr><div class='container'><div style='display:inline-block;' class='fluid-row'>" +
@@ -239,10 +239,36 @@ td, th {
           if(error){
             alert("Bir hata oluştu. Lütfen tekrar deneyiniz.");
           }else{
-            alert("Reddedildi. Yönetici bilgilendirildi.");
-            location.reload();
+            sendtoEmailString(sporcenterID);
           }
         });
+      });
+    }
+
+    function sendtoEmailString(sporcenterID){
+      firebase.database().ref("Users").child("Managers").on("child_added",function(snapshot){
+        firebase.database().ref("Users").child("Managers").child(snapshot.key).child("mySportCenters").on("child_added",function(snapshot2){
+          console.log(snapshot2.key);
+          if(snapshot2.key == sporcenterID){
+            sendEmail(snapshot.val().email);
+          }
+        });
+      });
+    }
+
+    function sendEmail(email){
+      console.log(email);
+      var from,to,subject,text;
+        to= email
+        subject= "Spor Salonunuz Hk."
+        text="Spor salonunuz reddedilmiştir.\nLütfen gerekli bilgileri uygun doldurunuz. \n\nBize Ulaşın : info@sporsepetim.com"
+        $.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
+        if(data=="sent")
+        {
+          alert("Reddedildi. Yönetici e-mail bilgilendirildi.");
+          location.reload();
+          console.log("success");
+        }
       });
     }
 
