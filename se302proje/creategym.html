@@ -130,6 +130,27 @@
 
 			<script>
 
+			firebase.auth().onAuthStateChanged(function(user) {
+	      if (user) {
+	        // User is signed in.
+	        //document.getElementById("formAdminLogin").action = "admin.html";
+	        //document.getElementById("formAdminLogin").submit();
+	        showPage();
+	      } else {
+	        // No user is signed in.
+	        //document.getElementById("formAdminMain").action = "login.html";
+	        //document.getElementById("formAdminMain").submit();
+	        window.location.href = "index.html";
+	      }
+	    });
+	    function logout1(){
+	      firebase.auth().signOut().then(function() {
+	        console.log('Signed Out');
+	      }, function(error) {
+	        console.error('Sign Out Error', error);
+	      });
+	    }
+
 			var pushID = firebase.database().ref().push().key;
 			// UPLOAD IMAGE START
 		const storageService = firebase.storage();
@@ -202,7 +223,13 @@
 													salonaciklama:salonaciklama,
 													salonIcerik:salonicerik,
 													status:false
-												});
+												}).then(function(error){
+									        if(error){
+									          alert("Hata! Lütfen tekrar deneyiniz!");
+									        }else {
+														setSportCenterIDforManager(pushID);
+									        }
+									      });
 
 												var downloadURL = "";
 												const uploadTask = storageRef.child('sportcenters/' + pushID).put(selectedFile); //create a child directory called images, and place the file inside this directory
@@ -234,6 +261,13 @@
 			}else{
 				alert("Lütfen geçerli bir email giriniz.");
 			}
+		}
+
+		function setSportCenterIDforManager(sportcentersID){
+			var managerID = firebase.auth().currentUser.uid;
+			firebase.database().ref("Users").child("Manager").child(managerID).child("mySportCenters").update({
+				[sportcentersID]:sportcentersID,
+			});
 		}
 
 
