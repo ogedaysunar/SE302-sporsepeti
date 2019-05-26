@@ -86,9 +86,6 @@ td, th {
                   <li>
                      <a onclick="logout1()" href="#"><i class="fa fa-power-off "></i>Çıkış</a>
                  </li>
-
-
-
               </ul>
             </div>
 
@@ -178,10 +175,11 @@ td, th {
           if(exists){
             firebase.database().ref("SportCenters").on("child_added",function(snapshot2){
               firebase.database().ref("SportCenters").child(snapshot2.key).on("value",function(snapshot3){
-                adminCount += 1;
-                admintoogleID = adminCount.toString();
+
                 var sportcentersName = snapshot3.val().salonName
                 if(!snapshot3.val().status){
+                  adminCount += 1;
+                  admintoogleID = adminCount.toString();
                   list_div.innerHTML += "<li class='list-group-item'><div class='row toggle' id='dropdown-detail' data-toggle='detail'><div onclick='ready(\"" +  admintoogleID + "\")' style='text-align:left' class='col-xs-10'><b>" + admintoogleID + "- </b>" + sportcentersName.toUpperCase() + "</div><div class='col-xs-2'><button type='button' class='btn' style='margin-left:2px;background-color:green;color:white' onclick='approveSportCenter(\"" +  snapshot3.key + "\")'><i id='i" + admintoogleID + "' class='fa fa-check'></i></button><button onclick='rejectSportCenter(\"" +  snapshot3.key + "\")'style='background-color:red;color:white' type='button' class='btn'><i id='i" + admintoogleID + "' class='fa fa-close'></i></button><i onclick='ready(\"" +  admintoogleID + "\")' style='margin-top:7px;margin-right:20px' class='fa fa-chevron-down pull-right'></i></div></div><div style='display: none;' id=\"" + admintoogleID + "\"><hr></hr><div class='container'><div style='display:inline-block;' class='fluid-row'>" +
                   "<table>" +
                   "<tr>" +
@@ -227,17 +225,19 @@ td, th {
           alert("Hata! Lütfen tekrar deneyiniz!");
         }else {
           alert("Kabul edildi.");
+          location.reload();
         }
       });
     }
 
     function rejectSportCenter(sporcenterID){
-      firebase.database().ref("SportCenters").child(sporcenterID).on("child_added",function(snapshot){
+      firebase.database().ref("SportCenters").child(sporcenterID).on("value",function(snapshot){
         snapshot.ref.remove(function(error){
           if(error){
             alert("Bir hata oluştu. Lütfen tekrar deneyiniz.");
           }else{
             alert("Reddedildi.");
+            location.reload();
           }
         });
       });
