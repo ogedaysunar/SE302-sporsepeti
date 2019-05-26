@@ -280,7 +280,14 @@
 								sunday:{
 									text:sunday
 								}
-							});
+							}).then(function(error){
+				        if(error){
+				          alert("Hata! Lütfen tekrar deneyiniz!");
+				        }else {
+				          alert("Program oluşturuldu ve gönderildi.");
+				          location.reload();
+				        }
+				      });
 						}
 					}
 				}

@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SporSepetim</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" type="image/png" href="images/icons/mainicon.png"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body style="margin:0;" class="is-preload">
+		<div id="loader"></div>
+		<div style="display:none;" class="animate-bottom" id="myDiv">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
+									<ul id="userIcon" class="icons">
+										<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
+										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
+
+										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+										<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
+										<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<!-- burdan -->
+								<div class="container1">
+
+								<img id="denemeimg" src="images/emptyUser.jpg" alt="profile-sample4" class="profile" style="width:200px;height:200px" />
+								<div id="filesubmit">
+						      <input type="file" class="file-select" accept="image/*"/>
+						      <progress id="uploader" value="0" max="100">0%</progress>
+						      <button class="file-submit">Yükle</button>
+						    </div>
+
+
+							</div>
+
+				          <div class="line-separator"></div>
+                  <form class="" action="editprofile.html" method="post">
+                    <div class="container">
+
+
+
+                      <div class="form-item col-2">
+                        <h1>Spor Salonu Bilgileri</h1>
+                        <div class="custom-input active">
+                          <label>Salon Adı</label>
+                            <input id="salonName" class="validate-item data-hj-whitelist" type="text" />
+
+                        </div>
+
+                        <div class="custom-input active">
+                          <label>Sporlar</label>
+                            <input class="validate-item data-hj-whitelist" id="salonIcerik" type="text" />
+
+                        </div>
+
+
+                    <div class="form-item">
+                        <div class="custom-input active">
+                          <label>Adres</label>
+                            <input class="validate-item email data-hj-whitelist" id="salonAdress" type="text" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <div class="custom-input">
+                          <label>Telefon</label>
+                            <input class="phone data-hj-whitelist" id="salonPhone" type="text" value="" />
+
+                        </div>
+                    </div>
+
+										<div class="form-item">
+                        <div class="custom-input">
+                          <label>E-mail</label>
+                            <input class="phone data-hj-whitelist" id="saloneEmail" type="text" value="" />
+                        </div>
+                    </div>
+
+										<div class="form-item">
+                        <div class="custom-input">
+                          <label>Açılış Saati</label>
+                            <input class="phone data-hj-whitelist" id="openTime" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <div class="custom-input">
+                          <label>Kapanış Saati</label>
+                            <input class="phone data-hj-whitelist" id="closeTime" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <div class="custom-input">
+                          <label>Açıklama</label>
+                            <input class="phone data-hj-whitelist" id="salonaciklama" type="text" value="" />
+                        </div>
+                    </div>
+
+
+
+                    </div>
+
+                    </div>
+
+                    <div class="container">
+                      <input type="button" value="Kaydet" onclick="saveEditSportCenter()">
+                    </div>
+
+            </form>
+								<!-- buraya -->
+								<!-- Sidebar -->
+									<div id="sidebar">
+										<div class="inner">
+
+											<!-- Menu -->
+												<nav id="menu">
+													<header class="major">
+														<h2>Menu</h2>
+													</header>
+													<ul>
+														<li><a href="index.html">Anasayfa</a></li>
+														<li><a href="hakkimizda.html">Hakkımızda</a></li>
+														<li><a href="sportcenters.html">Spor Salonları</a></li>
+														<li><a href="trainers.html">Eğitmenler</a></li>
+														<li><a href="#">İletişim</a></li>
+													</ul>
+												</nav>
+
+
+												<section>
+													<header class="major">
+														<h2>İletişim</h2>
+													</header>
+													<p>
+														Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+													için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
+													<ul class="contact">
+														<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
+														<li class="fa-phone">(212) 567-9822</li>
+														<li class="fa-home">1234 Akaretler #8254<br />
+														İstanbul, TR 00000-0000</li>
+													</ul>
+												</section>
+
+											<!-- Footer -->
+												<footer id="footer">
+													<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
+												</footer>
+
+										</div>
+									</div>
+
+					</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	    <script src="assets/js/db.js"></script>
+
+	  <script>
+
+	firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+	  // User is signed in.
+		firebase.database().ref("Users").on("child_added",function(snapshot2){
+			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
+				if(snapshot.key == user.uid){
+					userNameAsString = snapshot.val().name + " " + snapshot.val().surname + "(" + snapshot.val().status + ")"
+					document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+				}
+			});
+		});
+	} else {
+	  // No user is signed in.
+
+		window.location.href = "index.html";
+	}
+	});
+
+	//----------------- LOADING ICON START. -------------------//
+	function notLoading() {
+		document.getElementById("loader").style.display = "none";
+		document.getElementById("myDiv").style.display = "block";
+	}
+
+	function showLoading() {
+		document.getElementById("loader").style.display = "block";
+		document.getElementById("myDiv").style.display = "none";
+	}
+	//----------------- LOADING ICON FINISH. -------------------//
+	//
+
+	/**
+	 * getPopularTrainersImage function get trainer image.
+	 */
+
+	function getSportCenterImage(uid){
+		showLoading(); // RESİM İNDİRME DENEME..
+	  var storageRef = firebase.storage().ref();
+	  var starsRef = storageRef.child('sportcenters/' + uid);
+	  // Get the download URL
+	  starsRef.getDownloadURL().then(function(url) {
+	  // Insert url into an <img> tag to "download"
+	  if(url.includes(uid)){
+	    document.getElementById("denemeimg").src = url;
+
+	  }
+		notLoading();
+	  }).catch(function(error) {
+	  switch (error.code) {
+	    case 'storage/object_not_found':
+	      // File doesn't exist
+	      alert("Üzgünüz. Dosya bulunamıyor.");
+	      break;
+	    case 'storage/unauthorized':
+	      // User doesn't have permission to access the object
+	      alert("Bu resmi çekmenize izniniz yok.");
+	      break;
+	    case 'storage/canceled':
+	      // User canceled the upload
+	      alert("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+	      break;
+	    case 'storage/unknown':
+	      // Unknown error occurred, inspect the server response
+	      alert("Lütfen bizimle iletişime geçiniz");
+	      break;
+	  }
+	});
+	}
+
+	// UPLOAD IMAGE -------------------->
+	const storageService = firebase.storage();
+	const storageRef = storageService.ref();
+
+	document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
+	document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+
+
+	/**
+	 * handleFileUploadChange function select the image for computer.
+	 */
+
+	var selectedFile;
+	  function handleFileUploadChange(e) {
+	    selectedFile = e.target.files[0];
+	}
+
+
+	/**
+	 * handleFileUploadSubmit function upload the image on firebase storage.
+	 */
+
+	function handleFileUploadSubmit(e) {
+	  var user = firebase.auth().currentUser;
+	  var downloadURL = "";
+	  console.log(user.uid);
+	  const uploadTask = storageRef.child('trainers/' + user.uid).put(selectedFile); //create a child directory called images, and place the file inside this directory
+	  uploadTask.on('state_changed', (snapshot) => {
+	    var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+	    uploader.value = percentage;
+
+	  }, (error) => {
+	    // Handle unsuccessful uploads
+	    console.log(error);
+	  }, () => {
+	    // Do something once upload is complete
+	    //document.getElementById("yuklemeBildirim").innerHTML = "Resminiz eklenmiştir.";
+	    console.log('success');
+			location.reload();
+			e.target.files[0] = "";
+	  });
+	}
+	// UPLOAD IMAGE FINISH  -------------->
+	//
+
+
+	/**
+	 * getInfo function get selected user informations.
+	 */
+
+	function getInfoSportCenterEdit(){
+		var sportCenterKey = sessionStorage.getItem('label2');
+		firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
+			document.getElementById("salonName").value = snapshot.val().salonName
+			document.getElementById("salonPhone").value = snapshot.val().salonPhone
+			document.getElementById("saloneEmail").value = snapshot.val().saloneEmail
+			document.getElementById("salonAdress").value = snapshot.val().salonAdress
+			document.getElementById("openTime").value = snapshot.val().openTime
+			document.getElementById("closeTime").value = snapshot.val().closeTime
+			document.getElementById("salonaciklama").value = snapshot.val().salonaciklama
+			document.getElementById("salonIcerik").value = snapshot.val().salonIcerik
+			getSportCenterImage(sportCenterKey);
+		});
+	}
+getInfoSportCenterEdit();
+
+	function logout1(){
+	firebase.auth().signOut().then(function() {
+		console.log('Signed Out');
+	}, function(error) {
+		console.error('Sign Out Error', error);
+	});
+}
+
+
+/**
+ * saveEditProfile function save the current user informations on firebase database.
+ */
+
+function saveEditSportCenter(){
+	var sportCenterKey = sessionStorage.getItem('label2');
+	var salonName = document.getElementById("salonName").value
+	var salonPhone = document.getElementById("salonPhone").value
+	var saloneEmail = document.getElementById("saloneEmail").value
+	var salonAdress = document.getElementById("salonAdress").value
+	var openTime = document.getElementById("openTime").value
+	var closeTime = document.getElementById("closeTime").value
+	var salonaciklama = document.getElementById("salonaciklama").value
+	var salonIcerik = document.getElementById("salonIcerik").value
+
+	if(validateEmail(saloneEmail)){
+		// run codee
+		if(salonName == "" || salonPhone == "" || saloneEmail == "" || salonAdress == "" || openTime == "" || closeTime == "" || salonaciklama == "" || salonIcerik == ""){
+			alert("Lütfen boşluk bırakmayınız.");
+		}else{
+			var userID = firebase.auth().currentUser.uid;//salon id olarak al oge beyefendi
+			//var statu = document.getElementById("status").value;
+			firebase.database().ref("SportCenters").child(sportCenterKey).update({
+				salonName: salonName,
+				salonIcerik: salonIcerik,
+				salonAdress: salonAdress,
+				salonPhone: salonPhone,
+				saloneEmail: saloneEmail,
+				openTime: openTime,
+				closeTime: closeTime,
+				salonaciklama: salonaciklama,
+				status: true,
+			}).then(function(){
+				alert("Bilgileriniz başarılı bir şekilde kaydedildi.");
+			}).catch(function(error) {
+				alert("Opss. Bir hata oluştu, lütfen tekrar deneyiniz.");
+			});
+		}
+	}else{
+		alert("Lütfen geçerli bir email giriniz.");
+	}
+
+}
+
+function validateEmail(email) {
+var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+return re.test(String(email).toLowerCase());
+}
+
+	</script>
+
+	</body>
+</html>
