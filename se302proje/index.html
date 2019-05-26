@@ -46,7 +46,7 @@
 											</h1>
 											<p id="nedenSporSepetim">Neden SporSepetim ?</p>
 										</header>
-										<p id="altBaslik">Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+										<p id="altBaslik">neden spor sepetimle ilgili bir yazı.</p>
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 											<li><a id="aramaButton1" href="" class="button big" hidden>Eğitmenler</a></li>
@@ -170,6 +170,11 @@
 
 			<script>
 
+
+			/**
+			 * auth onAuthStateChanged function is a firebase function. This function checks if the user is online.
+			 */
+
 			var userNameAsString = "";
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
@@ -183,28 +188,35 @@
 						//what is the user status ?
 						var userID = user.uid;
 						firebase.database().ref("Users").on("child_added",function(snapshot){
-							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
-								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
-								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
-								if(snapshot2.val().status == "Managers"){
-									// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
-									document.getElementById("kayitButton").innerHTML = "Spor Salonu Oluştur"
-									document.getElementById("kayitButton").href = "creategym.html"
-									document.getElementById("nedenSporSepetim").innerHTML = "Spor Salonu Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
-									document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
-								}else if(snapshot2.val().status == "Trainers"){
-									document.getElementById("kayitButton").innerHTML = "Spor Programı Oluştur"
-									document.getElementById("kayitButton").href = "createProgram.html"
-									document.getElementById("nedenSporSepetim").innerHTML = "Spor Programı Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
-									document.getElementById("altBaslik").innerHTML = "Spor programı oluşturmak için ilk olarak, oluşturduğunuz spor programı kullanıcının isteklerine uyuyor mu uymuyor mu diye kontrol etmeniz gerekiyor. Bu yüzden spor programı oluştururken, spor programı içeriğini çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde kullanıcının isteklerine uymuyorsa sistemimiz tarafından onaylanmayacaktır ve sizinle iletişime geçilmek durumunda kalınacaktır."
-								}else{
-									document.getElementById("kayitButton").innerHTML = "Spor Salonları"
-									document.getElementById("aramaButton1").style.display = "block"
-									document.getElementById("kayitButton").href = "sportcenters.html"
-									document.getElementById("aramaButton1").href = "trainers.html"
-									document.getElementById("myProgramsButton").style.display = "block"
-									document.getElementById("myProgramsButton").href = "viewProgram.html"
-									document.getElementById("altBaslik").innerHTML = "Spor Salonu veya Spor Eğiteni arayıp, isteklerinize uygun salonlara kayıt olabilir, isteklerinize uygun eğitmenler ile iletişime geçip, onların öğrenicisi olabilirsiniz :)"
+							firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot3){
+								if(snapshot3.key == userID){
+									firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+										userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+										document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+										if(snapshot2.val().status == "Managers"){
+											// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
+											document.getElementById("kayitButton").innerHTML = "Spor Salonu Oluştur"
+											document.getElementById("kayitButton").href = "creategym.html"
+											document.getElementById("nedenSporSepetim").innerHTML = "Spor Salonu Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+											document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
+										}else if(snapshot2.val().status == "Trainers"){
+											document.getElementById("kayitButton").innerHTML = "Spor Programı Oluştur"
+											document.getElementById("kayitButton").href = "createProgram.html"
+											document.getElementById("nedenSporSepetim").innerHTML = "Spor Programı Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
+											document.getElementById("altBaslik").innerHTML = "Spor programı oluşturmak için ilk olarak, oluşturduğunuz spor programı kullanıcının isteklerine uyuyor mu uymuyor mu diye kontrol etmeniz gerekiyor. Bu yüzden spor programı oluştururken, spor programı içeriğini çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde kullanıcının isteklerine uymuyorsa sistemimiz tarafından onaylanmayacaktır ve sizinle iletişime geçilmek durumunda kalınacaktır."
+										}else if(snapshot2.val().status == "Users"){
+											document.getElementById("kayitButton").innerHTML = "Spor Salonları"
+											document.getElementById("aramaButton1").style.display = "block"
+											document.getElementById("kayitButton").href = "sportcenters.html"
+											document.getElementById("aramaButton1").href = "trainers.html"
+											document.getElementById("myProgramsButton").style.display = "block"
+											document.getElementById("myProgramsButton").href = "viewProgram.html"
+											document.getElementById("altBaslik").innerHTML = "Spor Salonu veya Spor Eğiteni arayıp, isteklerinize uygun salonlara kayıt olabilir, isteklerinize uygun eğitmenler ile iletişime geçip, onların öğrenicisi olabilirsiniz :)"
+										}else{
+											window.location.href = "admin.html";
+										}
+									});
+									notLoading();
 								}
 							});
 							notLoading();
@@ -225,17 +237,23 @@
 				// trainers search button is hidden
 				document.getElementById("aramaButton1").style.display = "none"
 				document.getElementById("myProgramsButton").style.display = "none"
-      firebase.auth().signOut().then(function() {
-        console.log('Signed Out');
-      }, function(error) {
-        console.error('Sign Out Error', error);
-      });
-    }
+				document.getElementById("nedenSporSepetim").innerHTML = "Neden SporSepetim ?"
+				document.getElementById("altBaslik").innerHTML = "neden spor sepetimle ilgili bir yazı."
+		    firebase.auth().signOut().then(function() {
+		      console.log('Signed Out');
+		    }, function(error) {
+		      console.error('Sign Out Error', error);
+		    });
+    	}
 
 		//----------------- LOGİN RESET PASSWORD AND LOGOUT FINISH. -------------------//
 
 
 		//----------------- VİEW POPULAR TRAINER START. -------------------//
+
+		/**
+		 * getPopularTrainers function get popular trainers informations.
+		 */
 		function getPopularTrainers(){
 			const egitmenListesi = document.querySelector("#trainerList");
 			firebase.database().ref("Users").child("Trainers").on("child_added",function(snapshot){
@@ -244,6 +262,12 @@
 			});
 		}
 		getPopularTrainers();
+
+
+
+		/**
+		 * getPopularTrainersImage function get popular trainers images.
+		 */
 
 		function getPopularTrainersImage(uid){
 			//showLoading(); // RESİM İNDİRME DENEME..
@@ -280,6 +304,10 @@
 		}
 
 		// send the key for view the popular trainer profile.
+
+		/**
+		 * sendUserKey function sends the user's id.
+		 */
 		function sendUserKey(userKey){
 			console.log(userKey);
    		sessionStorage.setItem('label', userKey);
@@ -290,6 +318,10 @@
 		//******************************************************************//
 
 		//----------------- VİEW POPULAR SPORT CENTER START. -------------------//
+
+		/**
+		 * getPopularSportCenters function get popular sport centers informations.
+		 */
 		function getPopularSportCenters(){
 			const sportCentersList = document.querySelector("#sportcentersList");
 			firebase.database().ref("SportCenters").on("child_added",function(snapshot){
@@ -301,6 +333,10 @@
 		}
 		getPopularSportCenters();
 
+
+		/**
+		 * getPopularTSportCentersImage function get popular sport centers images.
+		 */
 		function getPopularTSportCentersImage(sportcentersKey){
 			//showLoading(); // RESİM İNDİRME DENEME..
 		  var storageRef = firebase.storage().ref();
@@ -336,6 +372,10 @@
 		}
 		//----------------- VİEW POPULAR SPORT CENTER FINISH. -------------------//
 		// send the key for view the popular sport center profile.
+
+		/**
+		 * sendSportCenterKey function sends the user's id.
+		 */
 		function sendSportCenterKey(centerKey){
    		sessionStorage.setItem('label2', centerKey);
 			window.location.href = "sporcenter.html";

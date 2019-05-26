@@ -231,6 +231,10 @@
 	}
 
 	// trainers follow method start ->
+
+	/**
+	 * followTrainer function allows you to follow or follow other users.
+	 */
 	function followTrainer(){
 		if(!isFollowing){
 			firebase.database().ref("Users").child("Trainers").child(trainerUserKey).child("Followers").child(currentUserID).set({

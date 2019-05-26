@@ -219,6 +219,11 @@
 		document.getElementById("myDiv").style.display = "none";
 	}
 	//----------------- LOADING ICON FINISH. -------------------//
+	//
+
+	/**
+	 * getPopularTrainersImage function get trainer image.
+	 */
 
 	function getPopularTrainersImage(uid){
 		showLoading(); // RESİM İNDİRME DENEME..
@@ -261,10 +266,20 @@
 	document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
 	document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
 
+
+	/**
+	 * handleFileUploadChange function select the image for computer.
+	 */
+
 	var selectedFile;
 	  function handleFileUploadChange(e) {
 	    selectedFile = e.target.files[0];
 	}
+
+
+	/**
+	 * handleFileUploadSubmit function upload the image on firebase storage.
+	 */
 
 	function handleFileUploadSubmit(e) {
 	  var user = firebase.auth().currentUser;
@@ -287,6 +302,12 @@
 	  });
 	}
 	// UPLOAD IMAGE FINISH  -------------->
+	//
+
+
+	/**
+	 * getInfo function get selected user informations.
+	 */
 
 	function getInfo(uid){
 		firebase.database().ref("Users").on("child_added",function(snapshot){
@@ -312,6 +333,11 @@
 		console.error('Sign Out Error', error);
 	});
 }
+
+
+/**
+ * saveEditProfile function save the current user informations on firebase database.
+ */
 
 function saveEditProfile(){
 	var name = document.getElementById("name").value
