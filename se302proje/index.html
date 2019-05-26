@@ -49,6 +49,7 @@
 										<p id="altBaslik">neden spor sepetimle ilgili bir yazı.</p>
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
+											<li><a id="students" href="myStudents.html" class="button big" hidden>Öğrencilerim</a></li>
 											<li><a id="aramaButton1" href="" class="button big" hidden>Eğitmenler</a></li>
 											<li><a id="myProgramsButton" href="" class="button big" hidden>Spor Programlarım</a></li>
 										</ul>
@@ -201,6 +202,7 @@
 											document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
 										}else if(snapshot2.val().status == "Trainers"){
 											document.getElementById("kayitButton").innerHTML = "Spor Programı Oluştur"
+											document.getElementById("students").style.display = "block";
 											document.getElementById("kayitButton").href = "createProgram.html"
 											document.getElementById("nedenSporSepetim").innerHTML = "Spor Programı Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
 											document.getElementById("altBaslik").innerHTML = "Spor programı oluşturmak için ilk olarak, oluşturduğunuz spor programı kullanıcının isteklerine uyuyor mu uymuyor mu diye kontrol etmeniz gerekiyor. Bu yüzden spor programı oluştururken, spor programı içeriğini çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde kullanıcının isteklerine uymuyorsa sistemimiz tarafından onaylanmayacaktır ve sizinle iletişime geçilmek durumunda kalınacaktır."
@@ -237,6 +239,7 @@
 				// trainers search button is hidden
 				document.getElementById("aramaButton1").style.display = "none"
 				document.getElementById("myProgramsButton").style.display = "none"
+				document.getElementById("students").style.display = "none"
 				document.getElementById("nedenSporSepetim").innerHTML = "Neden SporSepetim ?"
 				document.getElementById("altBaslik").innerHTML = "neden spor sepetimle ilgili bir yazı."
 		    firebase.auth().signOut().then(function() {
@@ -326,8 +329,10 @@
 			const sportCentersList = document.querySelector("#sportcentersList");
 			firebase.database().ref("SportCenters").on("child_added",function(snapshot){
 				firebase.database().ref("SportCenters").child(snapshot.key).on("value",function(snapshot2){
-					sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
-					getPopularTSportCentersImage(snapshot.key);
+					if(snapshot2.val().status){
+						sportCentersList.innerHTML += "<article><a href='#' class='image'><img style='width:200px;height:200px' id='" + snapshot2.key + "' src='images/emptyUser.jpg'/></a><h3>" + snapshot2.val().salonName + "</h3><p>" + snapshot2.val().salonaciklama + "</p><ul class='actions'><li><a onclick='sendSportCenterKey(\"" + snapshot.key + "\")' class='button'>İncele</a></li></ul></article>"
+						getPopularTSportCentersImage(snapshot.key);
+					}
 				});
 			});
 		}

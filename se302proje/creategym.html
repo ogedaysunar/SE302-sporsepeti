@@ -87,7 +87,8 @@
 								<header class="major">
 									<h2>İletişim</h2>
 								</header>
-								<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<p>Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+							için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
 								<ul class="contact">
 									<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
 									<li class="fa-phone">(212) 567-9822</li>
@@ -129,6 +130,27 @@
 
 			<script>
 
+			firebase.auth().onAuthStateChanged(function(user) {
+	      if (user) {
+	        // User is signed in.
+	        //document.getElementById("formAdminLogin").action = "admin.html";
+	        //document.getElementById("formAdminLogin").submit();
+	        showPage();
+	      } else {
+	        // No user is signed in.
+	        //document.getElementById("formAdminMain").action = "login.html";
+	        //document.getElementById("formAdminMain").submit();
+	        window.location.href = "index.html";
+	      }
+	    });
+	    function logout1(){
+	      firebase.auth().signOut().then(function() {
+	        console.log('Signed Out');
+	      }, function(error) {
+	        console.error('Sign Out Error', error);
+	      });
+	    }
+
 			var pushID = firebase.database().ref().push().key;
 			// UPLOAD IMAGE START
 		const storageService = firebase.storage();
@@ -138,10 +160,18 @@
 
 		var selectedFile;
 			function handleFileUploadChange(e) {
+				/**
+				*function handleFileUploadChange(e)
+				*This function gets triggered any time someone selects a new file via the upload via the choose file upload button
+				*/
 				selectedFile = e.target.files[0];
 		}
 
 	function start() {
+		/**
+		*function(start)
+		*This function gets triggered when Oluştur button clicked.Check all textfields and register new sport center.
+		**/
 
 		var salonname=document.getElementById("salonname").value;
 		var salonEmail=document.getElementById("salonEmail").value;
@@ -191,8 +221,15 @@
 													ilce:ilce,
 													salonAdress:salonAdress,
 													salonaciklama:salonaciklama,
-													salonIcerik:salonicerik
-												});
+													salonIcerik:salonicerik,
+													status:false
+												}).then(function(error){
+									        if(error){
+									          alert("Hata! Lütfen tekrar deneyiniz!");
+									        }else {
+														setSportCenterIDforManager(pushID);
+									        }
+									      });
 
 												var downloadURL = "";
 												const uploadTask = storageRef.child('sportcenters/' + pushID).put(selectedFile); //create a child directory called images, and place the file inside this directory
@@ -224,6 +261,13 @@
 			}else{
 				alert("Lütfen geçerli bir email giriniz.");
 			}
+		}
+
+		function setSportCenterIDforManager(sportcentersID){
+			var managerID = firebase.auth().currentUser.uid;
+			firebase.database().ref("Users").child("Managers").child(managerID).child("mySportCenters").update({
+				[sportcentersID]:sportcentersID,
+			});
 		}
 
 
