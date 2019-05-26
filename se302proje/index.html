@@ -50,6 +50,7 @@
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 											<li><a id="students" href="myStudents.html" class="button big" hidden>Öğrencilerim</a></li>
+											<li><a id="sporsalonlarım" href="" class="button big" hidden>Spor Salonlarım</a></li>
 											<li><a id="aramaButton1" href="" class="button big" hidden>Eğitmenlerim</a></li>
 											<li><a id="myProgramsButton" href="" class="button big" hidden>Spor Programlarım</a></li>
 										</ul>
@@ -100,7 +101,7 @@
 
 								<section>
 									<header class="major">
-										<h2>Popüler Spor Salonları</h2>
+										<h2>Bazı Spor Salonları</h2>
 									</header>
 									<div id="sportcentersList" class="posts">
 									</div>
@@ -108,7 +109,7 @@
 
 								<section>
 									<header class="major">
-										<h2>Popüler Eğitmenler</h2>
+										<h2>Bazı Eğitmenler</h2>
 									</header>
 									<div id="trainerList" class="posts">
 									</div>
@@ -197,6 +198,8 @@
 										if(snapshot2.val().status == "Managers"){
 											// WE REMOVE LOGIN INPUTS AND ADDING USER ICON, USER NAME.
 											document.getElementById("kayitButton").innerHTML = "Spor Salonu Oluştur"
+											document.getElementById("sporsalonlarım").style.display = "block";
+											document.getElementById("sporsalonlarım").href = "mysportcenters.html";
 											document.getElementById("kayitButton").href = "creategym.html"
 											document.getElementById("nedenSporSepetim").innerHTML = "Spor Salonu Oluşturmadan Önce Dikkat Edilmesi Gerekenler"
 											document.getElementById("altBaslik").innerHTML = "Spor salonu oluşturmak için ilk olarak, oluşturduğunuz spor salonunun var olup olmadığını doğrulamamız gerekiyor. Bu yüzden spor salonu oluştururken, spor salonu bilgilerinizi çok dikkatli ve eksiksiz girmeye özen gösteriniz. Aksi taktirde isteğiniz sistemimiz tarafından onaylanmayacaktır."
@@ -242,6 +245,8 @@
 				document.getElementById("students").style.display = "none"
 				document.getElementById("nedenSporSepetim").innerHTML = "Neden SporSepetim ?"
 				document.getElementById("altBaslik").innerHTML = "neden spor sepetimle ilgili bir yazı."
+				document.getElementById("sporsalonlarım").style.display = "none";
+
 		    firebase.auth().signOut().then(function() {
 		      console.log('Signed Out');
 		    }, function(error) {

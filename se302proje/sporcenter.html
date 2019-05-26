@@ -11,6 +11,37 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  margin: 0 auto;
+		  width: 100%;
+		  display: inline-block;
+		  padding: 5px;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 3px;
+		}
+
+		.titleHead{
+		  text-align:center;
+		  background-color:#dddddd;
+		}
+
+		.titleHead2{
+		  text-align:center;
+		}
+
+		.tableRow1{
+		  width: 20%;
+		  height: 100px;
+		}
+
+		</style>
 	</head>
 	<body class="is-preload" style="margin:0">
 		<div id="loader"></div>
@@ -48,7 +79,7 @@
 
 								<figure class="snip1336">
 					  <figcaption>
-							<i class="rating fa fa-star">4.5</i>
+							<i id="rateID" class="rating fa fa-star">4.5</i>
 
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
@@ -74,6 +105,16 @@
 			</div>
 
 				</div>
+						<div class="row text-center pad-top" style="margin-left:15px">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 id="nameID" style="text-align:left"class="panel-title">Kullanıcılar</h3>
+								</div>
+								<ul style="text-align:left"class="list-group" id="joiningUserList">
+						</ul>
+					</div>
+				</div>
+
 				<!-- buraya -->
 								<!-- buraya -->
 								<!-- Sidebar -->
@@ -148,11 +189,18 @@
 				firebase.database().ref("Users").child("Users").child(user.uid).child("mySportCenters").on("child_added",function(snapshot){
 					counter += 1;
 				});
+				ratesPoint();
+				isPermissonRates();
+
 				//	getPopularTrainersImage(user.uid);
 				//	getInfo(user.uid);
 			} else {
 			  // No user is signed in.
 				getSportCenterInfo2();
+				ratesPoint();
+				document.getElementById("rateID").disabled = true;
+				document.getElementById("guncelleButton").style.display = "none";
+				document.getElementById("katilID").style.display = "none";
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 			}
 			});
@@ -232,6 +280,7 @@
 				var sportCenterKey = sessionStorage.getItem('label2');
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
 					if(snapshot2.key == "Managers"){
+						document.getElementById("katilID").style.display = "none";
 						firebase.database().ref("Users").child(snapshot2.key).on("child_added",function(snapshot3){
 							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).child("mySportCenters").on("child_added",function(snapshot4){
 								var exists = (snapshot4.key != null);
@@ -240,12 +289,53 @@
 									console.log(sportCenterKey);
 									if(sportCenterKey == snapshot4.val()){
 										document.getElementById("guncelleButton").style.display = "block";
+										seeJoiningUsers(sportCenterKey);
 									}
 								}
 							});
 						});
 					}
 				});
+
+				function seeJoiningUsers(sportCenterKey){
+					var userCount = 0;
+		      var usertoogleID = "";
+		      const list_div = document.querySelector("#joiningUserList");
+		      list_div.innerHTML = "";
+
+					firebase.database().ref("Users").child("Users").on("child_added",function(snapshot){
+						firebase.database().ref("Users").child("Users").child(snapshot.key).child("mySportCenters").on("child_added",function(snapshot2){
+							if(snapshot2.key == sportCenterKey){
+								userCount += 1;
+								usertoogleID = userCount.toString();
+								list_div.innerHTML += "<li class='list-group-item'><div class='row toggle' id='dropdown-detail' data-toggle='detail'><div onclick='ready(\"" +  usertoogleID + "\")' style='text-align:left' class='col-xs-10'><b>" + usertoogleID + "- </b>" + (snapshot.val().name + " " + snapshot.val().surname).toUpperCase() + "</div><div class='col-xs-2'><i onclick='ready(\"" +  usertoogleID + "\")' style='margin-top:7px;margin-right:20px' class='fa fa-chevron-down pull-right'></i></div></div><div style='display: none;' id=\"" + usertoogleID + "\"><hr></hr><div class='container' style='width:100%;display:inline-block;'><div style='display:inline-block;' class='fluid-row'>" +
+								"<table>" +
+								"<tr>" +
+									"<td class='titleHead' colspan='7'><b><label id=2titleDateID'>Bilgiler</label></b></td>"
+							 + "</tr>" +
+								"<tr>" +
+									"<th>Adı</th>" +
+									"<th>Soyadı</th>" +
+									"<th>E-mail</th>" +
+									"<th>Telefon</th>" +
+									"<th>Doğum Tarihi</th>" +
+								"</tr>" +
+								"<tr>" +
+									"<td>" + snapshot.val().name + "</td>" +
+									"<td>" + snapshot.val().surname  + "</td>" +
+									"<td>" + snapshot.val().email + "</td>" +
+									"<td>" + snapshot.val().phone + "</td>" +
+									"<td>" + snapshot.val().birthdate + "</td>" +
+								"</tr>" +
+							 "<tr>" +
+								 "<td class='tableRow1' colspan='7'><b><p><u>Hobiler:</u><br>" + snapshot2.val().hobiler + "</p></b></td>"
+							+ "</tr>" +
+								"</table>" +
+								"</div></div></div></li>"
+							}
+						});
+					});
+				}
 
 				firebase.database().ref("SportCenters").child(sportCenterKey).on("value",function(snapshot){
 					document.getElementById("gymName").innerHTML = snapshot.val().salonName
@@ -355,6 +445,105 @@
 			      break;
 			  }
 			});
+			}
+
+			var rating = $('.rating');
+
+			// Create rating popup
+			rating.on('click', function(e) {
+
+			  var self = $(this),
+			      userRating = $('<ul />').attr('class', 'user-rating animate');
+
+			  // Create stars if not already on page
+			  if (!self.find('.user-rating').length) {
+			    for (var i = 0; i < 5; i++) {
+			      userRating.prepend('<li data-rating="' + (i + 1) + '"><i class="fa fa-star"></i></li>');
+			    };
+
+			    // Add stars to page
+			    userRating.appendTo(self);
+			    setTimeout(function() {
+			      userRating.removeClass('animate');
+			    }, 50);
+			  };
+
+			  e.preventDefault();
+			  e.stopPropagation();
+			});
+
+			// Select rating
+			rating.on('click', '.user-rating li', function() {
+			  var self = $(this),
+			      rateVal = self.data('rating');
+						startRating(rateVal);
+			  setTimeout(function() {
+			    removeRating(rateVal);
+			  }, 300);
+			});
+
+			// Remove rating popup
+			function removeRating(rateVal) {
+			  rating.children('.user-rating').addClass('animate');
+			  setTimeout(function() {
+			    rating.children('.user-rating').remove();
+			  }, 350);
+			  if (rateVal) {
+				  // Ajax submit here
+
+			    rating.addClass('hide');
+			    setTimeout(function() {
+			      rating.text(rateVal).removeClass('hide');
+			    }, 150);
+			  };
+			};
+
+			$(document).on('click', function() {
+			  if (rating.children('.user-rating').length) {
+			    removeRating();
+			  };
+			});
+
+			function startRating(val){
+				var sportCenterKey = sessionStorage.getItem('label2');
+				var userID = firebase.auth().currentUser.uid;
+
+				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").update({
+					[userID]: val,
+				}).then(function(error){
+					if(error){
+						alert("Hata! Lütfen tekrar deneyiniz!");
+					}else {
+						//alert("Oy.");
+						location.reload();
+					}
+				});
+			}
+
+			function ratesPoint(){
+				var ratesPoint = 0;
+				var ratesCount = 0;
+				var sportCenterKey = sessionStorage.getItem('label2');
+				var userID = firebase.auth().currentUser.uid;
+
+				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
+					ratesCount += 1;
+					ratesPoint += snapshot.val();
+					document.getElementById("rateID").innerHTML = (ratesPoint / ratesCount);
+				});
+			}
+
+			function isPermissonRates(){
+				var sportCenterKey = sessionStorage.getItem('label2');
+				var userID = firebase.auth().currentUser.uid;
+				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
+					console.log(snapshot.key);
+					console.log(userID);
+					if(snapshot.key == userID){
+						//document.getElementById("rateID").
+						//document.getElementById("fa-star").disabled = true;
+					}
+				});
 			}
 
     </script>
