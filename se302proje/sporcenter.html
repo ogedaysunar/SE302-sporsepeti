@@ -174,7 +174,7 @@
 			firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
 			  // User is signed in.
-				document.getElementById("rateID").style.display = "block";
+
 				haveSportCenter(user);
 				getSportCenterInfo1(user);
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
@@ -190,7 +190,6 @@
 					counter += 1;
 				});
 				ratesPoint();
-				isPermissonRates();
 				document.getElementById("katilID").style.display = "block";
 
 				//	getPopularTrainersImage(user.uid);
@@ -201,7 +200,6 @@
 				ratesPoint();
 				document.getElementById("nameID").style.display = "none";
 				document.getElementById("joiningUserList").style.display = "none";
-				document.getElementById("rateID").disabled = true;
 				document.getElementById("guncelleButton").style.display = "none";
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 			}
@@ -538,19 +536,7 @@
 				});
 			}
 
-			function isPermissonRates(){
-				var sportCenterKey = sessionStorage.getItem('label2');
-				var userID = firebase.auth().currentUser.uid;
-				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
-					console.log(snapshot.key);
-					console.log(userID);
-					if(snapshot.key == userID){
-						document.getElementById("rateID").style.display = "none";
-						//document.getElementById("fa-star").disabled = true;
 
-					}
-				});
-			}
 
     </script>
 
