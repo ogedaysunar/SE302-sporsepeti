@@ -79,8 +79,8 @@
 
 								<figure class="snip1336">
 					  <figcaption>
-							<i id="rateID" class="rating fa fa-star">4.5</i>
-							<label id="rateLabel" style="display:none"></label>
+							<i id="rateID" class="rating fa fa-star" style="display:none">4.5</i>
+							<h3 id="rateLabel" style="float: right"></h3>
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
 					    <button id="katilID" onclick="joinsportCenter()" class="follow" value="Katıl" style="display:none">Katıl</button>
@@ -175,7 +175,9 @@
 			firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
 			  // User is signed in.
+				document.getElementById("rateLabel").style.display = "none";
 
+				document.getElementById("rateID").style.display = "block";
 				haveSportCenter(user);
 				getSportCenterInfo1(user);
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
@@ -199,8 +201,7 @@
 			  // No user is signed in.
 				getSportCenterInfo2();
 				ratesPoint2();
-				document.getElementById("rateID").style.display = "none";
-				document.getElementById("nameID").style.display = "none";
+
 				document.getElementById("joiningUserList").style.display = "none";
 				document.getElementById("guncelleButton").style.display = "none";
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
@@ -529,7 +530,6 @@
 				var ratesPoint = 0;
 				var ratesCount = 0;
 				var sportCenterKey = sessionStorage.getItem('label2');
-				var userID = firebase.auth().currentUser.uid;
 
 				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
 					ratesCount += 1;
@@ -542,13 +542,11 @@
 				var ratesPoint = 0;
 				var ratesCount = 0;
 				var sportCenterKey = sessionStorage.getItem('label2');
-				var userID = firebase.auth().currentUser.uid;
 
 				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
 					ratesCount += 1;
 					ratesPoint += snapshot.val();
-					document.getElementById("rateLabel").style.display = "block";
-					document.getElementById("rateLabel").innerHTML = (ratesPoint / ratesCount);
+					document.getElementById("rateLabel").innerHTML = "Popülerlik " + (ratesPoint / ratesCount) +".0";
 				});
 			}
 

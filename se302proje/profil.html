@@ -46,7 +46,7 @@
 								<figure class="snip1336">
 					  			<figcaption>
 										<i id="rateID" class="rating fa fa-star">4.5</i>
-										<label id="rateLabel" style="display:none"></label>
+										<label id="rateLabel"></label>
 							    	<h2 id="profilName"></h2>
 					    			<p id="userDescription"></p>
 					    			<button id="followTrainerID" class="follow" onclick="followTrainer()">Takip Et</button>
@@ -132,6 +132,8 @@
 	if (user) {
 	  // User is signed in.
 		var trainerUserKey = sessionStorage.getItem('label');
+		document.getElementById("rateLabel").style.display = "none";
+
 		if(trainerUserKey == user.uid){
 			document.getElementById("followTrainerID").style.display = "none";
 		};
@@ -366,7 +368,6 @@
 		var ratesPoint = 0;
 		var ratesCount = 0;
 		var sportCenterKey = sessionStorage.getItem('label2');
-		var userID = firebase.auth().currentUser.uid;
 
 		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
 			ratesCount += 1;
@@ -379,13 +380,11 @@
 		var ratesPoint = 0;
 		var ratesCount = 0;
 		var sportCenterKey = sessionStorage.getItem('label2');
-		var userID = firebase.auth().currentUser.uid;
 
 		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
 			ratesCount += 1;
 			ratesPoint += snapshot.val();
-			document.getElementById("rateLabel").style.display = "block";
-			document.getElementById("rateLabel").innerHTML = (ratesPoint / ratesCount);
+			document.getElementById("rateLabel").innerHTML = "Popülerlik " + (ratesPoint / ratesCount) + ".0";
 		});
 	}
 	</script>
