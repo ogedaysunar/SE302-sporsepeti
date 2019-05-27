@@ -128,6 +128,10 @@
 	firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in.
+		var trainerUserKey = sessionStorage.getItem('label');
+		if(trainerUserKey == user.uid){
+			document.getElementById("followTrainerID").style.display = "none";
+		};
 		currentUserID = user.uid;
 		firebase.database().ref("Users").on("child_added",function(snapshot2){
 			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
@@ -178,6 +182,7 @@
 
 
 	var trainerUserKey = sessionStorage.getItem('label');
+
 	function getInfo(){
 		firebase.database().ref("Users").on("child_added",function(snapshot){
 			firebase.database().ref("Users").child(snapshot.key).on("child_added",function(snapshot2){
