@@ -45,7 +45,8 @@
 
 								<figure class="snip1336">
 					  			<figcaption>
-										<i style="display:none" id="rateID" class="rating fa fa-star">4.5</i>
+										<i id="rateID" class="rating fa fa-star">4.5</i>
+										<label id="rateLabel" style="display:none"></label>
 							    	<h2 id="profilName"></h2>
 					    			<p id="userDescription"></p>
 					    			<button id="followTrainerID" class="follow" onclick="followTrainer()">Takip Et</button>
@@ -125,6 +126,8 @@
 		var currentUserID = "";
 		var trainerUserKey = sessionStorage.getItem('label');
 		var isFollowing = false;
+		var counter = 0;
+
 	firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in.
@@ -132,7 +135,7 @@
 		if(trainerUserKey == user.uid){
 			document.getElementById("followTrainerID").style.display = "none";
 		};
-		document.getElementById("rateID").style.display = "block";
+
 		currentUserID = user.uid;
 		firebase.database().ref("Users").on("child_added",function(snapshot2){
 			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
@@ -170,11 +173,17 @@
 			});
 
 		});
+
+		firebase.database().ref("Users").child("Users").child(user.uid).child("mySportCenters").on("child_added",function(snapshot){
+			counter += 1;
+		});
+		ratesPoint();
 		//	getPopularTrainersImage(user.uid);
 		//	getInfo(user.uid);
 		notLoading();
 	} else {
 	  // No user is signed in.
+			ratesPoint2();
 		document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 		document.getElementById("followTrainerID").style.display = "none";
 		notLoading();
@@ -278,9 +287,106 @@
 			location.reload();
 		}
 	}
+
+	var rating = $('.rating');
+
+	// Create rating popup
+	rating.on('click', function(e) {
+
+		var self = $(this),
+				userRating = $('<ul />').attr('class', 'user-rating animate');
+
+		// Create stars if not already on page
+		if (!self.find('.user-rating').length) {
+			for (var i = 0; i < 5; i++) {
+				userRating.prepend('<li data-rating="' + (i + 1) + '"><i class="fa fa-star"></i></li>');
+			};
+
+			// Add stars to page
+			userRating.appendTo(self);
+			setTimeout(function() {
+				userRating.removeClass('animate');
+			}, 50);
+		};
+
+		e.preventDefault();
+		e.stopPropagation();
+	});
+
+	// Select rating
+	rating.on('click', '.user-rating li', function() {
+		var self = $(this),
+				rateVal = self.data('rating');
+				startRating(rateVal);
+		setTimeout(function() {
+			removeRating(rateVal);
+		}, 300);
+	});
+
+	// Remove rating popup
+	function removeRating(rateVal) {
+		rating.children('.user-rating').addClass('animate');
+		setTimeout(function() {
+			rating.children('.user-rating').remove();
+		}, 350);
+		if (rateVal) {
+			// Ajax submit here
+
+			rating.addClass('hide');
+			setTimeout(function() {
+				rating.text(rateVal).removeClass('hide');
+			}, 150);
+		};
+	};
+
+	$(document).on('click', function() {
+		if (rating.children('.user-rating').length) {
+			removeRating();
+		};
+	});
+
+	function startRating(val){
+		var sportCenterKey = sessionStorage.getItem('label2');
+		var userID = firebase.auth().currentUser.uid;
+
+		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").update({
+			[userID]: val,
+		}).then(function(error){
+			if(error){
+				alert("Hata! Lütfen tekrar deneyiniz!");
+			}else {
+				//alert("Oy.");
+				location.reload();
+			}
+		});
+	}
+
+	function ratesPoint(){
+		var ratesPoint = 0;
+		var ratesCount = 0;
+		var sportCenterKey = sessionStorage.getItem('label2');
+		var userID = firebase.auth().currentUser.uid;
+
+		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
+			ratesCount += 1;
+			ratesPoint += snapshot.val();
+			document.getElementById("rateID").innerHTML = (ratesPoint / ratesCount);
+		});
+	}
+
+	function ratesPoint2(){
+		var ratesPoint = 0;
+		var ratesCount = 0;
+		var sportCenterKey = sessionStorage.getItem('label2');
+		var userID = firebase.auth().currentUser.uid;
+
+		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
+			ratesCount += 1;
+			ratesPoint += snapshot.val();
+			document.getElementById("rateLabel").style.display = "block";
+			document.getElementById("rateLabel").innerHTML = (ratesPoint / ratesCount);
+		});
+	}
 	</script>
-
-
-
 	</body>
 </html>

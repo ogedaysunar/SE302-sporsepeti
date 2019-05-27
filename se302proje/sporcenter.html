@@ -80,6 +80,7 @@
 								<figure class="snip1336">
 					  <figcaption>
 							<i id="rateID" class="rating fa fa-star">4.5</i>
+							<label id="rateLabel" style="display:none"></label>
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
 					    <button id="katilID" onclick="joinsportCenter()" class="follow" value="Katıl" style="display:none">Katıl</button>
@@ -197,7 +198,7 @@
 			} else {
 			  // No user is signed in.
 				getSportCenterInfo2();
-				ratesPoint();
+				ratesPoint2();
 				document.getElementById("nameID").style.display = "none";
 				document.getElementById("joiningUserList").style.display = "none";
 				document.getElementById("guncelleButton").style.display = "none";
@@ -533,6 +534,20 @@
 					ratesCount += 1;
 					ratesPoint += snapshot.val();
 					document.getElementById("rateID").innerHTML = (ratesPoint / ratesCount);
+				});
+			}
+
+			function ratesPoint2(){
+				var ratesPoint = 0;
+				var ratesCount = 0;
+				var sportCenterKey = sessionStorage.getItem('label2');
+				var userID = firebase.auth().currentUser.uid;
+
+				firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
+					ratesCount += 1;
+					ratesPoint += snapshot.val();
+					document.getElementById("rateLabel").style.display = "block";
+					document.getElementById("rateLabel").innerHTML = (ratesPoint / ratesCount);
 				});
 			}
 
