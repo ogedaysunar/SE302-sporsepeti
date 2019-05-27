@@ -23,6 +23,7 @@ var config = {
   function logout1(){
     firebase.auth().signOut().then(function() {
       console.log('Signed Out');
+      window.location.href = "index.html";
     }, function(error) {
       console.error('Sign Out Error', error);
     });
