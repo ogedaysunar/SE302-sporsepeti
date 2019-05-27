@@ -105,7 +105,7 @@
 			</div>
 
 				</div>
-						<div id="deneme1" class="row text-center pad-top" style="margin-left:15px">
+						<div id="deneme1" class="row text-center pad-top" style="margin-left:15px;display:none">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 id="nameID" style="text-align:left"class="panel-title">Kullanıcılar</h3>
@@ -198,7 +198,8 @@
 			  // No user is signed in.
 				getSportCenterInfo2();
 				ratesPoint();
-				document.getElementById("deneme1").style.display = "none";
+				document.getElementById("nameID").style.display = "none";
+				document.getElementById("joiningUserList").style.display = "none";
 				document.getElementById("rateID").disabled = true;
 				document.getElementById("guncelleButton").style.display = "none";
 				document.getElementById("katilID").style.display = "none";
@@ -290,6 +291,8 @@
 
 									if(sportCenterKey == snapshot4.val()){
 										document.getElementById("guncelleButton").style.display = "block";
+										document.getElementById("deneme1").style.display = "block";
+
 										seeJoiningUsers(sportCenterKey);
 									}
 								}
