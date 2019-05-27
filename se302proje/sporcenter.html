@@ -79,8 +79,8 @@
 
 								<figure class="snip1336">
 					  <figcaption>
-							<i id="rateID" class="rating fa fa-star" style="display:none">4.5</i>
-
+							<i id="rateID" class="rating fa fa-star" style="display:none">4.5</i>Puan:
+							<label id="labelRate" style="display:none"></label>
 					    <h2 id="gymName">Gold Gym<span>Gym</span></h2>
 
 					    <button id="katilID" onclick="joinsportCenter()" class="follow" value="Katıl" style="display:none">Katıl</button>
@@ -536,6 +536,7 @@
 					ratesCount += 1;
 					ratesPoint += snapshot.val();
 					document.getElementById("rateID").innerHTML = (ratesPoint / ratesCount);
+					document.getElementById("labelRate").innerHTML = (ratesPoint / ratesCount);
 				});
 			}
 
@@ -546,8 +547,10 @@
 					console.log(snapshot.key);
 					console.log(userID);
 					if(snapshot.key == userID){
-						//document.getElementById("rateID").
+						document.getElementById("rateID").display.style = "none";
 						//document.getElementById("fa-star").disabled = true;
+						document.getElementById("labelRate").display.style = "block";
+
 					}
 				});
 			}
