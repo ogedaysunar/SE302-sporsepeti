@@ -184,6 +184,7 @@
 	} else {
 	  // No user is signed in.
 			ratesPoint2();
+			document.getElementById("rateID").style.display = "none";
 		document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 		document.getElementById("followTrainerID").style.display = "none";
 		notLoading();
