@@ -279,14 +279,14 @@
 			function getSportCenterInfo1(user){
 				var sportCenterKey = sessionStorage.getItem('label2');
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
+					console.log(snapshot2.key);
 					if(snapshot2.key == "Managers"){
 						document.getElementById("katilID").style.display = "none";
 						firebase.database().ref("Users").child(snapshot2.key).on("child_added",function(snapshot3){
 							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).child("mySportCenters").on("child_added",function(snapshot4){
 								var exists = (snapshot4.key != null);
 								if(exists){
-									console.log(snapshot4.val());
-									console.log(sportCenterKey);
+
 									if(sportCenterKey == snapshot4.val()){
 										document.getElementById("guncelleButton").style.display = "block";
 										seeJoiningUsers(sportCenterKey);

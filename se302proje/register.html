@@ -118,7 +118,7 @@
 
 
     /**
-     * kayit function create a new user after some informations checked.    
+     * kayit function create a new user after some informations checked.
      */
 
     function kayit(){
@@ -224,6 +224,7 @@
       firebase.auth().currentUser.sendEmailVerification().then(function() {
         // Email Verification sent!
         alert('Kayıt başarılı bir şekilde gerçekleşmiştir. Lütfen giriş yapmak için size gönderdiğimiz maili onaylayınız.');
+        window.location.href = "index.html";
       });
       //END
     }
