@@ -107,7 +107,7 @@
 				</div>
 						<div class="row text-center pad-top" style="margin-left:15px">
 							<div class="panel panel-default">
-								<div class="panel-heading">
+								<div id="deneme1" class="panel-heading">
 									<h3 id="nameID" style="text-align:left"class="panel-title">Kullanıcılar</h3>
 								</div>
 								<ul style="text-align:left"class="list-group" id="joiningUserList">
@@ -198,6 +198,7 @@
 			  // No user is signed in.
 				getSportCenterInfo2();
 				ratesPoint();
+				document.getElementById("deneme1").style.display = "none";
 				document.getElementById("rateID").disabled = true;
 				document.getElementById("guncelleButton").style.display = "none";
 				document.getElementById("katilID").style.display = "none";
