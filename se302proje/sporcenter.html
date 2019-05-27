@@ -203,7 +203,6 @@
 				document.getElementById("joiningUserList").style.display = "none";
 				document.getElementById("rateID").disabled = true;
 				document.getElementById("guncelleButton").style.display = "none";
-				document.getElementById("katilID").style.display = "none";
 				document.getElementById("userIcon").innerHTML = "<li><input style='height:30px' type='text' name='query' id='email' placeholder='Email'/></li><li><input style='height:30px' type='password' name='query' id='password' placeholder='Şifre'/></li><li><a style='font-size:18px' onclick='login1()' class='icon fa-arrow-circle-o-right'></a></li><br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>"
 			}
 			});
@@ -284,7 +283,7 @@
 				firebase.database().ref("Users").on("child_added",function(snapshot2){
 					console.log(snapshot2.key);
 					if(snapshot2.key == "Managers"){
-						//document.getElementById("katilID").style.display = "none";
+						document.getElementById("katilID").style.display = "none";
 						firebase.database().ref("Users").child(snapshot2.key).on("child_added",function(snapshot3){
 							firebase.database().ref("Users").child(snapshot2.key).child(user.uid).child("mySportCenters").on("child_added",function(snapshot4){
 								var exists = (snapshot4.key != null);
@@ -293,7 +292,7 @@
 									if(sportCenterKey == snapshot4.val()){
 										document.getElementById("guncelleButton").style.display = "block";
 										document.getElementById("deneme1").style.display = "block";
-
+										document.getElementById("katilID").style.display = "none";
 										seeJoiningUsers(sportCenterKey);
 									}
 								}
