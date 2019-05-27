@@ -132,6 +132,7 @@
 		if(trainerUserKey == user.uid){
 			document.getElementById("followTrainerID").style.display = "none";
 		};
+		document.getElementById("rateID").style.display = "block";
 		currentUserID = user.uid;
 		firebase.database().ref("Users").on("child_added",function(snapshot2){
 			firebase.database().ref("Users").child(snapshot2.key).on("child_added", function(snapshot){
