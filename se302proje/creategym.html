@@ -267,7 +267,15 @@
 			var managerID = firebase.auth().currentUser.uid;
 			firebase.database().ref("Users").child("Managers").child(managerID).child("mySportCenters").update({
 				[sportcentersID]:sportcentersID,
+			}).then(function(error){
+				if(error){
+					alert("Hata! Lütfen tekrar deneyiniz!");
+				}else {
+					alert("Spor salonu oluşturulmuştur.");
+					window.location.href = "index.html";
+				}
 			});
+
 		}
 
 
