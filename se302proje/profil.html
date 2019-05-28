@@ -384,7 +384,7 @@
 		firebase.database().ref("SportCenters").child(sportCenterKey).child("Rates").on("child_added",function(snapshot){
 			ratesCount += 1;
 			ratesPoint += snapshot.val();
-			document.getElementById("rateLabel").innerHTML = "Popülerlik " + (ratesPoint / ratesCount) + ".0";
+			document.getElementById("rateLabel").innerHTML = "Popülerlik " + (ratesPoint / ratesCount);
 		});
 	}
 	</script>

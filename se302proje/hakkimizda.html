@@ -7,8 +7,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="is-preload">
-
+	<body class="is-preload" style="margin:0">
+		<div id="loader"></div>
+	<div style="display:none;" class="animate-bottom" id="myDiv">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -17,15 +18,19 @@
 						<div class="inner">
 
 							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
-									<ul class="icons">
-                    <li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
-										<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
+							<header id="header">
+								<a href="index.html" class="logo"><strong>SporSepetim</strong></a>
+								<ul id="userIcon" class="icons">
+									<li><input style="height:30px;" type="text" name="query" id="email" placeholder="Email" /></li>
+									<li><input style="height:30px;" type="password" name="query" id="password" placeholder="Şifre" /></li>
 
-										<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
-									</ul>
-								</header>
+									<li><a style="font-size:18px" onclick="login1()" class="icon fa-arrow-circle-o-right"></a></li>
+									<br><li><a onclick='resetSifre()' style='font-size:10px'>Şifremi Unuttum.</a></li>
+									<!--<li><a href="#" class="icon fa-user"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon fa-power-off"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon fa-enter"><span class="label">Instagram</span></a></li> -->
+								</ul>
+							</header>
 
 							<!-- Content -->
 								<section>
@@ -36,81 +41,81 @@
 
 									<!-- Content -->
 
-										<h2 id="content">Bu sitede neler yapabilirim?</h2>
+									<h2 id="content">Bu sitede neler yapabilirim?</h2>
 
-									<hr class="major" />
+								<hr class="major" />
 
-                  <section>
-                    <header class="major">
-                      <h2>Spor Aktiviteleri</h2>
-                    </header>
-                    <div class="posts">
-                      <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-                        <h3>Yüzme</h3>
-                        <p>Yüzme sporu, birçok kaynağa göre, vücudun neredeyse tüm kaslarını çalıştırması nedeniyle, en yararlı sporlardan biri olarak kabul edilmektedir.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-                        <h3>Boks</h3>
-                        <p>Boks, iki kişinin boks hakeminin gözetiminin altında karşılıklı yumruklaşarak; her kafaya vurduklarında tek puan topladıkları spor müsabakasıdır.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-                        <h3>Body Building</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3>Koşu</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-                        <h3>Crossfit</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Basketbol</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Futbol</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                      <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-                        <h3>Pilates</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                          <li><a href="#" class="button">İncele</a></li>
-                        </ul>
-                      </article>
-                    </div>
-                  </section>
+								<section>
+									<header class="major">
+										<h2>Spor Aktiviteleri</h2>
+									</header>
+									<div class="posts">
+										<article>
+											<a href="#" class="image"><img src="images/yüzmeresim.jpg" alt="" /></a>
+											<h3>Yüzme</h3>
+											<p>Yüzme sporu, birçok kaynağa göre, vücudun neredeyse tüm kaslarını çalıştırması nedeniyle, en yararlı sporlardan biri olarak kabul edilmektedir.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/yuzme.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/boks.jpg" alt="" /></a>
+											<h3>Boks</h3>
+											<p>Boks, iki kişinin boks hakeminin gözetiminin altında karşılıklı yumruklaşarak; her kafaya vurduklarında tek puan topladıkları spor müsabakasıdır.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/boks.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/bodybuilding.jpg" alt="" /></a>
+											<h3>Body Building</h3>
+											<p>Vücut Geliştirme, (İngilizce'de Body Building) ağırlık kaldırma, kalori alımı ve diğer uygulamaların bir araya getirilmesiyle kas telciklerinin (fibres) geliştirilmesi işlemidir. Bu aktivite ile uğraşan kişiye vücut geliştirici (Body Builder) denir.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/bodybuilding.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/kosu.jpg" alt="" /></a>
+											<h3>Koşu</h3>
+											<p>Koşu, koşmak eylemi esas alınarak yapılan bir tür spordur. Koşu, yarış amaçlı yapılabileceği gibi vücudun dinamizminin sağlanması için tek başına da yapılabilir. Koşu, basit bir biçimde insanın her iki ayağının da belirli bir periyotla yerden kesilerek vücudunu ileri doğru hareket ettirmesidir.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/kosu.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/crossfit.jpg" alt="" /></a>
+											<h3>Crossfit</h3>
+											<p>CrossFit, Inc. Greg Glassman tarafından 2000 yılında kurulan bir fitnes şirketidir. CrossFit programları üyeleri tarafından yaklaşık 3400 üye salonda icra edilmektedir. Bunların çoğu ABD'de bulunmaktadır. CrossFit isim hakkı saklı tutulan bir antrenman metodudur.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/crossfit.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/basketbol.jpg" alt="" /></a>
+											<h3>Basketbol</h3>
+											<p>Basketbol, beş kişilik takım şeklinde topla ve elle oynanan bir spordur.  Takım oyunu olan basketbolda, yüksekliği 3,05 metre olan bir çemberden topun geçirilmesi gerekir. Dünya çapında popülaritesi olan bu spor, dünyada ilk kez James Naismith tarafından 1891 senesinde oynanmaya başlamıştır.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/basketbol.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/futboll.jpg" alt="" /></a>
+											<h3>Futbol</h3>
+											<p>Futbol 11’er kişilik iki takım arasında oynanır ve kendine özgü kuralları vardır. Oyunun amacı, topu rakip kaleye sokmaktır. Topu elle ve kolla oynamak kesinlikle yasaktır, ama kafa ile ya da kurallara uygun olarak bedenin herhangi bir yeriyle topa vurulabilir.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/futbol.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pilates.jpg" alt="" /></a>
+											<h3>Pilates</h3>
+											<p>Pilates, erkek ve kadın olarak ayırt etmeksizin, her yaştan insanın yapabileceği bir egzersiz türüdür. Hareketler kontrollü olmaya başladıkça, stabilizasyon artar. Hareketlerin kontrollü bir şekilde yapılması, egzersizi yeterince iddialı bir hale getirmektedir. İleri seviye hareketleri uygulayabilmek için,  ciddi bir çalışma, disiplin ve kas kuvveti gerekmektedir.</p>
+											<ul class="actions">
+												<li><a href="sporaktiviteleri/pilates.html" class="button">İncele</a></li>
+											</ul>
+										</article>
+									</div>
+								</section>
 
 
 				<!-- Sidebar -->
@@ -126,8 +131,7 @@
 										<li><a href="index.html">Anasayfa</a></li>
 										<li><a href="hakkimizda.html">Hakkımızda</a></li>
 										<li><a href="sportcenters.html">Spor Salonları</a></li>
-										<li><a href="elements.html">Eğitmenler</a></li>
-										<li><a href="elements.html">İletişim</a></li>
+										<li><a href="trainers.html">Eğitmenler</a></li>
 
 									</ul>
 								</nav>
@@ -136,22 +140,26 @@
 
 
 							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>İletişim</h2>
-									</header>
-									<p>Bize Yazın! Bizimle iletişime geçmek için aşağıdaki bilgileri kullanabilirsiniz.</p>
-									<ul class="contact">
-										<li class="fa-envelope-o"><a href="#">se302@isik.edu.tr</a></li>
-										<li class="fa-phone">444 0 799</li>
-										<li class="fa-home">Meşrutiyet Mahallesi, Işık Ünv., 34980 Şile/İstanbul</li>
-									</ul>
-								</section>
+							<section>
+								<header class="major">
+									<h2>İletişim</h2>
+								</header>
+								<p>
+									Herhangi bir konuda şikayet etmek, bilgi almak veya fikirlerinizi bizimle paylaşmak
+								için aşağıdaki e-mail ile bize ulaşabilirsiniz.</p>
+								<ul class="contact">
+									<li class="fa-envelope-o"><a href="#">info@sporsepetim.com</a></li>
+									<li class="fa-phone">(212) 567-9822</li>
+									<li class="fa-home">1234 Akaretler #8254<br />
+									İstanbul, TR 00000-0000</li>
+								</ul>
+							</section>
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
+								<!-- Footer -->
+								<!-- Footer -->
+									<footer id="footer">
+										<p class="copyright">&copy; SE302-Team. All rights reserved.</p>
+									</footer>
 
 						</div>
 					</div>
@@ -164,6 +172,37 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<li><a href="#"  style="margin-left:44%; margin-bottom:30px"	class="button">Daha Fazla</a></li>
+
+			<!--Initiliaze Firebase -->
+			<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+			<script src="assets/js/db.js"></script>
+
+			<script>
+
+			var userNameAsString = "";
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					if(!user.emailVerified){
+						alert("Lütfen size gönderdiğimiz e-maili onaylayınız. E-mail tekrar yollanmıştır.");
+						logout1();
+						notLoading();
+					}else{
+						// User is signed in.
+						//what is the user status ?
+						var userID = user.uid;
+						firebase.database().ref("Users").on("child_added",function(snapshot){
+							firebase.database().ref("Users").child(snapshot.key).child(userID).on("value",function(snapshot2){
+								userNameAsString = snapshot2.val().name + " " + snapshot2.val().surname + "(" + snapshot2.val().status + ")"
+								document.getElementById("userIcon").innerHTML = "<li><a onclick='logout1()' class='icon fa-power-off'></a></li><li><a href='editprofile.html' class='icon fa-user'><br>" + userNameAsString + "</a></li>"
+							});
+							notLoading();
+						});
+					}
+				} else {
+					// No user is signed in.
+					notLoading();
+				}
+			});
+			</script>
 	</body>
 </html>

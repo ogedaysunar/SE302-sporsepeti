@@ -46,7 +46,7 @@
 											</h1>
 											<p id="nedenSporSepetim">Neden SporSepetim ?</p>
 										</header>
-										<p id="altBaslik">neden spor sepetimle ilgili bir yazı.</p>
+										<p id="altBaslik">SporSepetim size uygun spor salonunu, spor programlarını ve eğitmenlere hızlı bir şekilde ulaşmanızı sağlar. Bu yüzden bizi tercih etmek size daha fazla zaman ve deneyim kazandırır. Bunlardan yararlanmak için aşağıdaki butona tıklayarak hızlıca kayıt olup, yeni eğitmenler veya spor salonları aramaya başlayabilirsin. </p>
 										<ul class="actions">
 											<li><a id="kayitButton" href="register.html" class="button big">Kayıt Ol</a></li>
 											<li><a id="students" href="myStudents.html" class="button big" hidden>Öğrencilerim</a></li>
@@ -67,6 +67,8 @@
 														<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 														<li data-target="#myCarousel" data-slide-to="1"></li>
 														<li data-target="#myCarousel" data-slide-to="2"></li>
+														<li data-target="#myCarousel" data-slide-to="3"></li>
+														<li data-target="#myCarousel" data-slide-to="4"></li>
 													</ol>
 
 													<!-- Wrapper for slides -->
@@ -76,11 +78,17 @@
 														</div>
 
 														<div class="item">
-															<img src="images/mainpic1.jpg" style="width:100%;height:250px;">
+															<img src="images/resim2.jpg" style="width:100%;height:250px;">
 														</div>
 
 														<div class="item">
-															<img src="images/mainpic1.jpg" style="width:100%;height:250px;">
+															<img src="images/yüzmeresim.jpg" style="width:100%;height:250px;">
+														</div>
+														<div class="item">
+															<img src="images/crossfit.jpg" style="width:100%;height:250px;">
+														</div>
+														<div class="item">
+															<img src="images/kosu.jpg" style="width:100%;height:250px;">
 														</div>
 													</div>
 
@@ -244,7 +252,7 @@
 				document.getElementById("myProgramsButton").style.display = "none"
 				document.getElementById("students").style.display = "none"
 				document.getElementById("nedenSporSepetim").innerHTML = "Neden SporSepetim ?"
-				document.getElementById("altBaslik").innerHTML = "neden spor sepetimle ilgili bir yazı."
+				document.getElementById("altBaslik").innerHTML = "SporSepetim size uygun spor salonunu, spor programlarını ve eğitmenlere hızlı bir şekilde ulaşmanızı sağlar. Bu yüzden bizi tercih etmek size daha fazla zaman ve deneyim kazandırır. Bunlardan yararlanmak için aşağıdaki butona tıklayarak hızlıca kayıt olup, yeni eğitmenler veya spor salonları aramaya başlayabilirsin.";
 				document.getElementById("sporsalonlarım").style.display = "none";
 
 		    firebase.auth().signOut().then(function() {

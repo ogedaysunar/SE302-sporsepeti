@@ -46,7 +46,7 @@
 						      <input type="file" class="file-select" accept="image/*"/>
 						      <progress id="uploader" value="0" max="100">0%</progress>
 						      <button class="file-submit">Yükle</button>
-									<button class="file-submit"> Şifre Değiştir</button>
+									<button onclick="changePassword()"  type="button" class="file-submit"> Şifre Değiştir</button>
 						    </div>
 
 
@@ -132,7 +132,6 @@
 														<li><a href="hakkimizda.html">Hakkımızda</a></li>
 														<li><a href="sportcenters.html">Spor Salonları</a></li>
 														<li><a href="trainers.html">Eğitmenler</a></li>
-														<li><a href="#">İletişim</a></li>
 													</ul>
 												</nav>
 
@@ -385,6 +384,26 @@ function saveEditProfile(){
 		alert("Lütfen geçerli bir email giriniz.");
 	}
 
+}
+
+function changePassword(){
+		var password = prompt("Lütfen e-mailinizi giriniz.");
+
+	if (password != "") {
+		if(!validateEmail(password)){
+			alert("Lütfen geçerli bir e-mail giriniz.");
+		}else{
+			var auth = firebase.auth();
+  		// password reset method with firebase
+  			auth.sendPasswordResetEmail(password).then(function() {
+  				alert("Parola değiştirme e-maili gönderilmiştir.");
+  			}).catch(function(error) {
+  				alert("Hata! Lütfen tekrar deneyiniz.");
+  			});
+		}
+	} else {
+		alert("Lütfen boş bırakmayınız.");
+	}
 }
 
 function validateEmail(email) {
